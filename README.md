@@ -5,10 +5,10 @@ This assignment asks you to describe your proposal in two or three paragaphs. Pl
 - Title
 
 - Group members
-  -Benjamin Antolin
-  -Michael Brawner
-  -Robert Buchalter
-  -Kristoffer Stuvstad
+  - Benjamin Antolin
+  - Michael Brawner
+  - Robert Buchalter
+  - Kristoffer Stuvstad
 
 - The motives
 
