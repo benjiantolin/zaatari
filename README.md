@@ -1,16 +1,16 @@
-# Proposal
+# Zaatari Refugee Camp
 
 This assignment asks you to describe your proposal in two or three paragaphs. Please create a Github repository and write down the proposal in the `readme.md`. This proposal shoud contain the following items:
 
 - Title
 
-- Group members
+- **Group members**
   - Benjamin Antolin
   - Michael Brawner
   - Robert Buchalter
   - Kristoffer Stuvstad
 
-- The motives
+- **The motives**
 
 - An description of your project
 
