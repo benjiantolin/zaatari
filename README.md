@@ -1,14 +1,14 @@
-# Zaatari Refugee Camp
+# [Zaatari Refugee Camp](benjiantolin.github.io/zaatari)
 
-- **Group members**
-  - Benjamin Antolin
-  - Michael Brawner
-  - Robert Buchalter
-  - Kristoffer Stuvstad
+**Group members**
+- Benjamin Antolin
+- Michael Brawner
+- Robert Buchalter
+- Kristoffer Stuvstad
 
-- **The motives**
+**The motives**
 
-- A description of your project
+**Description**
 
 **Data**
   - [Population data:](https://data.humdata.org/organization/reach-initiative?groups=jor&q=&ext_page_size=25) Reach Initiative, UNICEF
