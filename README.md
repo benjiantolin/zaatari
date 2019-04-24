@@ -7,10 +7,10 @@
 - Kristoffer Stuvstad
 
 **The motives**
-We would like to create a coordinated view web map of the Zaatari refugee camp in Jordan. 
+- We would like to create a coordinated view web map of the Zaatari refugee camp in Jordan. 
 
 **Description**
-In our coordinated view, we are interested in including population density, age, and other demographic factors broken down by entire camp, district and block in the camp. We plan to create a population pyramid for the entire camp, districts, and block groups. We also plan to create chloropleth maps of a variety of demographic factors including age and others.  
+- In our coordinated view, we are interested in including population density, age, and other demographic factors broken down by entire camp, district and block in the camp. We plan to create a population pyramid for the entire camp, districts, and block groups. We also plan to create chloropleth maps of a variety of demographic factors including age and others.  
 
 We are also interested in incorporating timeseries data if we are able to find the data. Possibilities include collecting satellite imagery of the camp over time to spatially visualize the structural change over time.
 
