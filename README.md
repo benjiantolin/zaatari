@@ -21,7 +21,7 @@ We are also interested in incorporating timeseries data if we are able to find t
   - [General Infrastructure and Wastewater Network data:](https://github.com/impact-initiatives/reach-jor-zaatari-data) Reach Initiative with collective effort from several other agencies
 
 **Interface Design** 
-- please list the url and a short description of two or even more (less than five) geoviz which you can refer to.
+
 [Population Pyramid](https://bl.ocks.org/mbostock/4062085) D3
 [Chloropleth Map] (https://observablehq.com/@d3/choropleth) D3
 
