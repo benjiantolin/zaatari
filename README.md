@@ -22,6 +22,6 @@ We are also interested in incorporating timeseries data if we are able to find t
 
 **Interface Design** 
 
--[Population Pyramid](https://bl.ocks.org/mbostock/4062085) D3
--[Chloropleth Map](https://observablehq.com/@d3/choropleth) D3
+- [Population Pyramid](https://bl.ocks.org/mbostock/4062085) D3
+- [Chloropleth Map](https://observablehq.com/@d3/choropleth) D3
 
