@@ -19,7 +19,7 @@ We are also interested in incorporating timeseries data if we are able to find t
 **Data**
   - [Population data:](https://data.humdata.org/organization/reach-initiative?groups=jor&q=&ext_page_size=25) Reach Initiative, UNICEF
   - [General Infrastructure and Wastewater Network data:](https://github.com/impact-initiatives/reach-jor-zaatari-data) Reach Initiative with collective effort from several other agencies
-    -[Survey data:](http://reachjor.github.io/pop_count/index.html#) Reach Initiative, UNICEF
+  - [Survey data:](http://reachjor.github.io/pop_count/index.html#) Reach Initiative, UNICEF
 
 **Interface Design**
 
