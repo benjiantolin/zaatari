@@ -17,8 +17,9 @@ In our coordinated view, we are interested in including population density, age,
 We are also interested in incorporating timeseries data if we are able to find the data. Possibilities include collecting satellite imagery of the camp over time to spatially visualize the structural change over time.
 
 **Data**
+
 | Name                   | Description                                                  | URL                                                          |
-| ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ---------------------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
 | Population by District | Population by gender and age                                 | https://data.humdata.org/organization/reach-initiative?groups=jor&q=&ext_page_size=25 |
 | Survey Data            | Age group, gender, date of arrival, district of origin in syria, shelter type, distance to various infrastucture on each individual in the camp. | <http://reachjor.github.io/pop_count/index.html#>            |
 | Shapefiles             | This github page host various infrastucture and wastewater data for Zaatari refugee camp. | <https://github.com/impact-initiatives/reach-jor-zaatari-data> |
