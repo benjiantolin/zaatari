@@ -34,3 +34,8 @@ We are also interested in incorporating timeseries data if we are able to find t
 
 **QGIS GUI Screenshot**
 ![](img/GUI.png)
+
+**Interface Sketch**
+![](img/interface_sketch.png)
+- In this interface sketch we visualize on paper of some of the chart and map display and functions. 
+- In this sketch, you can see Syria with conflict across the nation and Syrian refugee data visualized through interactive maps and charts.
