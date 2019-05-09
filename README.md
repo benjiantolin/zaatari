@@ -21,7 +21,7 @@ We are also interested in incorporating timeseries data if we are able to find t
 | Name                              | Description                                                  | URL                                                          |
 | --------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Population by District (Zaatari)  | Population of Zataari refugee camp by gender and age         | https://data.humdata.org/organization/reach-initiative?groups=jor&q=&ext_page_size=25 |
-| Zaatari Survey Data               | Age group, gender, date of arrival, district of origin in syria, shelter type, distance to various infrastucture on each individual in the camp. | <http://reachjor.github.io/pop_count/index.html#>            |
+| Zaatari Survey Data               | Age group, gender, date of arrival, district of origin in syria, shelter type, distance to various infrastucture on each individual in the camp. | <http://reachjor.github.io/pop_count/index.html#>, http://www.reachresourcecentre.info/advanced-search?name_list%5B%5D=JO&field_document_type_tid%5B%5D=6            |
 | Zaatari Shapefiles                | This github page host various infrastucture and wastewater data for Zaatari refugee camp. | <https://github.com/impact-initiatives/reach-jor-zaatari-data> |
 | Satellite Imagery of Zaatari camp | Google Earth was used to collect satellite imagery over time. | <https://github.com/benjiantolin/zaatari/tree/master/img/SatImagery> |
 | Syria Shapefiles                  | Syria districts shapefiles                                   | <https://data.humdata.org/dataset/syrian-arab-republic-administrative-boundaries-populated-places> |
