@@ -1,17 +1,175 @@
 // 1. Create a map object.
 var mymap = L.map('map', {
-    center: [32.293, 36.33],
+    center: [32.293, 36.3125],
     zoom: 15,
     maxZoom: 18,
     minZoom: 8,
     zoomcontrol: false,
     detectRetina: true });
 
+var syriamap = L.map('origin', {
+    center: [35., 38.7],
+    zoom: 6,
+    maxZoom: 18,
+    minZoom: 3,
+    zoomcontrol: false,
+    detectRetina: true });
+
 // 2. Add a base map.
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(syriamap);
 
+Promise.all([
+  d3.csv('assets/time.csv'),
+]).then(function(datasets) {
+
+  var t = ["t"];
+  var d1 = ["D1"];
+  var d2 = ["D2"];
+  var d3 = ["D3"];
+  var d4 = ["D4"];
+  var d5 = ["D5"];
+  var d6 = ["D6"];
+  var d7 = ["D7"];
+  var d8 = ["D8"];
+  var d9 = ["D9"];
+  var d10 = ["D10"];
+  var d11 = ["D11"];
+  var d12 = ["D12"];
+  var total = ["Total"];
+
+  datasets[0].forEach(function(d) {
+    t.push(new Date(d["t"]))
+    d1.push(+d["d1"])
+    d2.push(+d["d2"])
+    d3.push(+d["d3"])
+    d4.push(+d["d4"])
+    d5.push(+d["d5"])
+    d6.push(+d["d6"])
+    d7.push(+d["d7"])
+    d8.push(+d["d8"])
+    d9.push(+d["d9"])
+    d10.push(+d["d10"])
+    d11.push(+d["d11"])
+    d12.push(+d["d12"])
+    total.push(+d["total"])
+
+  });
+
+var chart = c3.generate({
+    title: {
+      text: 'Refugee Arrival (2012/7-2014/12)'
+    },
+    data: {
+        x: 't',
+        columns: [t,total],
+        type: 'area-spline',
+    },
+    subchart: {
+    show: true,
+    size: {
+      height: 15
+    },
+    onbrush: function(d) {
+      chart2.zoom(chart.zoom());
+    }
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m'
+            }
+        },
+        y: {
+          label: {
+              text: '# of Refugees',
+              position: 'outer-middle'
+          }
+        },
+    },
+    point: {
+      r: 0,
+      focus: {
+        expand: {
+          r: 2
+        }
+      }
+    },
+    zoom: {
+      // rescale: true,+
+      enabled: true,
+      type: "scroll",
+      onzoom: function(d) {
+        chart2.zoom(chart.zoom());
+        // step();
+      }
+    },
+    stanford: {
+    scaleMin: 1,
+    scaleMax: 10000,
+    scaleFormat: 'pow10',
+    padding: {
+        top: 15,
+        right: 0,
+        bottom: 0,
+        left: 0
+    }
+},
+      bindto: "#total"
+});
+
+var chart2 = c3.generate({
+    title: {
+      text: 'Refugee Arrival by District (D)'
+    },
+    data: {
+        x: 't',
+        columns: [t, d1, d2, d3, d4, d5, d6,d7, d8, d9, d10, d11, d12],
+        type: 'spline',
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                format: '%Y-%m'
+            }
+        },
+        y: {
+          tick: {
+              format: ''
+          },
+          label: {
+              text: '# of Refugees',
+              position: 'outer-middle'
+          }
+        },
+    },
+    point: {
+      r: 0,
+      focus: {
+        expand: {
+          r: 2
+        }
+      }
+    },
+    zoom: {
+      enabled: {
+        type: "drag"
+      },
+      onzoomend: function(d) {
+        chart.zoom(chart2.zoom());
+      }
+    },
+    tooltip: {
+      linked: true
+    },
+      bindto: "#district"
+});
+    });
 // 3. Add airports GeoJSON Data
-var airports = null;
+var districts = null;
+var syria = null;
 
 // 4. build up a set of colors from colorbrewer's dark2 category
 var colors = chroma.scale('RdYlBu').mode('lch').colors(2);
@@ -22,24 +180,27 @@ for (i = 0; i < 2; i++) {
 }
 
 //get airport.geojson data
-airports= L.geoJson.ajax("assets/districts.geojson",{
-
+districts = L.geoJson.ajax("assets/districts.geojson",{
 //add popup window
 onEachFeature: function (feature, layer) {
 layer.bindPopup('District: '+feature.properties.DISTRICT +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
-},
-
-pointToLayer: function (feature, latlng) {
-var id = 0;
-if (feature.properties.CNTL_TWR == "N") { id = 0; }
-else { id = 1;}
-return L.marker(latlng, {icon: L.divIcon({className: 'fa fa-plane marker-color-' + (id + 1).toString() })});
 },
 
 attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
 })
 .addTo(mymap);
 
+syria = L.geoJson.ajax("assets/syria1min.geojson",{
+//add popup window
+// onEachFeature: function (feature, layer) {
+// layer.bindPopup('District: '+feature.properties.NAM_EN_REF +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
+// },
+
+// attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
+
+})
+.addTo(syriamap);
+$(".leaflet-control-attribution").hide();
 // 6. Set function for color ramp
 colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
 
@@ -142,7 +303,8 @@ legend.onAdd = function () {
 
 // 11. Add a legend to map
 legend.addTo(mymap);
+
 // 12. Add a scale bar to map
-L.control.scale({position: 'bottomleft'}).addTo(mymap);
+L.control.scale({position: 'bottomright'}).addTo(mymap);
 //Add mouse position to map
 L.control.mousePosition().addTo(mymap);
