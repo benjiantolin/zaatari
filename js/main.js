@@ -248,7 +248,7 @@ function highlightFeature(e) {
     // bring the layer to the front.
     layer.bringToFront();
     // select the update class, and update the contet with the input value.
-    $(".update").html('<b> District: </b>' + layer.feature.properties.d_id + '<br> <b>Total Population:</b> ' + layer.feature.properties.totpop +'<br> <b>Total Households:</b> '+ layer.feature.properties.tothh);
+    $(".update").html('<b> District: </b>' + layer.feature.properties.DISTRICT + '<br> <b>Total Population:</b> ' + layer.feature.properties.totpop +'<br> <b>Total Households:</b> '+ layer.feature.properties.hhs);
 }
 
 // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
@@ -259,7 +259,7 @@ function zoomToFeature(e) {
 // 3.2.3 reset the hightlighted feature when the mouse is out of its region.
 function resetHighlight(e) {
     districts.resetStyle(e.target);
-    $(".update").html("Hover over a state");
+    $(".update").html("Hover over a district");
 }
 
 // 3.3 add these event the layer obejct.
@@ -272,7 +272,7 @@ function onEachFeature(feature, layer) {
 }
 
 // 3.4 assign the geojson data path, style option and onEachFeature option. And then Add the geojson layer to the map.
-districts = L.geoJson.ajax("assets/blocks.geojson", {
+districts = L.geoJson.ajax("assets/districts.geojson", {
     style: style,
     onEachFeature: onEachFeature
 }).addTo(mymap);
