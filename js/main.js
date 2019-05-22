@@ -180,15 +180,15 @@ for (i = 0; i < 2; i++) {
 }
 
 //get airport.geojson data
-districts = L.geoJson.ajax("assets/districts.geojson",{
-//add popup window
-onEachFeature: function (feature, layer) {
-layer.bindPopup('District: '+feature.properties.DISTRICT +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
-},
-
-attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
-})
-.addTo(mymap);
+// districts = L.geoJson.ajax("assets/districts.geojson",{
+// //add popup window
+// onEachFeature: function (feature, layer) {
+// layer.bindPopup('District: '+feature.properties.DISTRICT +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
+// },
+//
+// attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
+// })
+// .addTo(mymap);
 
 syria = L.geoJson.ajax("assets/syria1min.geojson",{
 //add popup window
