@@ -286,7 +286,7 @@ legend.onAdd = function () {
 
     // Create Div Element and Populate it with HTML
     var div = L.DomUtil.create('div', 'legend');
-    div.innerHTML += '<b># of Airports</b><br />';
+    div.innerHTML += '<b>Population (2015)</b><br />';
     div.innerHTML += '<i style="background: ' + colors[6] + '; opacity: 0.5"></i><p>59+</p>';
     div.innerHTML += '<i style="background: ' + colors[5] + '; opacity: 0.5"></i><p>26-58</p>';
     div.innerHTML += '<i style="background: ' + colors[4] + '; opacity: 0.5"></i><p>20-25</p>';
@@ -294,9 +294,9 @@ legend.onAdd = function () {
     div.innerHTML += '<i style="background: ' + colors[2] + '; opacity: 0.5"></i><p>10-14</p>';
     div.innerHTML += '<i style="background: ' + colors[1] + '; opacity: 0.5"></i><p> 5-9</p>';
     div.innerHTML += '<i style="background: ' + colors[0] + '; opacity: 0.5"></i><p> 0- 4</p>';
-    div.innerHTML += '<hr><b>Control Tower Status<b><br />';
-    div.innerHTML += '<i class="fa fa-plane marker-color-1"></i><p> No control tower</p>';
-    div.innerHTML += '<i class="fa fa-plane marker-color-2"></i><p> Has control tower</p>';
+    // div.innerHTML += '<hr><b>Control Tower Status<b><br />';
+    // div.innerHTML += '<i class="fa fa-plane marker-color-1"></i><p> No control tower</p>';
+    // div.innerHTML += '<i class="fa fa-plane marker-color-2"></i><p> Has control tower</p>';
     // Return the Legend div containing the HTML content
     return div;
 };
