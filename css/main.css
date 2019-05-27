@@ -4,8 +4,8 @@ html, body, #map { width: 100%; height: 100%; margin: 0; background: #fff;}
 .info {
 z-index: 1000;
 position: absolute;
-right: 5px;
-top: 20px;
+left: 5px;
+top: 5px;
 padding: 6px 8px;
 font: 14px Arial, Helvetica, sans-serif;
 text-align: right;
@@ -47,3 +47,4 @@ font-size: 12px;
 line-height: 16px;
 margin: 0;
 }
+

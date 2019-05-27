@@ -10,13 +10,27 @@ var mymap = L.map('map', {
 var syriamap = L.map('origin', {
     center: [35., 38.7],
     zoom: 6,
-    maxZoom: 18,
-    minZoom: 3,
+    maxZoom: 6,
+    minZoom: 6,
     zoomcontrol: false,
     detectRetina: true });
+$(".leaflet-control-zoom").hide();
+L.control.zoom({
+  position: 'topleft'
+}).addTo(mymap);
+
+
+var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png');
+var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
+var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+
+var baseLayers = {
+  'Grayscale': gray,
+  'Streets': streets,
+  'Satellite': satellite
+}
 
 // 2. Add a base map.
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(syriamap);
 
 Promise.all([
@@ -192,15 +206,16 @@ for (i = 0; i < 2; i++) {
 
 syria = L.geoJson.ajax("assets/syria1min.geojson",{
 //add popup window
-// onEachFeature: function (feature, layer) {
-// layer.bindPopup('District: '+feature.properties.NAM_EN_REF +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
-// },
+onEachFeature: function (feature, layer) {
+layer.bindPopup('District: '+feature.properties.NAM_EN_REF +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
+},
 
 // attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
 
 })
 .addTo(syriamap);
 $(".leaflet-control-attribution").hide();
+
 // 6. Set function for color ramp
 colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
 
@@ -275,8 +290,9 @@ function onEachFeature(feature, layer) {
 districts = L.geoJson.ajax("assets/districts.geojson", {
     style: style,
     onEachFeature: onEachFeature
-}).addTo(mymap);
 
+}).addTo(mymap);
+        L.control.layers(baseLayers, null, {collapsed:false}).addTo(mymap);
 
 // 9. Create Leaflet Control Object for Legend
 var legend = L.control({position: 'bottomright'});
