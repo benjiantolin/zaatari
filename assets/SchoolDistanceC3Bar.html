@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
+<style>
+
+body
+{
+    min-width: 800px;
+}
+
+.chart
+{
+    width: 600px;
+    height: 400px;
+    margin: 1em;
+    padding: 1em;
+    border: 2px;
+    background: #ccc;
+}
+
+</style>
+</head>
+
+<body>
+<div id="chart" class="chart"></div>
+<script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+var xAxisData = ['0-99m', '100-199m', '200-399m', '400-799m', '800+m'];
+var chart = c3.generate({
+    data: {
+        columns: [
+            ["D1",175,544,1207,361,0],
+            ["D2",42,281,893,1412,0],
+            ["D3",614,656,461,0,0],
+            ["D4",179,375,1038,14,0],
+            ["D5",159,374,1041,434,0],
+            ["D6",0,0,540,1979,0],
+            ["D7",169,246,749,1215,51],
+            ["D8",73,144,651,1734,191],
+            ["D9",0,30,439,1220,0],
+            ["D10",188,651,1276,227,0],
+            ["D11",0,7,807,2040,0],
+            ["D12",124,304,976,642,0],
+        ],
+        type: 'bar',
+        labels: {
+           format: {
+            y: d3.format('')
+                }
+                  },
+         },
+
+         axis: {
+            x: {
+               type: 'categorized',
+               label: 'Distance from Schools by Zaatari District',
+               categories: xAxisData
+
+},
+            y: {
+               label: 'School-Age Children Count'
+      },
+
+        bar: {
+           width: {
+                  ratio: 0.5 // this makes bar width 50% of length between ticks
+      }}},
+});
+
+</script>
