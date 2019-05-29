@@ -14,9 +14,11 @@ var syriamap = L.map('origin', {
     minZoom: 6,
     zoomcontrol: false,
     detectRetina: true });
+
+
 $(".leaflet-control-zoom").hide();
 L.control.zoom({
-  position: 'topleft'
+  position: 'topright'
 }).addTo(mymap);
 
 
@@ -35,6 +37,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(syriamap
 
 Promise.all([
   d3.csv('assets/time.csv'),
+  d3.json('assets/overlay/mosques.geojson')
 ]).then(function(datasets) {
 
   var t = ["t"];
@@ -119,17 +122,6 @@ var chart = c3.generate({
         // step();
       }
     },
-    stanford: {
-    scaleMin: 1,
-    scaleMax: 10000,
-    scaleFormat: 'pow10',
-    padding: {
-        top: 15,
-        right: 0,
-        bottom: 0,
-        left: 0
-    }
-},
       bindto: "#total"
 });
 
@@ -180,29 +172,33 @@ var chart2 = c3.generate({
     },
       bindto: "#district"
 });
-    });
-// 3. Add airports GeoJSON Data
-var districts = null;
-var syria = null;
 
-// 4. build up a set of colors from colorbrewer's dark2 category
-var colors = chroma.scale('RdYlBu').mode('lch').colors(2);
+var mosquesLayer = L.geoJSON(datasets[1], {
+  style: {
+    icon: L.divIcon({
+      className:'fas fa-mosque',
+    }),
+    opacity: 0.6,
+    fillOpacity: 0,
+    weight: 2,
+    color: "gray",
+    dashArray: '6'
+  }
+}).addTo(mymap);
 
-// 5. dynamically append style classes to this page. This style classes will be used for colorize the markers.
-for (i = 0; i < 2; i++) {
-    $('head').append($("<style> .marker-color-" + (i + 1).toString() + " { color: " + colors[i] + "; font-size: 15px; text-shadow: 0 0 3px #ffffff;} </style>"));
+var overlays = {
+  // "<span style='color:red'>No. 123: Englewood</span>": proj_123_group,
+  // "<span style='color:green'>No. 141: HallToAsh</span>": proj_141_group,
+  // "<span style='color:blue'>No. 1080: Greenway</span>": proj_1080_group,
+  // "<span style='color:purple'>No. 6758: Alden Wq Retrofit</span>": proj_6758_group,
+  "<i class='fas fa-mosque' style='vertical-align: sub;'></i> <span style='color:brown'>Mosques</span>": mosquesLayer,
+
+  // "<span style='color:gray'>Basin Area</span>": basinLayer,
+  // "<span style='color:blue'>Fanno Creek</span>": streamsLayer
 }
 
-//get airport.geojson data
-// districts = L.geoJson.ajax("assets/districts.geojson",{
-// //add popup window
-// onEachFeature: function (feature, layer) {
-// layer.bindPopup('District: '+feature.properties.DISTRICT +'<br> Total Population: '+feature.properties.totpop +'<br> Total Households: '+feature.properties.hhs)
-// },
-//
-// attribution: 'Zaatari Population Data &copy; REACH | Zaatari Spatial Data &copy; REACH | Base Map &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | Made By Benjamin Antolin'
-// })
-// .addTo(mymap);
+L.control.layers(baseLayers, overlays, {collapsed:false}).addTo(mymap);
+    });
 
 syria = L.geoJson.ajax("assets/syria1min.geojson",{
 //add popup window
