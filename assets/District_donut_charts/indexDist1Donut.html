@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
+<style>
+body
+{
+    min-width: 800px;
+}
+.chart
+{
+    width: 600px;
+    height: 400px;
+    margin: 1em;
+    padding: 1em;
+    border: 2px;
+    background: 'white';
+}
+</style>
+</head>
+
+<body>
+<div id="chart" class="chart"></div>
+<script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+var chart = c3.generate({
+    data: {
+        columns: [
+            ["0-99m",175],
+            ["100-199m",544],
+            ["200-399m",1207],
+            ["400-799mm",361],
+            ["800+m",0]
+        ],
+        type: 'donut',
+        labels: {
+           format: {
+            y: d3.format('')
+                }
+              }},
+        donut: {
+          title: "District 1 School Distances",
+          width: 70
+        },
+
+});
+
+var chart = c3.generate({
+    data: {
+        columns: [
+            ["0-99m",175],
+            ["100-199m",544],
+            ["200-399m",1207],
+            ["400-799mm",361],
+            ["800+m",0]
+        ],
+        type: 'donut',
+        labels: {
+           format: {
+            y: d3.format('')
+                }
+              }},
+        donut: {
+          title: "District 1 School Distances",
+          width: 70
+        },
+
+});
+
+
+</script>
