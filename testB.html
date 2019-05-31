@@ -89,11 +89,11 @@ Promise.all([
   // var tandc = ["Tent_and_caravan"];
   // var gt = ["Grand_Total"];
   var age_brackets = ["age_brackets"];
-  // var length1 = ["0_99m"];
-  // var length2 = ["100_199m"];
-  // var length3 = ["200_399m"];
-  // var length4 = ["400_799m"];
-  // var length5 = ["800+m"];
+  var length1 = ["0_99m"];
+  var length2 = ["100_199m"];
+  var length3 = ["200_399m"];
+  var length4 = ["400_799m"];
+  var length5 = ["800+m"];
   var total = ["Total"];
 
 
@@ -105,11 +105,11 @@ Promise.all([
     // tandc.push(+d["tandc"])
     // gt.push(+d["gt"])
     age_brackets.push(+d["age_brackets"])   //X axis
-    // length1.push(+d["0_99m"])
-    // length2.push(+d["100_199m"])
-    // length3.push(+d["200_399m"])
-    // length4.push(+d["400_799m"])
-    // length5.push(+d["800plusm"])
+    length1.push(+d["0_99m"])
+    length2.push(+d["100_199m"])
+    length3.push(+d["200_399m"])
+    length4.push(+d["400_799m"])
+    length5.push(+d["800plusm"])
     total.push(+d["total"])
 
   });
@@ -152,7 +152,7 @@ Promise.all([
           data: {
             //url: 'assets/SurveyData_HealthDist.csv',
             // x: 'age_brackets',
-            columns: [age_brackets, total],
+            columns: [age_brackets, length1, length2, length3, length4, length5, total],
             type: 'bar'
           },
           axis: {
