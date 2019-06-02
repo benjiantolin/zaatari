@@ -23,7 +23,6 @@
         font-family: 'Titillium Web', sans-serif;
       }
       */
-
       #info {
         position: fixed;
         z-index: 1000;
@@ -75,101 +74,75 @@
 <!-- <div id="map"></div>
 <div class='info'><h2>Zaatari Refugee Camp</h2><div class='update'>Hover over a district</div></div> -->
 <script>
-
-
-
 Promise.all([
-  //d3.csv('assets/SurveyData_Shelter.csv'),
-  d3.csv('assets/SurveyData_HealthDist.csv')
+  d3.csv('assets/SurveyData_Shelter.csv'),
 ]).then(function(datasets) {
-
-  // var dist = ["dist"];
-  // var caravan = ["Caravan"];
-  // var tent = ["Tent"];
-  // var tandc = ["Tent_and_caravan"];
-  // var gt = ["Grand_Total"];
-  var age_brackets = ["age_brackets"];
-  var length1 = ["0_99m"];
-  var length2 = ["100_199m"];
-  var length3 = ["200_399m"];
-  var length4 = ["400_799m"];
-  var length5 = ["800+m"];
-  var total = ["Total"];
-
-
+  var dist = ["dist"];
+  var caravan = ["Caravan"];
+  var tent = ["Tent"];
+  var tandc = ["Tent and Caravan"];
  //************** Use name of attributes in csv file in the quotes for this section
   datasets[0].forEach(function(d) {
-    // dist.push(+d["dist"])         //X axis
-    // caravan.push(+d["caravan"])
-    // tent.push(+d["tent"])
-    // tandc.push(+d["tandc"])
-    // gt.push(+d["gt"])
+    dist.push(+d["dist"])         //X axis
+    caravan.push(+d["caravan"])
+    tent.push(+d["tent"])
+    tandc.push(+d["tent_and_caravan"])
+  });
+  var shelter_bar = c3.generate({
+       title: {
+         text: 'Shelter Count by District'
+       },
+       data: {
+         columns: [caravan, tent, tandc],
+         type: 'bar',
+       },
+       axis: {
+         x: {
+           type: 'category',
+           categories: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12']
+         }
+       },
+       bar: {
+         width: {
+           ratio: 0.5
+         },
+       },
+       bindto: '#shelter_bar',
+   });
+});
+
+Promise.all([
+  d3.csv('assets/SurveyData_HealthDist.csv')
+]).then(function(datasets) {
+  var age_brackets = ["age_brackets"];
+  var length1 = ["0-99m"];
+  var length2 = ["100-199m"];
+  var length3 = ["200-399m"];
+  var length4 = ["400-799m"];
+  var length5 = ["800+m"];
+ //************** Use name of attributes in csv file in the quotes for this section
+  datasets[0].forEach(function(d) {
     age_brackets.push(+d["age_brackets"])   //X axis
     length1.push(+d["0_99m"])
     length2.push(+d["100_199m"])
     length3.push(+d["200_399m"])
     length4.push(+d["400_799m"])
     length5.push(+d["800plusm"])
-    total.push(+d["total"])
-
   });
 
-  // var shelter_bar = c3.generate({
-  //     title: {
-  //       text: 'Shelter Count by District'
-  //     },
-  //     data: {
-  //       //url: 'assets/SurveyData_Shelter.csv',
-  //       x: 'dist',
-  //       columns: [dist, caravan, tent, tandc, gt],
-  //       type: 'bar',
-  //     },
-  //     axis: {
-  //       x: {
-  //         tick: {
-  //             format: ''
-  //         }
-  //       },
-  //       y: {
-  //         tick: {
-  //             format: ''
-  //         },
-  //         label: {
-  //           text: '# of People in Different Shelter Types',
-  //           position: 'outer-middle'
-  //         }
-  //       },
-  //     },
-  //     bar: {
-  //       width: {
-  //         ratio: 0.5
-  //       },
-  //     },
-  //     bindto: '#shelter_bar',
-  // });
-
   var agehealth_bar = c3.generate({
+          title: {
+            text: 'Distance to Health Center by Age Group'
+          },
           data: {
-            //url: 'assets/SurveyData_HealthDist.csv',
-            // x: 'age_brackets',
-            columns: [age_brackets, length1, length2, length3, length4, length5, total],
+            columns: [length1, length2, length3, length4, length5],
             type: 'bar'
           },
           axis: {
             x: {
               type: 'category',
-              categories: ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8', 'cat9']
+              categories: ['0-19 years', '20-34 years', '35-49 years', '50-64 years', '65+ years']
             }
-
-          //   y: {
-          //     tick: {
-          //         format: ''
-          //     },
-          //     label: {
-          //       text: '# of People by Age Group',
-          //       position: 'outer-middle'
-          //     }
-          //   }
           },
           bar: {
             width: {
@@ -180,8 +153,6 @@ Promise.all([
       });
 
 });
-
-
 </script>
 </body>
 </html>
