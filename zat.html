@@ -18,12 +18,46 @@
   <link rel="stylesheet" href="css/zaatari.css">
 <style>
 
+.legend {
+  line-height: 16px;
+  width: 140px;
+  color: #333333;
+  font-family: 'Open Sans', sans-serif;
+  padding: 6px 8px;
+  background: white;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.legend i {
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.9;
+}
+
+.legend img {
+  width: 16px;
+  height: 16px;
+  margin-right: 3px;
+  float: left;
+}
+
+.legend p {
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+}
+
+
 .fa-mosque:hover {
     opacity: 0.3;
 }
 
 .fa-mosque {
-  color: brown;
+  color: #8c510a;
   font-size: .5rem;
   position: absolute;
   border: 5px;
@@ -32,16 +66,31 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   opacity: 0.8;
-  text-shadow: 10px 10px 10px grey;
-
+  text-shadow: 1px 1px 1px black;
 }
-  .fa-trash-alt {
+
+.control, .trash {
+  color: #8c510a;
+  font-size: 10px;
+  position: relative;
+  border: 5px;
+  top: 35%;
+  left: 5%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  opacity: 0.8;
+  text-shadow: 1px 1px 1px black;
+}
+
+
+
+  .fa-trash-alt:hover {
       opacity: 0.3;
   }
 
   .fa-trash-alt {
-    color: grey;
-    font-size: .48rem;
+    color: #878787;
+    font-size: 10px;
     position: absolute;
     border: 5px;
     top: 35%;
@@ -49,9 +98,17 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     opacity: 0.8;
-    text-shadow: 10px 10px 10px grey;
+    text-shadow: 10px 10px 10px white;
 }
 
+/* .mosques {
+  color: red;
+  opacity: 0.8;
+  text-shadow: 1px 1px 1px grey;
+} */
+.leaflet-control-layers {
+  width: 220px;
+}
 </style>
   <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon" /> -->
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
@@ -76,10 +133,8 @@
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
             <h4 class="text-white">About</h4>
-            <p class="text-muted">This website utilizes web geovisualization tools to
-                                       visualize Zaatari Refugee Camp. Each application contains interactive map
-                                       elements and charts. Explore the categories below to
-                                       to learn more.</p>
+            <p class="text-muted">The Za’atari Demographic Coordinated View, created by students at Oregon State University, is a geovisualization of the Za’atari refugee camp in Jordan. <br>
+                                  The project focuses on demographics and time trends in the camp from its opening in 2012 to December 2014.</p>
           </div>
           <div class="col-sm-4 offset-md-1 py-4">
             <h4 class="text-white">Contact</h4>
@@ -156,13 +211,11 @@
 
   <div id="info">
     <h4>Zaatari Refugee Camp</h4>
-    <p id="caseDesc">Where have CWS projects been implemented in the Fanno Creek subbasin and have those projects impacted water quality downstream? This map dynamically visualizes project plant and monitoring data, and water quality variables through map visualiztions and charts.
+    <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
     </p>
-    <p id="mapFunc">The default settings on this application shows Fanno Creek and basin and highlights four CWS projects.
-
-Hover over a project polygon to activate a sidebar with several charts of the projects planting and monitoring data. In this sidebar, you also can see selected photos of the CWS project site as well as a brief summary of CWS project. At the bottom left of the application is a chart of Water Temperature and Dissolved Oxygen over time at the USGS water monitor at Durham.
+    <p id="mapFunc">Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
     </p>
-    <div id="temp" style="min-height: 250px"></div>
+    <div id="totpop" style="min-height: 250px"></div>
   </div>
 
   <script>
@@ -240,19 +293,11 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
       $.getJSON("assets/overlay/garbageBins.geojson"),
       $.getJSON("assets/districts.geojson"),
       $.getJSON("assets/overlay/roads.geojson"),
-      // $.getJSON("assets/proj_1080.geojson"),
-      // $.getJSON("assets/proj_6758.geojson")
-    ).done(function(mosques, trash, districts, roads) {
-
-      // var basinLayer = L.geoJSON(basin, {
-      //   style: {
-      //     opacity: 0.6,
-      //     fillOpacity: 0,
-      //     weight: 2,
-      //     color: "gray",
-      //     dashArray: '6'
-      //   }
-      // }).addTo(mymap);
+      $.getJSON("assets/overlay/septicTanks.geojson"),
+      $.getJSON("assets/overlay/pipesSeptic.geojson"),
+      $.getJSON("assets/overlay/steelTanks.geojson"),
+      $.getJSON("assets/overlay/pipesSolidFree.geojson"),
+    ).done(function(mosques, trash, districts, roads, sepTanks, sepPipes, steelTanks, steelPipes) {
 
       var mosquesLayer = L.geoJSON(mosques, {
         onEachFeature: function(feature, layer) {
@@ -265,72 +310,108 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
             })
           });
         }
-      }).addTo(mymap);
+      });
 
-
-      function trash_style(feature) {
-        var c = null;
-        if (feature.properties.CONDITION == "good") {
-          c = "blue";
-        } else if (feature.properties.CONDITION == "maintain") {
-          c = "yellow";
-        } else if (feature.properties.CONDITION == "replace") {
-          c = "red";
-        } else {
-          c = "grey";
-        }
-        return {
-          opacity: 0.7,
-          color: c
-        };
-      };
-
-
+      // 4. build up a set of colors from colorbrewer's dark2 category
+      var trashColors = chroma.scale('RdYlGn').mode('lch').colors(3);
+      for (i = 0; i < 3; i++) {
+          $('head').append($("<style> .trash-color-" + (i + 1).toString() + " { color: " + trashColors[i] + "; font-size: 10px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
 
       var trashLayer = L.geoJSON(trash, {
-        style: trash_style,
         onEachFeature: function(feature, layer) {
           layer.bindPopup('<b>CONDITION: </b>' + feature.properties.CONDITION)
         },
         pointToLayer: function(feature, latlng) {
+          var id = 0;
+    if
+    (feature.properties.CONDITION == "replace") { id = 0; }
+    else if
+    (feature.properties.CONDITION == "maintain") { id = 1;}
+    else if
+    (feature.properties.CONDITION == "good") { id = 2;}
+    else {id = 3;}
           return L.marker(latlng, {
             icon: L.divIcon({
-              className: 'fas fa-trash-alt'
+              className: 'fas fa-trash-alt trash-color-'+ (id + 1).toString(),
+            })
+          });
+        }
+      });
+
+      var sepTanksColors = chroma.scale('blues').colors(4);
+      for (i = 0; i < 3; i++) {
+          $('head').append($("<style> .sepTanks-color-" + (i + 1).toString() + " { color: " + sepTanksColors[i] + "; font-size: 6px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
+
+      var sepTanksLayer = L.geoJSON(sepTanks, {
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup('<b># of Households Served: </b>' + feature.properties.HOUSE_COUN)
+        },
+        pointToLayer: function(feature, latlng) {
+          var id = 0;
+    if
+    (feature.properties.HOUSE_COUN > 15) { id = 3; }
+    else if
+    (feature.properties.HOUSE_COUN > 10) { id = 2;}
+    else if
+    (feature.properties.HOUSE_COUN > 5) { id = 1;}
+    else {id = 0;}
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-box sepTanks-color-'+ (id + 1).toString(),
+            })
+          });
+        }
+      });
+
+      var sepPipesLayer = L.geoJSON(sepPipes, {
+        style: {
+          color: "gray",
+          weight: 1,
+          opacity: .8,
+        }
+      });
+
+      var steelTanksColors = chroma.scale('greens').colors(4);
+      for (i = 0; i < 3; i++) {
+          $('head').append($("<style> .steelTanks-color-" + (i + 1).toString() + " { color: " + steelTanksColors[i] + "; font-size: 8px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
+
+      var steelTanksLayer = L.geoJSON(steelTanks, {
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup('<b># of Households Served: </b>' + feature.properties.house_coun)
+        },
+        pointToLayer: function(feature, latlng) {
+          var id = 0;
+    if
+    (feature.properties.house_coun > 150) { id = 3; }
+    else if
+    (feature.properties.house_coun > 100) { id = 2;}
+    else if
+    (feature.properties.house_coun > 50) { id = 1;}
+    else {id = 0;}
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-box steelTanks-color-'+ (id + 1).toString(),
             })
           });
         }
       }).addTo(mymap);
 
-
-      // function setColorTrash(cond) {
-      //   var id = 0;
-      //   if (cond == "good") {
-      //     id = 3;
-      //   } else if (zone == "maintain") {
-      //     id = 2;
-      //   } else if (zone == "replace") {
-      //     id = 1;
-      //   } else {
-      //     id = 0;
-      //   }
-      //   return trashColors[id];
-      // }
-      //
-      // function styleTrash(feature) {
-      //   return {
-      //     fillColor: setColorTrash(feature.properties.CONDITION),
-      //     fillOpacity: 0.4,
-      //     weight: 0,
-      //     opacity: 1,
-      //     color: '#b4b4b4',
-      //     dashArray: '4'
-      //   };
-      // }
-
+      var steelPipesLayer = L.geoJSON(steelPipes, {
+        style: {
+          color: "gray",
+          weight: 1,
+          opacity: .8,
+        }
+      }).addTo(mymap);
 
       var roadsLayer = L.geoJSON(roads, {
         style: road_style
-      }).addTo(mymap);
+      });
+
+
 
       //
       //
@@ -372,22 +453,21 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
         // "<span style='color:blue'>No. 1080: Greenway</span>": proj_1080_group,
         // "<span style='color:purple'>No. 6758: Alden Wq Retrofit</span>": proj_6758_group,
         // "<span >USGS Water Monitor</span>": waterstation_group,
-        '<span>Mosques: </span> <i class="fas fa-mosque"></i> ': mosquesLayer,
+        '<span>Mosques</span> <i class="fas fa-mosque fa-lg control"></i> ': mosquesLayer,
         // '<span>Flow Gauges: </span> <i class="fas fa-water fa-lg flow_gauge"></i> ': flow_gauges,
-        "<span>Garbage Bins</span>": trashLayer,
-        "<span >Roads</span>": roadsLayer,
+        '<span>Garbage Bins</span><i class="fas fa-trash-alt fa-lg trash"></i>': trashLayer,
+        "<span >Roads<hr></span>": roadsLayer,
+        "<span >Septic Tanks</span>": sepTanksLayer,
+        "<span >Septic Pipes</span>": sepPipesLayer,
+        "<span >Steel Tanks</span>": steelTanksLayer,
+        "<span >Solid Free Pipes</span>": steelPipesLayer,
       }
 
       L.control.layers(baseLayers, overlays, {collapsed:false}).addTo(mymap);
 
 
       var districtsLayer = L.geoJSON(districts, {
-        style: {
-          opacity: 1,
-          fillOpacity: 0.5,
-          weight: 1,
-          color: "mediumslateblue"
-        },
+        style: style,
         onEachFeature: function(feature, layer) {
           layer.on({
             mouseover: highlightFeature,
@@ -482,7 +562,7 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
 
         Promise.all([
           d3.csv('assets/data.csv'),
-          d3.csv('assets/projs/Monitor' + projId + '.csv'),
+          // d3.csv('assets/projs/Monitor' + projId + '.csv'),
         ]).then(function(datasets) {
 
           // $("#projName").text(projName);
@@ -797,16 +877,55 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
 
     function road_style(feature) {
       var c = null;
+      var w = 1;
       if (feature.properties.LINETYPE == "paved") {
         c = "grey";
+        w = 1;
       } else {
         c = "brown";
+        w = .75;
       }
       return {
         opacity: 0.7,
-        color: c
+        color: c,
+        weight: w
       };
     };
+
+
+    colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
+
+    function setColor(density) {
+      var id = 0;
+      if (density > 8507) {
+        id = 6;
+      } else if (density > 7726 && density <= 8507) {
+        id = 5;
+      } else if (density > 6946 && density <= 7726) {
+        id = 4;
+      } else if (density > 6165 && density <= 6946) {
+        id = 3;
+      } else if (density > 5385 && density <= 6165) {
+        id = 2;
+      } else if (density > 4605 && density <= 5385) {
+        id = 1;
+      } else {
+        id = 0;
+      }
+      return colors[id];
+    }
+
+    // 7. Set style function that sets fill color.md property equal to cell tower density
+    function style(feature) {
+      return {
+        fillColor: setColor(feature.properties.totpop),
+        fillOpacity: 0.4,
+        weight: 2,
+        opacity: 1,
+        color: '#b4b4b4',
+        dashArray: '4'
+      };
+    }
 
 
 
@@ -822,16 +941,14 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
     });
 
 
-    d3.csv('assets/wq/temp_do.csv').then(function(dataset) {
+    d3.csv('assets/time.csv').then(function(dataset) {
 
       var t = ["t"];
-      var temp = ["Temperature (ºC)"];
-      var oxy = ["Dissolved Oxygen, Probe (mg/L)"];
+      var totpop = ["Incoming Syrian Refugees"];
 
       dataset.forEach(function(d) {
         t.push(new Date(d["t"]))
-        temp.push((+d["temp"]).toFixed(2))
-        oxy.push((+d["do"]).toFixed(2))
+        totpop.push((+d["total"]))
       });
 
       var chart = c3.generate({
@@ -840,12 +957,8 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
         },
         data: {
           x: "t",
-          columns: [t, temp, oxy],
-          type: 'spline',
-          axes: {
-            temp: 'Temperature (ºC)',
-            oxy: 'Dissolved Oxygen, Probe (mg/L)'
-          }
+          columns: [t, totpop],
+          type: 'area-spline',
         },
         subchart: {
           show: true,
@@ -863,22 +976,15 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
           x: {
             type: "timeseries",
             tick: {
-              format: "%Y"
+              format: "%b, %Y"
             }
           },
           y: {
             label: {
-              text: 'Temperature (ºC)',
+              text: 'Incoming Syrian Refugees',
               position: 'outer-middle'
             }
           },
-          y2: {
-            show: true,
-            label: {
-              text: 'Dissolved Oxygen, Probe (mg/L)',
-              position: 'outer-middle'
-            }
-          }
         },
         point: {
           r: 0,
@@ -893,21 +999,14 @@ Hover over a project polygon to activate a sidebar with several charts of the pr
           enabled: true,
           type: "scroll",
         },
-        legend: {
-          position: 'inset',
-          inset: {
-            anchor:"top-left",
-            y: -10,
-          },
-        },
         tooltip: {
           linked: true
         },
-        bindto: "#temp"
+        bindto: "#totpop"
       });
 
 
-      $($($("#temp svg").children()[2]).children()[2]).find("text").hide()
+      $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
 
 
 
