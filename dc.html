@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!--Originally developed by Bo Zhao, and commented and revised by Alex Water-->
+  <title>Coordinated View Geovisualization</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+  <link rel="stylesheet" href="https://dc-js.github.io/dc.js/css/dc.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Cairo|Lobster" rel="stylesheet">
+  <style>
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #fff;
+    }
+
+    #id-chart {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #date-chart {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #date-chart2 {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    #stock-chart {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    }
+
+    #class-chart {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .dc-data-count {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /*text {*/
+    /*font-family: Lobster !important;*/
+    /*font-size: larger;*/
+    /*}*/
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+</head>
+
+<body>
+  <p class="dc-data-count">Number of Earthquakes</p>
+  <div id="id-chart"></div>
+  <div id="class-chart"></div>
+  <div id="date-chart"></div>
+  <div id="stock-chart"></div>
+  <div id="species-chart"></div>
+    <div id="date-chart2"></div>
+  <div id="map"></div>
+  <script>
+    //create a map object for us to input the map and it's components into.
+    var map = L.map('map', {
+      center: [35., 38.7],
+      zoom: 6,
+      maxZoom: 6,
+      minZoom: 6,
+      zoomControl: false,
+      detectRetina: true,
+      dragging: false
+    });
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png').addTo(map);
+
+    //add in the .csv file .then() run the functions on that data
+    Promise.all([
+      d3.csv('assets/projs/planting.csv'),
+      d3.csv('assets/projs/monitoring.csv'),
+    ]).then(function(datasets) {
+
+      //////////////////////////////////////////////////PREP THE DATA////////////////////////////////////////////////////////
+      //create crossfilter passes each feature to the filter. We have to pass it through the crossfilter before we can split up with data using
+      //the .dimensions() method
+      var ndx = crossfilter(datasets[0]); //passes the features to the crossfilter
+
+      var ndx2 = crossfilter(datasets[1]); //passes the features to the crossfilter
+
+      // groups everything together into one group, this is used to quickly search all of the data at once
+      var all = ndx.groupAll();
+
+      var all2 = ndx2.groupAll();
+
+
+      //Takes each of the records of the dataset and returns each individual line so that they can be used. .dimension() puts
+      // the data into an easily searchable/manipulable format for DC
+      var everything = ndx.dimension(function(d) {
+        return d
+      });
+
+      var everything2 = ndx2.dimension(function(d) {
+        return d
+      });
+
+      //////////////////////////////////////////////SORT THE DATA///////////////////////////////////////////////////////////
+      //Now that we have our initial data imported and in the right format using crossfilter we now have to sort out the data that we want to display, set up
+      //the chart space and populate the graphs
+
+      //defines the categories from idnitude property
+      var idDimension = ndx.dimension(function(d) {
+        return d.ProjectName.split(" - ")[1];
+      });
+
+      var stockDimension = ndx.dimension(function(d) {
+        return d.StockType;
+      });
+
+
+      var speciesDimension = ndx.dimension(function(d) {
+        return d.SpeciesType;
+      });
+
+      // //sorts through the data and finds the unit of each earthquake. Then returns a category based on the unit using the lamda operations
+      var classDimension = ndx.dimension(function(d) {
+        var unit = +d.Units;
+        unitClass = ">=1000";
+
+        if (unit < 50) {
+          unitClass = '<50'
+        } else if (unit >= 50 && unit <= 99) {
+          unitClass = "50-99"
+        } else if (unit >= 100 && unit <= 499) {
+          unitClass = "100-499"
+        } else if (unit >= 50 && unit <= 999) {
+          unitClass = "500-999"
+        } else {
+          unitClass = ">=1000"
+        }
+        return unitClass
+      });
+
+      var classes = ["<50", "50-99", "100-499", "500-999", ">=1000"];
+      var classOrdinal = d3.scaleOrdinal().domain(classes);
+      var dateDimension = ndx.dimension(function(d) {
+        return d3.timeYear(new Date(+d.PlantingYear, 1, 1))
+      });
+
+
+      var dateDimension2 = ndx2.dimension(function(d) {
+        return d3.timeYear(new Date(+d.Year, 1, 1))
+      });
+
+
+      /////////////////////////////////////////GROUP THE DATA///////////////////////////////////////////////////////////////
+      // Now that we have the id dimension captured in an object we have to group them all together so that we can use them
+      var idDimensionGroup = idDimension.group().reduceSum(function(d) {
+        return +d.Units;
+      });
+
+      var classDimensionGroup = classDimension.group();
+
+      var dateDimensionGroup = dateDimension.group().reduceSum(function(d) {
+        return +d.Units;
+      });
+
+      var dateDimensionGroup2 = dateDimension2.group().reduceSum(function(d) {
+        return +d.SiteAssessmentStemsPerAcre;
+      });
+
+      var stockDimensionGroup = stockDimension.group().reduceSum(function(d) {
+        return +d.Units;
+      });
+
+      var speciesDimensionGroup = speciesDimension.group().reduceSum(function(d) {
+        return +d.Units;
+      });
+
+      /////////////////////////////////////CREATE THE CHARTS////////////////////////////////////////////////////////////////
+      //binds the barChart  to the <div> elements that we created earlier in the <body>
+      var idChart = dc.barChart('#id-chart');
+      //define the characteristics of the chart before we actually add the data to it
+      idChart
+        .height(100) //pixel height of the chart
+        .margins({
+          top: 10,
+          right: 50,
+          bottom: 30,
+          left: 40
+        }) //margins of the chart
+        .dimension(idDimension) //pulls in the id data
+        .group(idDimensionGroup) //is the functions of the data; created earlier
+        .elasticY(true) //allows for an OTF adjustable y axis
+        .x(d3.scaleBand()) //Do this because there are ORDERs of idNITUDE; Its the scale that we want in the chart
+        .xUnits(dc.units.ordinal)
+        .yAxisLabel('# Plants')
+        .yAxis().ticks(3);
+
+      var classChart = dc.barChart('#class-chart');
+
+      classChart
+        .height(100)
+        .margins({
+          top: 10,
+          right: 50,
+          bottom: 30,
+          left: 40
+        })
+        .x(classOrdinal)
+        .xUnits(dc.units.ordinal)
+        .brushOn(false)
+        .dimension(classDimension)
+        .group(classDimensionGroup)
+        .elasticY(true)
+        .xAxisLabel('Class')
+        .yAxisLabel('# Plants')
+        .yAxis();
+
+      var stockChart = dc.pieChart('#stock-chart');
+
+      stockChart
+        .height(100)
+        .innerRadius(100)
+        .dimension(stockDimension)
+        .group(stockDimensionGroup);
+
+
+      var speciesChart = dc.pieChart('#species-chart');
+
+      speciesChart
+        .height(100)
+        .innerRadius(100)
+        .dimension(speciesDimension)
+        .group(speciesDimensionGroup);
+
+      var dateChart = dc.lineChart('#date-chart');
+      dateChart
+        .renderArea(true) //area or lines
+        .height(150)
+        .brushOn(false)
+        .transitionDuration(1000) //how long it takes to transition
+        .margins({
+          top: 30,
+          right: 50,
+          bottom: 25,
+          left: 40
+        })
+        .dimension(dateDimension)
+        .group(dateDimensionGroup)
+        .yAxisLabel('# Plants')
+        .elasticY(true)
+        // .controlsUseVisibility(true)
+        .x(d3.scaleTime().domain([new Date(2005, 11, 1), new Date(2018, 1, 1)])); //timeDate object that has the format for the date
+
+
+
+      var dateChart2 = dc.lineChart('#date-chart2');
+      dateChart2
+        .renderArea(true) //area or lines
+        .height(150)
+        .transitionDuration(1000) //how long it takes to transition
+        .margins({
+          top: 30,
+          right: 50,
+          bottom: 25,
+          left: 40
+        })
+        .dimension(dateDimension2)
+        .group(dateDimensionGroup2)
+        .yAxisLabel('<span style="font-size:20px; color: red"># Plants</span>')
+        .elasticY(true)
+        // .controlsUseVisibility(true)
+        .x(d3.scaleTime().domain([new Date(2009, 11, 1), new Date(2018, 1, 1)])); //timeDate object that has the format for the date
+
+
+      var earthquakeCount = dc.dataCount('.dc-data-count'); //creates text depicting how many earthquakes are on screen, needs a <p> element
+      earthquakeCount
+        .dimension(ndx)
+        .group(all) //since we're counting how many records we have we use the 'all' variable but we could have used any variable that had the total counts
+        .html({
+          some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
+            ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'>Reset All</a>',
+          all: 'All records selected. Please click on the graph or change the map view to apply filters.'
+        });
+
+      /////////////////////////////////////////DRAW ALL THE CHARTS//////////////////////////////////////////////////////////
+      dc.renderAll(); //activates everything
+      //  dc.render();
+
+
+
+
+      dateChart.on('filtered', function(chart, filter) {
+        dateDimension2.filter(filter);
+        // dateChart2.filter(filter);
+        dc.redrawAll();
+
+      });
+
+
+
+      dateChart2.on('filtered', function(chart, filter) {
+        dateDimension.filter(filter);
+        // dateChart.filter(filter);
+        dc.redrawAll();
+      });
+
+
+
+
+
+
+
+
+
+    })
+  </script>
+</body>
+
+</html>

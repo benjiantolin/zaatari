@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Benji Antolin, Bo Zhao">
+  <title>Zaatari Refugee Camp (2015)</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/zaatari.css">
+  <style>
+    html,
+    body,
+    #syriamap {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #fff;
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+  <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+  <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+
+  <script src="https://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <!-- <script src="js/leaflet.heat.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites
+              or contact information.</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Follow on Twitter</a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-expand-md navbar-dark bg-dark shadow-sm">
+          <ul class="navbar-nav mr-auto">
+
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="case1.html">Flood compliants</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="case2.html">Local Changes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="case3.html">Projec Imapcts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="case4.html">Beaver Activities</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid d-flex justify-content-between">
+        <a href="index.html" class="navbar-brand d-flex align-items-center">
+          <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
+          <strong>Wiki Gallery</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div id="sidebar">
+      <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      <div class="sidebar-header">
+        <h3 id="projName">Zaatari Dimensional Charts</h3>
+      </div>
+      <div id="projDesc">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</div>
+        <li ><a class="reset btn btn-primary btn-sm" id="reset" href="#">Reset All</a></li>
+      <div id="count-info" data-step="1" data-position="right">
+        <h6 style="color: white"><strong><span class="total-count"></span></strong></span> total refugees in Al Za'atari Camp</strong></h6>
+        <h6 style="color: white"><strong><span class="filter-count"></span></strong> refugees filtered </h6>
+      </div>
+      <div class="col-md-3">
+        <div id="age" class="dc-chart">
+          <h5>Ages in years</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div id="gov" class="dc-chart">
+          <h5>District of origin in Syria</h5>
+        </div>
+        <div id="gender" class="dc-chart">
+          <h5>Gender</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6" style="margin-top:60px">
+          <p></p>
+          <div id="date" class="line-chart-date">
+            <h5>Date of Arrival in Zaatari Camp (select the graph area to filter by date)</h5>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div id="shelter" class="dc-chart">
+            <h5>Shelter type</h5>
+          </div>
+          <div id="wc" class="dc-chart">
+            <h5>Distance to closest active WASH Centre</h5>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div id="health" class="dc-chart">
+            <h5>Distance to the closest Health Centre</h5>
+          </div>
+          <div id="school" class="dc-chart">
+            <h5>Distance to the closest School - School aged children only</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+    <!-- <footer>
+      <a href='https://github.com/jakobzhao/storymap'><img src='http://jakobzhao.github.io/storymap/img/logo.png' width='18px' target='_blank' > storymap.js </a>
+    </footer> -->
+    </div>
+
+    <div id="map"></div>
+
+  </main>
+
+  <div id="info">
+    <div id="totpop" style="min-height: 250px"></div>
+    <!-- <div id="baselayers" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="radio" name="options" id="option1" autocomplete="off" checked> Light Gray
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option2" autocomplete="off"> Sattellite
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="options" id="option3" autocomplete="off"> Street Map
+      </label>
+    </div> -->
+  </div>
+
+  <script>
+    var createLabelIcon = function(labelClass, labelText) {
+      return L.divIcon({
+        className: labelClass,
+        html: labelText
+      })
+    }
+
+    // $(document).ready(function() {
+
+    $("#sidebar").mCustomScrollbar({
+      theme: "minimal"
+    });
+
+    $('#dismiss').on('click', function() {
+      $('#sidebar').removeClass('active');
+      $('#info').css('left', '20px');
+      // $('.overlay').removeClass('active');
+    });
+
+    // });
+
+    // creating sidebar https://bootstrapious.com/p/bootstrap-sidebar
+    //1. Create a map object.
+    var mymap = L.map('map', {
+      center: [32.293, 36.3125],
+      zoom: 15,
+      maxZoom: 18,
+      minZoom: 8,
+      zoomControl: false,
+      detectRetina: true
+    });
+
+    L.control.zoom({
+      position: 'topright'
+    }).addTo(mymap);
+
+
+    L.control.scale({
+      position: 'bottomright'
+    }).addTo(mymap);
+
+    // 2. Add a base map.
+    //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
+    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png');
+    // var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    // 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+    // }).addTo(mymap);
+
+    var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
+    var streets = L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png');
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+
+    var baseLayers = {
+      'Grayscale': gray,
+      'Streets': streets,
+      'Satellite': satellite
+    }
+
+
+    // var proj_123_group = L.layerGroup().addTo(mymap);
+    // var proj_1080_group = L.layerGroup().addTo(mymap);
+    // var proj_141_group = L.layerGroup().addTo(mymap);
+    // var proj_6758_group = L.layerGroup().addTo(mymap);
+    // var waterstation_group = L.layerGroup().addTo(mymap);
+
+
+
+
+
+    $.when($.getJSON("assets/districts.geojson"), ).done(function(districts) {
+      var districtsLayer = L.geoJSON(districts, {
+        style: {
+          opacity: 1,
+          fillOpacity: 0.5,
+          weight: 1,
+          color: "mediumslateblue"
+        },
+        onEachFeature: function(feature, layer) {
+          layer.on({
+            mouseover: highlightFeature,
+            click: highlightFeature,
+            mouseout: function(e) {
+              districtsLayer.resetStyle(e.target);
+            }
+          });
+        }
+      }).addTo(mymap);
+      // var districtsLayer = L.geoJSON(districts, {
+      //   style: {
+      //     opacity: 0.6,
+      //     fillOpacity: 0,
+      //     weight: 2,
+      //     color: "gray",
+      //     dashArray: '6'
+      //   }
+      // }).addTo(mymap);
+
+      // var streamsLayer = L.geoJSON(streams, {
+      //   style: stream_style
+      // }).addTo(mymap);
+      //
+      //
+      // var lable_6758 = L.marker(new L.LatLng(45.4608159837, -122.7595400265), {
+      //   icon: createLabelIcon("textLabelclass2", "Alden Wq Retrofit (Proj #. 6758)")
+      //
+      // }).addTo(proj_6758_group);
+      //
+      //
+      //
+      // var waterstation = L.marker(new L.latLng(45.4033159837, -122.7549400265), {
+      //   icon: L.divIcon({
+      //     className: 'fas fa-caret-up fa-2x station'
+      //   })
+      // }).addTo(waterstation_group);
+      //
+      //
+      // var waterstation_label = L.marker(new L.LatLng(45.4038159837, -122.7519400265), {
+      //   icon: createLabelIcon("textLabelclass", "<a href='https://waterdata.usgs.gov/usa/nwis/uv?site_no=14206950' target='_blank'>USGS Water Monitor @ Durham</a>")
+      // }).addTo(waterstation_group);
+
+
+      var overlays = {
+        // "<span style='color:red'>No. 123: Englewood</span>": proj_123_group,
+        // "<span style='color:green'>No. 141: HallToAsh</span>": proj_141_group,
+        // "<span style='color:blue'>No. 1080: Greenway</span>": proj_1080_group,
+        // "<span style='color:purple'>No. 6758: Alden Wq Retrofit</span>": proj_6758_group,
+        // "<i class='fas fa-caret-up fa-2x station' style='vertical-align: sub;'></i> <span style='color:brown'>USGS Water Monitor</span>": waterstation_group,
+        "<span style='color:gray'>Districts</span>": districtsLayer,
+        // "<span style='color:blue'>Fanno Creek</span>": streamsLayer
+      }
+
+      L.control.layers(baseLayers, overlays, {
+        collapsed: false
+      }).addTo(mymap);
+
+
+
+      //
+      // var proj_141Layer = L.geoJSON(proj_141, {
+      //   style: {
+      //     opacity: 1,
+      //     fillOpacity: 0.5,
+      //     weight: 1,
+      //     color: "green"
+      //   },
+      //   onEachFeature: function(feature, layer) {
+      //     layer.on({
+      //       mouseover: highlightFeature,
+      //       click: highlightFeature,
+      //       mouseout: function(e) {
+      //         proj_141Layer.resetStyle(e.target);
+      //       }
+      //     });
+      //   }
+      // }).addTo(proj_141_group);
+      //
+      // var proj_1080Layer = L.geoJSON(proj_1080, {
+      //   style: {
+      //     opacity: 1,
+      //     fillOpacity: 0.5,
+      //     weight: 1,
+      //     color: "blue"
+      //   },
+      //   onEachFeature: function(feature, layer) {
+      //     layer.on({
+      //       mouseover: highlightFeature,
+      //       click: highlightFeature,
+      //       mouseout: function(e) {
+      //         proj_1080Layer.resetStyle(e.target);
+      //       }
+      //     });
+      //   }
+      // }).addTo(proj_1080_group);
+      //
+      // var proj_6758Layer = L.geoJSON(proj_6758, {
+      //   style: {
+      //     opacity: 1,
+      //     fillOpacity: 0.5,
+      //     weight: 1,
+      //     color: "purple"
+      //   },
+      //   onEachFeature: function(feature, layer) {
+      //     layer.on({
+      //       mouseover: highlightFeature,
+      //       click: highlightFeature,
+      //       mouseout: function(e) {
+      //         proj_6758Layer.resetStyle(e.target);
+      //       }
+      //     });
+      //   }
+      // }).addTo(proj_6758_group);
+
+      // proj_123_group.bringToFront();
+      // proj_141_group.bringToFront();
+      // proj_1080_group.bringToFront();
+      // proj_6758_group.bringToFront();
+
+
+      function highlightFeature(e) {
+        // e indicates the current event
+        var layer = e.target; //the target capture the object which the event associates with
+        layer.setStyle({
+          weight: 1,
+          opacity: 1,
+          color: 'white',
+          fillColor: 'mediumslateblue',
+          fillOpacity: 0.8
+        });
+
+
+        $('#sidebar').addClass('active');
+        $('#info').css('left', '420px');
+        // $('.overlay').addClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+
+        // projId = +e.target.feature.properties.PROJECT_ID;
+        // projName = e.target.feature.properties.ProjectNam;
+
+        var  wcChart             = dc.rowChart("#wc"),
+            genderChart         = dc.rowChart("#gender"),
+            dateChart           = dc.lineChart("#date"),
+            ageChart            = dc.rowChart("#age"),
+        	shelterChart        = dc.rowChart("#shelter"),
+        	govChart            = dc.rowChart("#gov"),
+        	schoolChart         = dc.rowChart("#school"),
+        	healthChart         = dc.rowChart("#health");
+
+  Promise.all([
+        d3.csv("assets/pop_count.csv"),
+      ]).then(function(d) {
+          var dateFormat = d3.timeFormat("%Y/%m");
+          var parseTime = d3.timeParse(d.arriv);
+
+        var ndx                  = crossfilter(d),
+              wcDimension      = ndx.dimension(function(d) {return d.wc;}),
+              wcGroup          = wcDimension.group(),
+              GenderDim          = ndx.dimension(function(d) {return d.gender;}),
+              GenderGroup        = GenderDim.group().reduceCount(),
+        	  ShelterDim         = ndx.dimension(function(d) {return d.shelter;}),
+              ShelterGroup       = ShelterDim.group().reduceCount(),
+              dateDimension      = ndx.dimension(function(d) {return d.dd ;}),
+              dateGroup          = dateDimension.group(),
+              AgeDim             = ndx.dimension(function(d) {return d.age_brakets;}),
+        	  all                = ndx.groupAll(),
+              AgeGroup           = AgeDim.group().reduceCount(),
+        	  govDimension      = ndx.dimension(function(d) {return d.dist_syr;}),
+              govGroup          = govDimension.group().reduceCount();
+        	  schoolDimension      = ndx.dimension(function(d) {return d.school;}),
+              schoolGroup          = schoolDimension.group().reduceCount();
+        	   healthDimension      = ndx.dimension(function(d) {return d.health;}),
+              healthGroup          = healthDimension.group().reduceCount();
+
+         dc.dataCount("#count-info")
+                            .dimension(ndx)
+                            .group(all);
+
+          wcChart.width(250).height(170)
+                  .dimension(wcDimension)
+                  .group(wcGroup)
+                 //.stack(governoratesByHousehold)
+                  .elasticX(true)
+                  .renderLabel(true)
+             	  .title(function (d) {return d.key + "etres: "+d.value+" individuals";})
+                  .colors(['#F89E59'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+           schoolChart.width(250).height(170)
+                  .dimension(schoolDimension)
+                  .group(schoolGroup)
+        		   .data(function(group) {
+        			return group.all().filter(function(kv) { return kv.key !=""; });
+        			})
+             	  .title(function (d) {return d.key + "etres: "+d.value+" individuals";})
+        		  .elasticX(true)
+                  .renderLabel(true)
+                  .colors(['#646C85'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+           healthChart.width(250).height(170)
+                  .dimension(healthDimension)
+                  .group(healthGroup)
+                  .elasticX(true)
+                  .renderLabel(true)
+             	  .title(function (d) {return d.key + "etres: "+d.value+" individuals";})
+                  .colors(['#86BF88'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+          genderChart
+                  .width(250)
+                  .height(100)
+                  //.slicesCap(7)
+                  //.colors(['#EE5859'])
+                  //.colorDomain([0,0])
+        		  .elasticX(true)
+                  .dimension(GenderDim)
+                  .group(GenderGroup)
+             	  .title(function (d) {return d.key + ": "+d.value+" individuals";})
+        		  .colors(['#EE5859'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+           shelterChart
+                  .width(250)
+                  .height(170)
+                  //.slicesCap(7)
+                  //.colors(['#EE5859'])
+                  //.colorDomain([0,0])
+        		  .elasticX(true)
+                  .ordering(function (p) { return -p.value;})
+                  .dimension(ShelterDim)
+                  .group(ShelterGroup)
+             	  .title(function (d) {return d.key + ": "+d.value+" individuals";})
+        		  .colors(['#FFF56D'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+          dateChart
+                  .width(600)
+                  .height(300)
+                  //.margins({top: 10, right: 50, bottom: 30, left: 60})
+                  .dimension(dateDimension)
+                  .group(dateGroup)
+                  .x(d3.scaleTime().domain([new Date(2012, 1, 01), new Date(2014, 12, 31)]))
+                  .renderHorizontalGridLines(true)
+             	  .title(function (d) {return d.key + ": "+d.value+" individuals";})
+                  .elasticY(true)
+        		  .elasticX(true)
+                  .renderArea(true)
+                  .brushOn(true)
+                  .renderDataPoints(true)
+        		  .yAxisLabel(" ")
+                  .xAxis().ticks(15);
+
+          ageChart.width(250).height(400)
+                  .dimension(AgeDim)
+                  .group(AgeGroup)
+                 // .stack(governoratesByHousehold)
+                  .elasticX(true)
+                  .renderLabel(true)
+
+        		  .ordering(function(d) {
+        			if(d.key == "00-05 yrs") return 17;
+        			else if(d.key == "05-09 yrs") return 16;
+        			else if(d.key == "10-14 yrs") return 15;
+        			else if(d.key == "15-19 yrs") return 14;
+        			else if(d.key == "20-24 yrs") return 13;
+        			else if(d.key == "25-29 yrs") return 12;
+        			else if(d.key == "30-34 yrs") return 11;
+        			else if(d.key == "35-39 yrs") return 10;
+        			else if(d.key == "40-40 yrs") return 9;
+        			else if(d.key == "45-49 yrs") return 8;
+        			else if(d.key == "50-54 yrs") return 7;
+        			else if(d.key == "55-59 yrs") return 6;
+        			else if(d.key == "60-64 yrs") return 5;
+        			else if(d.key == "65-69 yrs") return 4;
+        			else if(d.key == "70-74 yrs") return 3;
+        			else if(d.key == "75-79 yrs") return 2;
+        			else if(d.key == "80+ yrs") return 1;
+        			})
+        		  .title(function (d) {return d.key + ": "+d.value+" individuals";})
+                  .colors(['#95A0A9'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+          govChart.width(250).height(250)
+                  .dimension(govDimension)
+                  .group(govGroup)
+        		  .data(function(group) {
+                                return group.top(8);
+                            })
+        		  .elasticX(true)
+                  .ordering(function (p) { return -p.value;})
+             	  .title(function (d) {return d.key + ": "+d.value+" individuals";})
+        		  .colors(['#E8D186'])
+                  .colorDomain([0,0])
+                  .colorAccessor(function(d, i){return 1;})
+                  .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+        $('#reset').on('click', function (){
+          dc.filterAll();
+          //dc.renderAll();
+          dc.redrawAll();
+          return false;
+        })
+
+        //  dc.renderAll();
+          dc.renderAll();
+        });
+
+      }
+
+      // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
+      function zoomToFeature(e) {
+        mymap.fitBounds(e.target.getBounds());
+      }
+      //  var labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}@2x.png').addTo(mymap);
+    });
+
+    $(".leaflet-control-attribution")
+      .css("bottom", "60px")
+      .css("background-color", "transparent")
+      .html("Supported by <a href='http://geoviz.ceoas.oregonstate.edu'> GeoViz Lab @ Oregon State University </a>");
+
+
+    $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
+
+
+    d3.csv('assets/time.csv').then(function(dataset) {
+
+      var t = ["t"];
+      var total = ["Total"];
+
+      dataset.forEach(function(d) {
+        t.push(new Date(d["t"]))
+        total.push(+d["total"])
+      });
+
+      var chart = c3.generate({
+        // title: {
+        //   text: 'Refugee Arrival (2012/7-2014/12)'
+        // },
+        data: {
+          x: 't',
+          columns: [t, total],
+          type: 'area-spline',
+        },
+        subchart: {
+          show: true,
+          size: {
+            height: 25
+          }
+        },
+        axis: {
+          x: {
+            type: 'timeseries',
+            tick: {
+              format: '%Y-%m'
+            }
+          },
+          y: {
+            label: {
+              text: '# of Refugees',
+              position: 'outer-middle'
+            }
+          },
+        },
+        point: {
+          r: 0,
+          focus: {
+            expand: {
+              r: 2
+            }
+          }
+        },
+        zoom: {
+          // rescale: true,+
+          enabled: true,
+          type: "scroll",
+        },
+        legend: {
+          show: false,
+        },
+        bindto: "#totpop"
+      });
+
+
+      // $($($("#totpop svg").children()[1]).children()[3]).hide();
+      // $($($("#totpop svg").children()[1]).children()[5]).hide();
+      // $($($("#totpop svg").children()[1]).children()[6]).hide();
+      // $($($("#totpop svg").children()[2]).children()[2]).hide();
+      $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
+
+
+
+    });
+  </script>
+</body>
+
+</html>

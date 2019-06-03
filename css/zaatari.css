@@ -1,0 +1,144 @@
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+#sidebar {
+    position:absolute;
+    left: -400px;
+    width: 400px;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 1000;
+    background: #343a40;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: scroll;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+#sidebar.active {
+    left: 0;
+}
+
+#dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: #6c757d;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+#dismiss:hover {
+    background: #fff;
+    color: #6c757d;
+}
+
+
+#sidebar .sidebar-header {
+    padding: 20px 30px;
+    background: #343a40;
+}
+
+#sidebar ul.components {
+    padding: 0 0 0 0;
+    border-bottom: 1px solid gray;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 0 30px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+
+#class-chart, #date-chart, #date-chart2 {
+  margin-top: 10px;
+  margin-left:20px
+}
+
+#stock-chart {
+    margin-top: 10px;
+  margin-left:20px
+}
+
+#species-chart {
+  margin-top: 10px;
+  margin-left:20px
+}
+
+
+
+.proj-img img {
+  margin-bottom: 10px;
+}
+
+#projDesc {
+  margin: 15px;
+}
+
+.textLabelclass a {
+  white-space: nowrap;
+  font-size: 15px;
+  /* font-weight: 400; */
+  /* text-shadow: 0 0 0.1em gray, 0 0 0.1em gray,
+    0 0 0.1em gray, 0 0 0.1em gray, 0 0 0.1em; */
+  color: brown !important;
+}
+
+.textLabelclass2 {
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow: 0 0 0.1em black, 0 0 0.1em black,
+    0 0 0.1em black, 0 0 0.1em black, 0 0 0.1em;
+  color: white;
+}
+
+.station {
+  color: brown;
+  opacity: 1;
+  /* text-shadow: 1px 1px 1px black; */
+}

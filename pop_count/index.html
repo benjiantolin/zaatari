@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+  <link rel="stylesheet" type="text/css" href="css/dc.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/tooltipster.css" />
+  \
+  <style>
+    html,
+    body,
+    #map {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #fff;
+    }
+  </style>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/d3.js"></script>
+  <script type="text/javascript" src="js/crossfilter.js"></script>
+  <script type="text/javascript" src="js/dc.js"></script>
+  <script type="text/javascript" src="js/jquery.tooltipster.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#about').tooltipster({
+        content: $('#content'),
+        animation: 'fade',
+        delay: 200,
+        theme: 'tooltipster-default',
+        touchDevices: false,
+        hideOnClick: true,
+        maxWidth: 600,
+        trigger: 'click'
+      });
+    });
+  </script>
+
+  <style>
+
+
+
+
+  </style>
+
+</head>
+
+<body">
+  <nav class="navbar navbar-default navbar-fixed-top"" role=" navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">JORDAN - Al Zaatari Camp population count - January 2015 </a>
+      </div>
+      <div id="count-info" data-step="1" data-position="right">
+        <h6 style="color: white"><strong><span class="total-count"></span></strong></span> total refugees in Al Za'atari Camp</strong></h6>
+        <h6 style="color: white"><strong><span class="filter-count"></span></strong> refugees filtered </h6>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"> </a></li>
+          <li><a class="reset btn btn-primary btn-sm" id="reset" href="#">Reset All</a></li>
+          <li><a class="btn btn-primary btn-sm" id="data" href="data/REACH_UNICEF_Population_Count_Zaatari_Jan_2015.rar">Data and Report</a></li>
+          <li><a class="btn btn-primary btn-sm" id="data" href="data/JOR_map_zaa_PopCount_JAN2015.rar">Thematic maps</a></li>
+          <li><a id="about" class="btn btn-primary btn-sm">About</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+          <li><a href="#"> </a></li>
+          <li style="top:5px"><img src="img/unicef-logo.png" width="180" height="37" href="#" style="border-width:0px;">
+          <li>
+          <li style="left:50px; top:5px"><img src="img/UNHCR_logo.png" width="165" height="37" href="#" style="border-width:0px;">
+          <li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"> </a></li>
+          <li style="top:3px"><img src="img/REACH_logo.png" width="196" height="45" href="http://www.reach-initiative.org/" style="border-width:0px;">
+          <li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <body>
+
+    <div class="container" style="margin-top:60px;margin-bottom:60px">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <p></p>
+
+
+        </div>
+      </div>
+      <div class="col-md-3">
+
+        <div id="age" class="dc-chart">
+          <h5>Ages in years</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div id="gov" class="dc-chart">
+          <h5>District of origin in Syria</h5>
+        </div>
+        <div id="gender" class="dc-chart">
+          <h5>Gender</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" style="margin-top:60px">
+        <p></p>
+        <div id="date" class="line-chart-date">
+          <h5>Date of Arrival in Zaatari Camp (select the graph area to filter by date)</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div id="shelter" class="dc-chart">
+          <h5>Shelter type</h5>
+        </div>
+        <div id="wc" class="dc-chart">
+          <h5>Distance to closest active WASH Centre</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div id="health" class="dc-chart">
+          <h5>Distance to the closest Health Centre</h5>
+        </div>
+        <div id="school" class="dc-chart">
+          <h5>Distance to the closest School - School aged children only</h5>
+        </div>
+
+      </div>
+    </div>
+    <div id="map"></div>
+    </div>
+    <div class="box" id="content" style="color:white">
+      <h4 style="margin-bottom:25px,margin-top:100px"><strong>About Al Za'atari Camp population count</strong></h4>
+      <h5> </h5>
+      <h5><strong>REACH conducted this population count of Za’atari refugee camp in partnership with UNICEF between 30 December 2014 and 18 January 2015.</strong></h5>
+      <h5>REACH has conducted several population counts within Za’atari Camp since its inception in July 2012. Although UNHCR registration data is available for the whole camp, these counts provide further information in the form of population per
+        district and per street/block, (data can be be downloaded from this page)</h5>
+      <h5>As Za’atari camp is an evolving context in which residents move within the camp, into and out of the camp from the host community, and leave the camp permanently on an on-going basis.</h5>
+      <h5>Regular counts are therefore necessary for humanitarian actors within the camp, as this facilitates the planning and implementation of the distribution and delivery of goods and services for the community.</h5>
+    </div>
+
+
+    <!-- /container -->
+    </br>
+    <!--<div id="reachbar"></div>-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+
+  <script type="text/javascript">
+
+    var map = L.map('map', {
+      center: [35., 38.7],
+      zoom: 10,
+      maxZoom: 6,
+      minZoom: 6,
+      zoomControl: false,
+      detectRetina: true,
+      dragging: false
+    });
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png').addTo(map);
+
+
+    var wcChart = dc.rowChart("#wc"),
+      genderChart = dc.rowChart("#gender"),
+      dateChart = dc.lineChart("#date"),
+      ageChart = dc.rowChart("#age"),
+      shelterChart = dc.rowChart("#shelter"),
+      govChart = dc.rowChart("#gov"),
+      schoolChart = dc.rowChart("#school"),
+      healthChart = dc.rowChart("#health");
+
+    d3.csv("data/pop_count.csv", function(error, experiments) {
+      var dateFormat = d3.time.format("%Y/%m");
+      experiments.forEach(function(d) {
+        d.dd = dateFormat.parse(d.arriv);
+      });
+      var ndx = crossfilter(experiments),
+        SubOffMapDim = ndx.dimension(function(d) {
+          return d.dist;
+        }),
+        SubOffMapGroup = SubOffMapDim.group().reduceCount(),
+        wcDimension = ndx.dimension(function(d) {
+          return d.wc;
+        }),
+        wcGroup = wcDimension.group(),
+        GenderDim = ndx.dimension(function(d) {
+          return d.gender;
+        }),
+        GenderGroup = GenderDim.group().reduceCount(),
+        ShelterDim = ndx.dimension(function(d) {
+          return d.shelter;
+        }),
+        ShelterGroup = ShelterDim.group().reduceCount(),
+        dateDimension = ndx.dimension(function(d) {
+          return d.dd;
+        }),
+        dateGroup = dateDimension.group(),
+        AgeDim = ndx.dimension(function(d) {
+          return d.age_brakets;
+        }),
+        all = ndx.groupAll(),
+        AgeGroup = AgeDim.group().reduceCount(),
+        govDimension = ndx.dimension(function(d) {
+          return d.dist_syr;
+        }),
+        govGroup = govDimension.group().reduceCount();
+      schoolDimension = ndx.dimension(function(d) {
+          return d.school;
+        }),
+        schoolGroup = schoolDimension.group().reduceCount();
+      healthDimension = ndx.dimension(function(d) {
+          return d.health;
+        }),
+        healthGroup = healthDimension.group().reduceCount();
+
+      dc.dataCount("#count-info")
+        .dimension(ndx)
+        .group(all);
+
+
+      wcChart.width(250).height(170)
+        .dimension(wcDimension)
+        .group(wcGroup)
+        //.stack(governoratesByHousehold)
+        .elasticX(true)
+        .renderLabel(true)
+        .title(function(d) {
+          return d.key + "etres: " + d.value + " individuals";
+        })
+        .colors(['#F89E59'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+      schoolChart.width(250).height(170)
+        .dimension(schoolDimension)
+        .group(schoolGroup)
+        .data(function(group) {
+          return group.all().filter(function(kv) {
+            return kv.key != "";
+          });
+        })
+        .title(function(d) {
+          return d.key + "etres: " + d.value + " individuals";
+        })
+        .elasticX(true)
+        .renderLabel(true)
+        .colors(['#646C85'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+      healthChart.width(250).height(170)
+        .dimension(healthDimension)
+        .group(healthGroup)
+        .elasticX(true)
+        .renderLabel(true)
+        .title(function(d) {
+          return d.key + "etres: " + d.value + " individuals";
+        })
+        .colors(['#86BF88'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+      genderChart
+        .width(250)
+        .height(100)
+        //.slicesCap(7)
+        //.colors(['#EE5859'])
+        //.colorDomain([0,0])
+        .elasticX(true)
+        .dimension(GenderDim)
+        .group(GenderGroup)
+        .title(function(d) {
+          return d.key + ": " + d.value + " individuals";
+        })
+        .colors(['#EE5859'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+      shelterChart
+        .width(250)
+        .height(170)
+        //.slicesCap(7)
+        //.colors(['#EE5859'])
+        //.colorDomain([0,0])
+        .elasticX(true)
+        .ordering(function(p) {
+          return -p.value;
+        })
+        .dimension(ShelterDim)
+        .group(ShelterGroup)
+        .title(function(d) {
+          return d.key + ": " + d.value + " individuals";
+        })
+        .colors(['#FFF56D'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+      dateChart
+        .width(600)
+        .height(300)
+        //.margins({top: 10, right: 50, bottom: 30, left: 60})
+        .dimension(dateDimension)
+        .group(dateGroup)
+        .x(d3.time.scale().domain([new Date(2012, 1, 01), new Date(2014, 12, 31)]))
+        .renderHorizontalGridLines(true)
+        .title(function(d) {
+          return d.key + ": " + d.value + " individuals";
+        })
+        .elasticY(true)
+        .elasticX(true)
+        .renderArea(true)
+        .brushOn(true)
+        .renderDataPoints(true)
+        .yAxisLabel(" ")
+        .xAxis().ticks(15);
+
+      ageChart.width(250).height(400)
+        .dimension(AgeDim)
+        .group(AgeGroup)
+        // .stack(governoratesByHousehold)
+        .elasticX(true)
+        .renderLabel(true)
+
+        .ordering(function(d) {
+          if (d.key == "00-05 yrs") return 17;
+          else if (d.key == "05-09 yrs") return 16;
+          else if (d.key == "10-14 yrs") return 15;
+          else if (d.key == "15-19 yrs") return 14;
+          else if (d.key == "20-24 yrs") return 13;
+          else if (d.key == "25-29 yrs") return 12;
+          else if (d.key == "30-34 yrs") return 11;
+          else if (d.key == "35-39 yrs") return 10;
+          else if (d.key == "40-40 yrs") return 9;
+          else if (d.key == "45-49 yrs") return 8;
+          else if (d.key == "50-54 yrs") return 7;
+          else if (d.key == "55-59 yrs") return 6;
+          else if (d.key == "60-64 yrs") return 5;
+          else if (d.key == "65-69 yrs") return 4;
+          else if (d.key == "70-74 yrs") return 3;
+          else if (d.key == "75-79 yrs") return 2;
+          else if (d.key == "80+ yrs") return 1;
+        })
+        .title(function(d) {
+          return d.key + ": " + d.value + " individuals";
+        })
+        .colors(['#95A0A9'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+      govChart.width(250).height(250)
+        .dimension(govDimension)
+        .group(govGroup)
+        .data(function(group) {
+          return group.top(8);
+        })
+        .elasticX(true)
+        .ordering(function(p) {
+          return -p.value;
+        })
+        .title(function(d) {
+          return d.key + ": " + d.value + " individuals";
+        })
+        .colors(['#E8D186'])
+        .colorDomain([0, 0])
+        .colorAccessor(function(d, i) {
+          return 1;
+        })
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+      $('#reset').on('click', function() {
+        dc.filterAll();
+        //dc.renderAll();
+        dc.redrawAll();
+        return false;
+      })
+
+      //  dc.renderAll();
+      dc.renderAll();
+    });
+  </script>
+
+  </body>
+
+</html>
