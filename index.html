@@ -98,6 +98,33 @@
       opacity: 0.3;
     }
 
+    .fa-github-square:hover {
+      opacity: 0.3;
+    }
+
+    .fa-github-square {
+      color: white;
+      font-size: 20px;
+    }
+
+    .fa-facebook:hover {
+      opacity: 0.3;
+    }
+
+    .fa-facebook {
+      color: white;
+      font-size: 20px;
+    }
+
+    .fa-info-circle:hover {
+      opacity: 0.3;
+    }
+
+    .fa-info-circle {
+      color: white;
+      font-size: 20px;
+    }
+
     .switch {
       position: relative;
       display: inline-block;
@@ -180,6 +207,17 @@
     .leaflet-control-layers {
       width: 220px;
     }
+
+    .donut
+    {
+        width: 300px;
+        height: 400px;
+        margin: 1em;
+        padding: 1em;
+        border: 2px;
+        /* background: 'white'; */
+    }
+
   </style>
   <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon" /> -->
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
@@ -202,17 +240,16 @@
     <div class="collapse bg-dark" id="navbarHeader">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-8 col-md-7 py-4">
+          <div class="col-sm-11 col-md-7 py-4">
             <h4 class="text-white">About</h4>
             <p class="text-muted">The Za’atari Coordinated View Map, created by students at Oregon State University, is a geovisualization of the Za’atari refugee camp in Jordan. <br>
               The project focuses on demographics and time trends in the camp from its opening in 2012 to December 2014.</p>
           </div>
-          <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Contact</h4>
+          <div class="col-sm-1 offset-md-1 py-4">
             <ul class="list-unstyled">
               <li><a href="#" class="text-white"><i class="fab fa-facebook"></i></a></li>
-              <li><a href="#" class="text-white">Like on Facebook</a></li>
-              <li><a href="#" class="text-white">Email me</a></li>
+              <li><a href="#" class="text-white"><i class="fab fa-github-square"></i></a></li>
+              <li><a href="#" class="text-white"><i class="fas fa-info-circle"></i></a></li>
             </ul>
           </div>
         </div>
@@ -234,6 +271,7 @@
       </div>
     </div>
   </header>
+
   <main>
     <div id="info" class="d-flex flex-column">
       <h4>Zaatari Refugee Camp</h4>
@@ -323,9 +361,10 @@
         </div>
       </div>
       <hr>
-      <div id="totpop" style="min-height: 185px"></div>
+      <!-- <div id="totpop" style="min-height: 185px"></div> -->
     </div>
-    <div id="map"></div>
+
+    <div class="loader"></div>
     <div id="sidebar">
       <div id="dismiss">
         <i class="fas fa-arrow-left"></i>
@@ -335,8 +374,11 @@
       </div>
       <div id="projDesc">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</div>
       <div id="projImages" class="row col-md-12"></div>
-
+      <div id="donut" class="donut"></div>
     </div>
+
+    <div id="map"></div>
+
   </main>
 
   <script>
@@ -770,6 +812,23 @@
       $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
     });
 
+    var donut = c3.generate({
+        data: {
+            columns: [
+                ["0-99m",175],
+                ["100-199m",544],
+                ["200-399m",1207],
+                ["400-799mm",361],
+                ["800+m",0]
+            ],
+            type: 'donut',
+          },
+            donut: {
+              title: "D1 School Distances",
+              width: 70
+            },
+        bindto: "#donut"
+    });
 
     $("#popSwitcher input").on("click", function() {
       if ($("#popSwitcher input:checked").val() === "on") {
