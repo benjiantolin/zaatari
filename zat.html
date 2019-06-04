@@ -23,9 +23,6 @@
       color: #333333;
       font-family: 'Open Sans', sans-serif;
       padding: 6px 8px;
-      background: white;
-      background: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
     .legend i {
@@ -46,6 +43,11 @@
       line-height: 16px;
       margin: 0;
     }
+
+    #mapFunc {
+      font-size: small
+    }
+
     .fa-mosque:hover {
       opacity: 0.3;
     }
@@ -88,6 +90,69 @@
     .fa-trash-alt:hover {
       opacity: 0.3;
     }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(22px);
+      -ms-transform: translateX(22px);
+      transform: translateX(22px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 16px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
     /* .fa-trash-alt {
       color: #878787;
       font-size: 10px;
@@ -166,7 +231,7 @@
 
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container-fluid d-flex justify-content-between">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
+        <a href="#" class="navbar-brand d-flex align-items-center">
           <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
           <strong>Zaatari Refugee Camp</strong>
         </a>
@@ -177,68 +242,81 @@
     </div>
   </header>
   <main>
-    <div class="loader"></div>
-    <div id="sidebar">
-      <div id="dismiss">
-        <i class="fas fa-arrow-left"></i>
-      </div>
-      <div class="sidebar-header">
-        <h3 id="projName">Zaatari Dimensional Charts</h3>
-      </div>
-      <div id="projDesc">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</div>
-      <div id="projImages" class="row col-md-12"></div>
-
-      <div id="class-chart"></div>
-      <div id="date-chart"></div>
+    <div id="info" class="d-flex flex-column">
+      <h4>Zaatari Refugee Camp</h4>
+      <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
+        beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
+      </p>
+      <p id="mapFunc">Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many
+        other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
+      </p>
       <div class="row col-md-12">
-        <div id="stock-chart" class="col-md-5"></div>
-        <div id="species-chart" class="col-md-5"></div>
+        <div class="col-md-8 align-items-center">
+          <span>Facility Type</span>
+          <label id="luSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="col-md-4 align-items-center">
+          <span>Population</span>
+          <label id="popSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-      <div id="date-chart2"></div>
-      <p class="dc-data-count"># Project Items</p>
-      <div id="plants" class="row"></div>
-      <div id="monitor" class="row"></div>
-
-      <footer>
-        <!-- <a href='https://github.com/jakobzhao/storymap'><img src='http://jakobzhao.github.io/storymap/img/logo.png' width='18px' target='_blank' > storymap.js </a> -->
-      </footer>
+      <div class="row col-md-12">
+        <div class="col-md-4 legend">
+          <i style="background: #b0d94e; opacity: 0.5"></i><p>Child Friendly Space</p>
+          <i style="background: #c9baa7; opacity: 0.5"></i><p>Community Center</p>
+          <i style="background: #ddc19a; opacity: 0.5"></i><p>Community Office</p>
+          <i style="background: #efc881; opacity: 0.5"></i><p>Distribution Point</p>
+          <i style="background: #fbd05b; opacity: 0.5"></i><p>Health</p>
+          <i style="background: #fad930; opacity: 0.5"></i><p>Kindergarten</p>
+          <i style="background: #d4da3d; opacity: 0.5"></i><p>Mosque</p>
+          <i style="background: #b3b3b3; opacity: 0.5"></i><p>Office</p>
+          <i style="background: #eeb549; opacity: 0.5"></i><p>Playground</p>
+        </div>
+        <div class="col-md-4 legend">
+          <i style="background: #ff8b8f; opacity: 0.5"></i><p>Recreation</p>
+          <i style="background: #dc8eca; opacity: 0.5"></i><p>Recycling Facilities</p>
+          <i style="background: #b299d5; opacity: 0.5"></i><p>Registration</p>
+          <i style="background: #909fcd; opacity: 0.5"></i><p>School</p>
+          <i style="background: #c693ca; opacity: 0.5"></i><p>Security</p>
+          <i style="background: #fc8491; opacity: 0.5"></i><p>Vacant</p>
+          <i style="background: #e49d52; opacity: 0.5"></i><p>Warehouse</p>
+          <i style="background: #a0b867; opacity: 0.5"></i><p>Water Facilities</p>
+          <i style="background: #66c2a5; opacity: 0.5"></i><p>Youth Center</p>
+        </div>
+        <div style="border-left:1px solid #C5C5C5;height:190px"></div>
+        <div class="col-md-3 legend">
+          <i style="background:#ffffcc; opacity: 0.5"></i><p>< 5000</p>
+          <i style="background:#ffeda0; opacity: 0.5"></i><p>5001-5500</p>
+          <i style="background: #fed976; opacity: 0.5"></i><p>5501-6000</p>
+          <i style="background:#feb24c; opacity: 0.5"></i><p>6001-6500</p>
+          <i style="background:#fd8d3c; opacity: 0.5"></i><p>6501-7000</p>
+          <i style="background: #fc4e2a; opacity: 0.5"></i><p>7001-7500</p>
+          <i style="background:#e31a1c; opacity: 0.5"></i><p>7501-8000</p>
+          <i style="background:#bd0026; opacity: 0.5"></i><p>8001-8500</p>
+          <i style="background: #800026; opacity: 0.5"></i><p>> 8500</p>
+        </div>
+      </div>
+      <hr>
+      <div id="totpop" style="min-height: 185px"></div>
     </div>
-
     <div id="map"></div>
 
   </main>
 
-  <div id="info">
-    <h4>Zaatari Refugee Camp</h4>
-    <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
-      beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
-    </p>
-    <p id="mapFunc">Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many
-      other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
-    </p>
-    <div id="totpop" style="min-height: 250px"></div>
-  </div>
-
   <script>
-    $(window).ready(function() {
-      $('.loader').fadeOut("slow");
-    });
     var createLabelIcon = function(labelClass, labelText) {
       return L.divIcon({
         className: labelClass,
         html: labelText
       })
     }
-    // $(document).ready(function() {
-    $("#sidebar").mCustomScrollbar({
-      theme: "minimal"
-    });
-    $('#dismiss').on('click', function() {
-      $('#sidebar').removeClass('active');
-      $('#info').css('left', '20px');
-      // $('.overlay').removeClass('active');
-    });
-    // });
+
     // creating sidebar https://bootstrapious.com/p/bootstrap-sidebar
     //1. Create a map object.
     var mymap = L.map('map', {
@@ -252,12 +330,7 @@
     L.control.scale({
       position: 'bottomright'
     }).addTo(mymap);
-    // 2. Add a base map.
-    //L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
-    // L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png');
-    // var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-    // 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-    // }).addTo(mymap);
+
     var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
     var streets = L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png');
     var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
@@ -266,7 +339,10 @@
       'Streets': streets,
       'Satellite': satellite
     }
-    var districts_group = L.layerGroup().addTo(mymap);
+    var districts_group = L.layerGroup();
+    var facilities_group = L.layerGroup();
+    var facilityColors = chroma.scale('Set2').mode('lch').colors(18);
+
     $.when($.getJSON("assets/mosques.geojson"),
       $.getJSON("assets/overlay/garbageBins.geojson"),
       $.getJSON("assets/districts.geojson"),
@@ -279,7 +355,7 @@
     ).done(function(mosques, trash, districts, roads, sepTanks, sepPipes, steelTanks, steelPipes, facilities) {
       var mosquesLayer = L.geoJSON(mosques, {
         onEachFeature: function(feature, layer) {
-          layer.bindPopup('<b>Mosque Name: </b>' + feature.properties.NAME_EN)
+          layer.bindTooltip('<b>Mosque Name: </b>' + feature.properties.NAME_EN, {className: 'feature-label', permanent: false, direction: 'center'});
         },
         pointToLayer: function(feature, latlng) {
           return L.marker(latlng, {
@@ -296,7 +372,7 @@
       }
       var trashLayer = L.geoJSON(trash, {
         onEachFeature: function(feature, layer) {
-          layer.bindPopup('<b>CONDITION: </b>' + feature.properties.CONDITION)
+          layer.bindTooltip('<b>CONDITION: </b>' + feature.properties.CONDITION, {className: 'feature-label', permanent: false, direction: 'center'});
         },
         pointToLayer: function(feature, latlng) {
           var id = 0;
@@ -316,39 +392,14 @@
           });
         }
       });
-      // var facilityColors = chroma.scale('RdYlGn').mode('lch').colors(3);
-      // for (i = 0; i < 3; i++) {
-      //   $('head').append($("<style> .facility-color-" + (i + 1).toString() + " { color: " + facilityColors[i] + "; font-size: 10px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
-      // }
-      // var facilityLayer = L.geoJSON(trash, {
-      //   onEachFeature: function(feature, layer) {
-      //     layer.bindPopup('<b>CONDITION: </b>' + feature.properties.CONDITION)
-      //   },
-      //   pointToLayer: function(feature, latlng) {
-      //     var id = 0;
-      //     if (feature.properties.CONDITION == "replace") {
-      //       id = 0;
-      //     } else if (feature.properties.CONDITION == "maintain") {
-      //       id = 1;
-      //     } else if (feature.properties.CONDITION == "good") {
-      //       id = 2;
-      //     } else {
-      //       id = 3;
-      //     }
-      //     return L.marker(latlng, {
-      //       icon: L.divIcon({
-      //         className: 'fas fa-trash-alt trash-color-' + (id + 1).toString(),
-      //       })
-      //     });
-      //   }
-      // });
+
       var sepTanksColors = chroma.scale('blues').colors(4);
       for (i = 0; i < 3; i++) {
         $('head').append($("<style> .sepTanks-color-" + (i + 1).toString() + " { color: " + sepTanksColors[i] + "; font-size: 6px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
       }
       var sepTanksLayer = L.geoJSON(sepTanks, {
         onEachFeature: function(feature, layer) {
-          layer.bindPopup('<b># of Households Served: </b>' + feature.properties.HOUSE_COUN)
+          layer.bindTooltip('<b># of Households Served: </b>' + feature.properties.HOUSE_COUN, {className: 'feature-label', permanent: false, direction: 'center'});
         },
         pointToLayer: function(feature, latlng) {
           var id = 0;
@@ -381,7 +432,7 @@
       }
       var steelTanksLayer = L.geoJSON(steelTanks, {
         onEachFeature: function(feature, layer) {
-          layer.bindPopup('<b># of Households Served: </b>' + feature.properties.house_coun)
+          layer.bindTooltip('<b># of Households Served: </b>' + feature.properties.house_coun, {className: 'feature-label', permanent: false, direction: 'center'});
         },
         pointToLayer: function(feature, latlng) {
           var id = 0;
@@ -400,68 +451,38 @@
             })
           });
         }
-      }).addTo(mymap);
+      });
       var steelPipesLayer = L.geoJSON(steelPipes, {
         style: {
           color: "gray",
           weight: 1,
           opacity: .8,
         }
-      }).addTo(mymap);
+      });
       var roadsLayer = L.geoJSON(roads, {
         style: road_style
       });
       var faciltiesLayer = L.geoJSON(facilities, {
-        // style: road_style
-      }).addTo(mymap);
-      //
-      //
-      // var lable_1080 = L.marker(new L.LatLng(45.4598159837, -122.7889400265), {
-      //   icon: createLabelIcon("textLabelclass2", "Greenway ( Proj #.1018)")
-      // }).addTo(proj_1080_group);
-      //
-      //
-      // var label_121 = L.marker(new L.LatLng(45.4468159837, -122.7840400265), {
-      //   icon: createLabelIcon("textLabelclass2", "Englewood (Proj #. 123)")
-      // }).addTo(proj_123_group);
-      //
-      //
-      // var lable_141 = L.marker(new L.LatLng(45.4278159837, -122.7680400265), {
-      //   icon: createLabelIcon("textLabelclass2", "HallToAsh (Proj #. 141)")
-      // }).addTo(proj_141_group);
-      //
-      // var lable_6758 = L.marker(new L.LatLng(45.4608159837, -122.7595400265), {
-      //   icon: createLabelIcon("textLabelclass2", "Alden Wq Retrofit (Proj #. 6758)")
-      //
-      // }).addTo(proj_6758_group);
-      // var waterstation = L.marker(new L.latLng(45.4033159837, -122.7549400265), {
-      //   icon: L.divIcon({
-      //     className: 'fas fa-caret-up fa-2x station'
-      //   })
-      // }).addTo(waterstation_group);
-      //
-      //
-      // var waterstation_label = L.marker(new L.LatLng(45.4038159837, -122.7519400265), {
-      //   icon: createLabelIcon("textLabelclass", "<a href='https://waterdata.usgs.gov/usa/nwis/uv?site_no=14206950' target='_blank'>USGS Water Monitor @ Durham</a>")
-      // }).addTo(waterstation_group);
-      var overlays = {
-        "<span style='color:red'>Zaatari Districts</span>": districts_group,
-        '<span>Mosques</span> <i class="fas fa-mosque fa-lg control"></i> ': mosquesLayer,
-        // '<span>Flow Gauges: </span> <i class="fas fa-water fa-lg flow_gauge"></i> ': flow_gauges,
-        '<span>Garbage Bins</span><i class="fas fa-trash-alt fa-lg trash"></i>': trashLayer,
-        "<span >Roads<hr></span>": roadsLayer,
-        "<span >Septic Tanks</span>": sepTanksLayer,
-        "<span >Septic Pipes</span>": sepPipesLayer,
-        "<span >Steel Tanks</span>": steelTanksLayer,
-        "<span >Solid Free Pipes</span>": steelPipesLayer,
-        "<span >Camp Facilties</span>": faciltiesLayer,
-      }
-      L.control.layers(baseLayers, overlays, {
-        collapsed: false
-      }).addTo(mymap);
+        style: styleFacility,
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>Facility Type: </b>' + feature.properties.TYPE, {className: 'feature-label', permanent: false, direction: 'center'});
+          layer.on({
+            mouseover: highlightFeature,
+            click: highlightFeature,
+            mouseout: function(e) {
+              faciltiesLayer.resetStyle(e.target);
+            }
+          });
+        },
+      }).addTo(facilities_group);
+
       var districtsLayer = L.geoJSON(districts, {
         style: style,
         onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>Name: </b>' + feature.properties.NAME_EN +
+                            '<br><b>Population: </b>'+feature.properties.totpop +
+                            '<br><b>Housholds: </b>'+feature.properties.hhs,
+                            {className: 'feature-label', permanent: false, direction: 'center'});
           layer.on({
             mouseover: highlightFeature,
             click: highlightFeature,
@@ -471,6 +492,22 @@
           });
         }
       }).addTo(districts_group);
+
+      var overlays = {
+        "<span>Zaatari Districts</span>": districtsLayer,
+        "<span>Camp Facilties</span>": faciltiesLayer,
+        '<span>Mosques</span> <i class="fas fa-mosque fa-lg control"></i> ': mosquesLayer,
+        '<span>Garbage Bins</span><i class="fas fa-trash-alt fa-lg trash"></i>': trashLayer,
+        "<span >Roads<hr></span>": roadsLayer,
+        "<span >Septic Tanks</span>": sepTanksLayer,
+        "<span >Septic Pipes</span>": sepPipesLayer,
+        "<span >Steel Tanks</span>": steelTanksLayer,
+        "<span >Solid Free Pipes</span>": steelPipesLayer,
+      }
+      L.control.layers(baseLayers, overlays, {
+        collapsed: false
+      }).addTo(mymap);
+
       // var proj_141Layer = L.geoJSON(proj_141, {
       //   style: {
       //     opacity: 1,
@@ -538,253 +575,13 @@
           fillColor: 'mediumslateblue',
           fillOpacity: 0.8
         });
-        $('#sidebar').addClass('active');
-        $('#info').css('left', '420px');
+        // $('#sidebar').addClass('active');
+        // $('#info').css('left', '420px');
         // $('.overlay').addClass('active');
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        // $('.collapse.in').toggleClass('in');
+        // $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         // projId = +e.target.feature.properties.PROJECT_ID;
         // projName = e.target.feature.properties.ProjectNam;
-        Promise.all([
-          d3.csv('assets/data.csv'),
-          // d3.csv('assets/projs/Monitor' + projId + '.csv'),
-        ]).then(function(datasets) {
-          // $("#projName").text(projName);
-          // // $("#projDesc").text(projDesc);
-          // switch (projId) {
-          //   case 141:
-          //     $("#projImages").html("");
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2008.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2008.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2010.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2010.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2016.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-LeftBank3-Upstream-2016.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2008.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2008.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2010.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2010.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2016.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/141/PhotoPoints/HallToAsh-RightBank3-Downstream-2016.jpg" class="img-fluid"></a>'
-          //     );
-          //     break;
-          //   case 123:
-          //     $("#projImages").html("");
-          //     $("#projImages").append('<a href="img/123/Stream2005.png" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/123/Stream2005.png" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/123/Stream2006.png" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/123/Stream2006.png" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/123/Stream2011.png" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/123/Stream2011.png" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/123/Stream2012.png" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/123/Stream2012.png" class="img-fluid"></a>');
-          //     break;
-          //   case 1080:
-          //     $("#projImages").html("");
-          //     $("#projImages").append(
-          //       '<a href="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2007.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2007.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2008.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2008.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2013.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2013.jpg" class="img-fluid"></a>'
-          //     );
-          //     $("#projImages").append(
-          //       '<a href="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2018.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/1080/PhotoPoints/Greenway-RightBank3-Upstream-2018.jpg" class="img-fluid"></a>'
-          //     );
-          //     break;
-          //   case 6758:
-          //     $("#projImages").html("");
-          //     $("#projImages").append('<a href="img/6758/1.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/6758/1.jpg" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/6758/2.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/6758/2.jpg" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/6758/3.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/6758/3.jpg" class="img-fluid"></a>');
-          //     $("#projImages").append('<a href="img/6758/4.jpg" data-toggle="lightbox" data-gallery="example-gallery" class="proj-img col-sm-3"><img src="img/6758/4.jpg" class="img-fluid"></a>');
-          //     break;
-          // }
-          var ndx = crossfilter(datasets[0]); //passes the features to the crossfilter
-          var ndx2 = crossfilter(datasets[1]); //passes the features to the crossfilter
-          // groups everything together into one group, this is used to quickly search all of the data at once
-          var all = ndx.groupAll();
-          var all2 = ndx2.groupAll();
-          //Takes each of the records of the dataset and returns each individual line so that they can be used. .dimension() puts
-          // the data into an easily searchable/manipulable format for DC
-          var everything = ndx.dimension(function(d) {
-            return d
-          });
-          var everything2 = ndx2.dimension(function(d) {
-            return d
-          });
-          //////////////////////////////////////////////SORT THE DATA///////////////////////////////////////////////////////////
-          //Now that we have our initial data imported and in the right format using crossfilter we now have to sort out the data that we want to display, set up
-          //the chart space and populate the graphs
-          var stockDimension = ndx.dimension(function(d) {
-            return d.StockType;
-          });
-          var speciesDimension = ndx.dimension(function(d) {
-            return d.SpeciesType;
-          });
-          // //sorts through the data and finds the unit of each earthquake. Then returns a category based on the unit using the lamda operations
-          var classDimension = ndx.dimension(function(d) {
-            var unit = +d.Units;
-            unitClass = ">=1000";
-            if (unit < 50) {
-              unitClass = '<50'
-            } else if (unit >= 50 && unit <= 99) {
-              unitClass = "50-99"
-            } else if (unit >= 100 && unit <= 499) {
-              unitClass = "100-499"
-            } else if (unit >= 50 && unit <= 999) {
-              unitClass = "500-999"
-            } else {
-              unitClass = ">=1000"
-            }
-            return unitClass
-          });
-          var classes = ["<50", "50-99", "100-499", "500-999", ">=1000"];
-          var classOrdinal = d3.scaleOrdinal().domain(classes);
-          var dateDimension = ndx.dimension(function(d) {
-            return +d.PlantingYear
-            // return d3.timeYear(new Date(+d.PlantingYear, 1, 1))
-          });
-          var dateDimension2 = ndx2.dimension(function(d) {
-            //return d3.timeYear(new Date(+d.Year, 1, 1))
-            return +d.Year
-          });
-          /////////////////////////////////////////GROUP THE DATA///////////////////////////////////////////////////////////////
-          // Now that we have the id dimension captured in an object we have to group them all together so that we can use them
-          var classDimensionGroup = classDimension.group();
-          var dateDimensionGroup = dateDimension.group().reduceSum(function(d) {
-            return +d.Units;
-          });
-          var dateDimensionGroup2 = dateDimension2.group().reduceSum(function(d) {
-            return +d.SiteAssessmentStemsPerAcre;
-          });
-          var stockDimensionGroup = stockDimension.group().reduceSum(function(d) {
-            return +d.Units;
-          });
-          var speciesDimensionGroup = speciesDimension.group().reduceSum(function(d) {
-            return +d.Units;
-          });
-          /////////////////////////////////////CREATE THE CHARTS////////////////////////////////////////////////////////////////
-          var classChart = dc.barChart('#class-chart');
-          classChart
-            .height(150)
-            .x(classOrdinal)
-            .xUnits(dc.units.ordinal)
-            .brushOn(false)
-            .dimension(classDimension)
-            .group(classDimensionGroup)
-            .elasticY(true)
-            .xAxisLabel('Class')
-            .yAxisLabel('# Plants')
-            .yAxis().ticks(5);
-          var stockChart = dc.pieChart('#stock-chart');
-          stockChart
-            .height(150)
-            .width(150)
-            // .innerRadius(50)
-            .dimension(stockDimension)
-            .group(stockDimensionGroup);
-          var speciesChart = dc.pieChart('#species-chart');
-          speciesChart
-            .height(150)
-            .width(150)
-            .dimension(speciesDimension)
-            .group(speciesDimensionGroup);
-          // var dateChart = dc.lineChart('#date-chart');
-          // dateChart
-          //   .renderArea(true) //area or lines
-          //   .height(150)
-          //   .brushOn(true)
-          //   .transitionDuration(1000) //how long it takes to transition
-          //   .margins({
-          //     top: 30,
-          //     right: 50,
-          //     bottom: 25,
-          //     left: 40
-          //   })
-          //   .dimension(dateDimension)
-          //   .group(dateDimensionGroup)
-          //   .yAxisLabel('# Plants')
-          //   .elasticY(true)
-          //   // .controlsUseVisibility(true)
-          //   .x(d3.scaleTime().domain([new Date(2005, 11, 1), new Date(2018, 1, 1)]))
-          //   .yAxis().ticks(5); //timeDate object that has the format for the date
-          var dateChart = dc.barChart('#date-chart');
-          dateChart
-            // .renderArea(true) //area or lines
-            .height(150)
-            // .brushOn(true)
-            .transitionDuration(1000) //how long it takes to transition
-            .margins({
-              top: 30,
-              right: 50,
-              bottom: 25,
-              left: 40
-            })
-            .dimension(dateDimension)
-            .group(dateDimensionGroup)
-            .yAxisLabel('# Plants')
-            .elasticY(true)
-            // .controlsUseVisibility(true)
-            .x(d3.scaleOrdinal())
-            .xUnits(dc.units.ordinal)
-            .yAxis().ticks(5); //timeDate object that has the format for the date
-          var dateChart2 = dc.barChart('#date-chart2');
-          dateChart2
-            // .renderArea(true) //area or lines
-            .brushOn(false)
-            .height(150)
-            .transitionDuration(1000) //how long it takes to transition
-            .margins({
-              top: 30,
-              right: 50,
-              bottom: 25,
-              left: 40
-            })
-            .dimension(dateDimension2)
-            .group(dateDimensionGroup2)
-            .yAxisLabel('# Plants')
-            .elasticY(true)
-            // .controlsUseVisibility(true)
-            .x(d3.scaleOrdinal())
-            .xUnits(dc.units.ordinal)
-            .yAxis().ticks(5); //timeDate object that has the format for the date
-          // const BAR_WIDTH= 20000000;
-          //             dateChart2.on('preRedraw', function(chart) {
-          //                   chart.width(chart.group().all().length * BAR_WIDTH);
-          //               });
-          var popCount = dc.dataCount('.dc-data-count'); //creates text depicting how many earthquakes are on screen, needs a <p> element
-          popCount
-            .dimension(ndx)
-            .group(all) //since we're counting how many records we have we use the 'all' variable but we could have used any variable that had the total counts
-            .html({
-              some: '<strong>%filter-count</strong> selected out of <strong>%total-count</strong> records' +
-                ' | <a href=\'javascript:dc.filterAll(); dc.renderAll();\'>Reset All</a>',
-              all: 'All records selected. Please click on the graph or change the map view to apply filters.'
-            });
-          /////////////////////////////////////////DRAW ALL THE CHARTS//////////////////////////////////////////////////////////
-          dc.renderAll(); //activates everything
-          $("#date-chart2 svg").attr("fill", "none");
-          $("#date-chart svg").attr("fill", "none");
-          dateChart.on('filtered', function(chart, filter) {
-            dateDimension2.filter(filter);
-            dateDimension.filter(filter);
-            dc.redrawAll();
-            $("#date-chart svg").attr("fill", "none");
-          });
-          dateChart2.on('filtered', function(chart, filter) {
-            dateChart.filter(filter);
-            // speciesChart.filter(filter);
-            dateDimension.filter(filter);
-            // dateDimension2.filter(filter);
-            // dateChart.redraw();
-            dc.redrawAll();
-            // $("#date-chart2 svg").attr("fill", "none");
-          });
-        });
       }
       // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
       function zoomToFeature(e) {
@@ -808,20 +605,24 @@
         weight: w
       };
     };
-    colors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
+    colors = chroma.scale('YlOrRd').colors(9); //colors = chroma.scale('OrRd').colors(5);
     function setColor(density) {
       var id = 0;
-      if (density > 8507) {
+      if (density > 8500) {
+        id = 8;
+      } else if (density > 8000 && density <= 8500) {
+        id = 7;
+      } else if (density > 7500 && density <= 8000) {
         id = 6;
-      } else if (density > 7726 && density <= 8507) {
+      } else if (density > 7000 && density <= 7500) {
         id = 5;
-      } else if (density > 6946 && density <= 7726) {
+      } else if (density > 6500 && density <= 7000) {
         id = 4;
-      } else if (density > 6165 && density <= 6946) {
+      } else if (density > 6000 && density <= 6500) {
         id = 3;
-      } else if (density > 5385 && density <= 6165) {
+      } else if (density > 5500 && density <= 6000) {
         id = 2;
-      } else if (density > 4605 && density <= 5385) {
+      } else if (density > 5000 && density <= 5500) {
         id = 1;
       } else {
         id = 0;
@@ -839,45 +640,71 @@
         dashArray: '4'
       };
     }
-    facilityColors = chroma.scale('YlOrRd').colors(7); //colors = chroma.scale('OrRd').colors(5);
-    function setfacilityColor(type) {
-      var id = null;
+    // facilityColors = chroma.scale('YlOrRd').colors(17);
+
+    function setColorFacility(type) {
+      var id = 0;
       if (type == "Child Friendly Space") {
-        id = 6;
+        id = 10;
       } else if (type == "Community Center") {
-        id = 5;
+        id = 16;
+      } else if (type == "Community Office") {
+        id = 15;
+      } else if (type == "Distribution Point") {
+        id = 14;
       } else if (type == "Health") {
+        id = 13;
+      } else if (type == "Kindergarten") {
+        id = 12;
+      } else if (type == "Mosque") {
+        id = 11;
+      } else if (type == "Office") {
+        id = 17;
+      } else if (type == "Playground") {
+        id = 9;
+      } else if (type == "Recreation") {
+        id = 8;
+      } else if (type == "Recycling Facilities") {
+        id = 7;
+      } else if (type == "Registration") {
+        id = 6;
+      } else if (type == "School") {
+        id = 5;
+      } else if (type == "Security") {
         id = 4;
-      } else if (type == "Child Friendly Space") {
+      } else if (type == "Vacant") {
         id = 3;
-      } else if (type == "Child Friendly Space") {
+      } else if (type == "Warehouse") {
         id = 2;
-      } else if (type == "Child Friendly Space") {
+      } else if (type == "Water Facilities") {
         id = 1;
       } else {
         id = 0;
       }
       return facilityColors[id];
     }
-    // 7. Set style function that sets fill color.md property equal to cell tower density
-    function facilityStyle(feature) {
+
+    function styleFacility(feature) {
       return {
-        fillColor: setfacilityColor(feature.properties.totpop),
+        fillColor: setColorFacility(feature.properties.TYPE),
         fillOpacity: 0.4,
-        weight: 2,
+        weight: 0,
         opacity: 1,
         color: '#b4b4b4',
         dashArray: '4'
       };
     }
+
     $(".leaflet-control-attribution")
       .css("bottom", "60px")
       .css("background-color", "transparent")
       .html("Supported by <a href='http://geoviz.ceoas.oregonstate.edu'> GeoViz Lab @ Oregon State University </a>");
+
     $(document).on("click", '[data-toggle="lightbox"]', function(event) {
       event.preventDefault();
       $(this).ekkoLightbox();
     });
+
     d3.csv('assets/time.csv').then(function(dataset) {
       var t = ["t"];
       var totpop = ["Incoming Syrian Refugees"];
@@ -886,9 +713,6 @@
         totpop.push((+d["total"]))
       });
       var chart = c3.generate({
-        title: {
-          // text: 'USGS Water Monitor @ Durham'
-        },
         data: {
           x: "t",
           columns: [t, totpop],
@@ -938,6 +762,24 @@
       });
       $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
     });
+
+
+    $("#popSwitcher input").on("click", function() {
+      if ($("#popSwitcher input:checked").val() === "on"){
+        districts_group.addTo(mymap);
+      } else {
+        districts_group.clearLayers();
+      }
+    })
+
+    $("#luSwitcher input").on("click", function() {
+      if ($("#luSwitcher input:checked").val() === "on"){
+        facilities_group.addTo(mymap);
+      } else {
+        facilities_group.clearLayers();
+      }
+    })
+
   </script>
 </body>
 
