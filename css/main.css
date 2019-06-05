@@ -98,3 +98,30 @@ footer p {
   -ms-user-select: none;
   user-select: none;
 }
+
+.fa-github-square:hover {
+  opacity: 0.3;
+}
+
+.fa-github-square {
+  color: white;
+  font-size: 20px;
+}
+
+.fa-facebook:hover {
+  opacity: 0.3;
+}
+
+.fa-facebook {
+  color: white;
+  font-size: 20px;
+}
+
+.fa-info-circle:hover {
+  opacity: 0.3;
+}
+
+.fa-info-circle {
+  color: white;
+  font-size: 20px;
+}
