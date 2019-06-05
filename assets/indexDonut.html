@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Benji Antolin, Bo Zhao">
+  <title>Zaatari Refugee Camp (2015)</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/zaatari.css">
+  <style>
+    .c3-chart-arcs-title {
+      fill: white;
+      font-size: 13px;
+    }
+    .c3-legend-item {
+      fill: white;
+    }
+    .donut
+    {
+      width: 375px;
+      height: 370px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+    }
+    .legend {
+      line-height: 16px;
+      width: 140px;
+      color: #333333;
+      font-family: 'Open Sans', sans-serif;
+      padding: 6px 8px;
+      border-radius: 5px;
+    }
+
+    .legend i {
+      width: 16px;
+      height: 16px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.9;
+    }
+
+    .legend img {
+      width: 16px;
+      height: 16px;
+      margin-right: 3px;
+      float: left;
+    }
+
+    .legend p {
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0;
+    }
+
+    #mapFunc {
+      font-size: small
+    }
+
+    .fa-mosque:hover {
+      opacity: 0.3;
+    }
+
+    .fa-mosque {
+      color: #8c510a;
+      font-size: .5rem;
+      position: absolute;
+      border: 5px;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
+
+    .control {
+      color: #8c510a;
+      font-size: 10px;
+      position: relative;
+      border: 5px;
+      top: 35%;
+      left: 5%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
+
+    .trash {
+      color: #878787;
+      font-size: 10px;
+      position: relative;
+      border: 5px;
+      top: 35%;
+      left: 5%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
+
+    .fa-trash-alt:hover {
+      opacity: 0.3;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(22px);
+      -ms-transform: translateX(22px);
+      transform: translateX(22px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 16px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    /* .fa-trash-alt {
+      color: #878787;
+      font-size: 10px;
+      position: absolute;
+      border: 5px;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 10px 10px 10px white;
+    } */
+    /* .mosques {
+  color: red;
+  opacity: 0.8;
+  text-shadow: 1px 1px 1px grey;
+} */
+    .leaflet-control-layers {
+      width: 220px;
+    }
+  </style>
+  <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon" /> -->
+  <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
+  <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+  <script src="https://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+  <script src="https://dc-js.github.io/dc.js/js/dc.js"></script>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+  <!-- <script src="js/leaflet.heat.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/1.3.4/chroma.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">The Za’atari Coordinated View Map, created by students at Oregon State University, is a geovisualization of the Za’atari refugee camp in Jordan. <br>
+              The project focuses on demographics and time trends in the camp from its opening in 2012 to December 2014.</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-expand-md navbar-dark bg-dark shadow-sm">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
+          <strong>Zaatari Refugee Camp</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div id="info" class="d-flex flex-column">
+      <h4>Zaatari Refugee Camp</h4>
+      <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
+        beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
+      </p>
+      <p id="mapFunc">Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many
+        other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
+      </p>
+      <div class="row col-md-12">
+        <div class="col-md-8 align-items-center">
+          <span>Facility Type</span>
+          <label id="luSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="col-md-4 align-items-center">
+          <span>Population</span>
+          <label id="popSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-4 legend">
+          <i style="background: #b0d94e; opacity: 0.5"></i>
+          <p>Child Friendly Space</p>
+          <i style="background: #c9baa7; opacity: 0.5"></i>
+          <p>Community Center</p>
+          <i style="background: #ddc19a; opacity: 0.5"></i>
+          <p>Community Office</p>
+          <i style="background: #efc881; opacity: 0.5"></i>
+          <p>Distribution Point</p>
+          <i style="background: #fbd05b; opacity: 0.5"></i>
+          <p>Health</p>
+          <i style="background: #fad930; opacity: 0.5"></i>
+          <p>Kindergarten</p>
+          <i style="background: #d4da3d; opacity: 0.5"></i>
+          <p>Mosque</p>
+          <i style="background: #b3b3b3; opacity: 0.5"></i>
+          <p>Office</p>
+          <i style="background: #eeb549; opacity: 0.5"></i>
+          <p>Playground</p>
+        </div>
+        <div class="col-md-4 legend">
+          <i style="background: #ff8b8f; opacity: 0.5"></i>
+          <p>Recreation</p>
+          <i style="background: #dc8eca; opacity: 0.5"></i>
+          <p>Recycling Facilities</p>
+          <i style="background: #b299d5; opacity: 0.5"></i>
+          <p>Registration</p>
+          <i style="background: #909fcd; opacity: 0.5"></i>
+          <p>School</p>
+          <i style="background: #c693ca; opacity: 0.5"></i>
+          <p>Security</p>
+          <i style="background: #fc8491; opacity: 0.5"></i>
+          <p>Vacant</p>
+          <i style="background: #e49d52; opacity: 0.5"></i>
+          <p>Warehouse</p>
+          <i style="background: #a0b867; opacity: 0.5"></i>
+          <p>Water Facilities</p>
+          <i style="background: #66c2a5; opacity: 0.5"></i>
+          <p>Youth Center</p>
+        </div>
+        <div style="border-left:1px solid #C5C5C5;height:190px"></div>
+        <div class="col-md-3 legend">
+          <i style="background:#ffffcc; opacity: 0.5"></i>
+          <p>
+            < 5000</p> <i style="background:#ffeda0; opacity: 0.5"></i>
+              <p>5001-5500</p>
+              <i style="background: #fed976; opacity: 0.5"></i>
+              <p>5501-6000</p>
+              <i style="background:#feb24c; opacity: 0.5"></i>
+              <p>6001-6500</p>
+              <i style="background:#fd8d3c; opacity: 0.5"></i>
+              <p>6501-7000</p>
+              <i style="background: #fc4e2a; opacity: 0.5"></i>
+              <p>7001-7500</p>
+              <i style="background:#e31a1c; opacity: 0.5"></i>
+              <p>7501-8000</p>
+              <i style="background:#bd0026; opacity: 0.5"></i>
+              <p>8001-8500</p>
+              <i style="background: #800026; opacity: 0.5"></i>
+              <p>> 8500</p>
+        </div>
+      </div>
+      <hr>
+      <div id="totpop" style="min-height: 185px"></div>
+    </div>
+    <div id="map"></div>
+    <div id="sidebar">
+      <div id="dismiss">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      <div class="sidebar-header">
+        <h3 id="projName">Zaatari Charts</h3>
+      </div>
+      <div id="projDesc">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</div>
+      <div id="projImages" class="row col-md-12"></div>
+      <div id="donut" class="donut" "c3-chart-arcs-title" "c3-legend-item"></div>
+
+    </div>
+  </main>
+
+  <script>
+
+    $("#sidebar").mCustomScrollbar({
+      theme: "minimal"
+    });
+
+    $('#dismiss').on('click', function() {
+      $('#sidebar').removeClass('active');
+      $('#info').css('left', '20px');
+      // $('.overlay').removeClass('active');
+    });
+
+
+    // creating sidebar https://bootstrapious.com/p/bootstrap-sidebar
+    //1. Create a map object.
+    var mymap = L.map('map', {
+      center: [32.293, 36.315],
+      zoom: 15,
+      maxZoom: 18,
+      minZoom: 8,
+      zoomControl: false,
+      detectRetina: true
+    });
+
+    L.control.scale({
+      position: 'bottomright'
+    }).addTo(mymap);
+
+    var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
+    var streets = L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png');
+    var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+    var baseLayers = {
+      'Grayscale': gray,
+      'Streets': streets,
+      'Satellite': satellite
+    }
+    var districts_group = L.layerGroup();
+    var facilities_group = L.layerGroup();
+    var facilityColors = chroma.scale('Set2').mode('lch').colors(18);
+
+    $.when($.getJSON("assets/mosques.geojson"),
+      $.getJSON("assets/overlay/garbageBins.geojson"),
+      $.getJSON("assets/districts.geojson"),
+      $.getJSON("assets/overlay/roads.geojson"),
+      $.getJSON("assets/overlay/septicTanks.geojson"),
+      $.getJSON("assets/overlay/pipesSeptic.geojson"),
+      $.getJSON("assets/overlay/steelTanks.geojson"),
+      $.getJSON("assets/overlay/pipesSolidFree.geojson"),
+      $.getJSON("assets/overlay/campFacilitiesAll.geojson"),
+    ).done(function(mosques, trash, districts, roads, sepTanks, sepPipes, steelTanks, steelPipes, facilities) {
+      var mosquesLayer = L.geoJSON(mosques, {
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>Mosque Name: </b>' + feature.properties.NAME_EN, {
+            className: 'feature-label',
+            permanent: false,
+            direction: 'center'
+          });
+        },
+        pointToLayer: function(feature, latlng) {
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-mosque'
+            })
+          });
+        }
+      });
+      // 4. build up a set of colors from colorbrewer's dark2 category
+      var trashColors = chroma.scale('RdYlGn').mode('lch').colors(3);
+      for (i = 0; i < 3; i++) {
+        $('head').append($("<style> .trash-color-" + (i + 1).toString() + " { color: " + trashColors[i] + "; font-size: 10px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
+      var trashLayer = L.geoJSON(trash, {
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>CONDITION: </b>' + feature.properties.CONDITION, {
+            className: 'feature-label',
+            permanent: false,
+            direction: 'center'
+          });
+        },
+        pointToLayer: function(feature, latlng) {
+          var id = 0;
+          if (feature.properties.CONDITION == "replace") {
+            id = 0;
+          } else if (feature.properties.CONDITION == "maintain") {
+            id = 1;
+          } else if (feature.properties.CONDITION == "good") {
+            id = 2;
+          } else {
+            id = 3;
+          }
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-trash-alt trash-color-' + (id + 1).toString(),
+            })
+          });
+        }
+      });
+
+      var sepTanksColors = chroma.scale('blues').colors(4);
+      for (i = 0; i < 3; i++) {
+        $('head').append($("<style> .sepTanks-color-" + (i + 1).toString() + " { color: " + sepTanksColors[i] + "; font-size: 6px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
+      var sepTanksLayer = L.geoJSON(sepTanks, {
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b># of Households Served: </b>' + feature.properties.HOUSE_COUN, {
+            className: 'feature-label',
+            permanent: false,
+            direction: 'center'
+          });
+        },
+        pointToLayer: function(feature, latlng) {
+          var id = 0;
+          if (feature.properties.HOUSE_COUN > 15) {
+            id = 3;
+          } else if (feature.properties.HOUSE_COUN > 10) {
+            id = 2;
+          } else if (feature.properties.HOUSE_COUN > 5) {
+            id = 1;
+          } else {
+            id = 0;
+          }
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-box sepTanks-color-' + (id + 1).toString(),
+            })
+          });
+        }
+      });
+      var sepPipesLayer = L.geoJSON(sepPipes, {
+        style: {
+          color: "gray",
+          weight: 1,
+          opacity: .8,
+        }
+      });
+      var steelTanksColors = chroma.scale('greens').colors(4);
+      for (i = 0; i < 3; i++) {
+        $('head').append($("<style> .steelTanks-color-" + (i + 1).toString() + " { color: " + steelTanksColors[i] + "; font-size: 8px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
+      }
+      var steelTanksLayer = L.geoJSON(steelTanks, {
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b># of Households Served: </b>' + feature.properties.house_coun, {
+            className: 'feature-label',
+            permanent: false,
+            direction: 'center'
+          });
+        },
+        pointToLayer: function(feature, latlng) {
+          var id = 0;
+          if (feature.properties.house_coun > 150) {
+            id = 3;
+          } else if (feature.properties.house_coun > 100) {
+            id = 2;
+          } else if (feature.properties.house_coun > 50) {
+            id = 1;
+          } else {
+            id = 0;
+          }
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              className: 'fas fa-archive steelTanks-color-' + (id + 1).toString(),
+            })
+          });
+        }
+      });
+      var steelPipesLayer = L.geoJSON(steelPipes, {
+        style: {
+          color: "gray",
+          weight: 1,
+          opacity: .8,
+        }
+      });
+      var roadsLayer = L.geoJSON(roads, {
+        style: road_style
+      });
+      var faciltiesLayer = L.geoJSON(facilities, {
+        style: styleFacility,
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>Facility Type: </b>' + feature.properties.TYPE, {
+            className: 'feature-label',
+            permanent: false,
+            direction: 'center'
+          });
+          layer.on({
+            mouseover: highlightFeature,
+            click: highlightFeature,
+            mouseout: function(e) {
+              faciltiesLayer.resetStyle(e.target);
+            }
+          });
+        },
+      }).addTo(facilities_group);
+
+      var districtsLayer = L.geoJSON(districts, {
+        style: style,
+        onEachFeature: function(feature, layer) {
+          layer.bindTooltip('<b>Name: </b>' + feature.properties.NAME_EN +
+            '<br><b>Population: </b>' + feature.properties.totpop +
+            '<br><b>Housholds: </b>' + feature.properties.hhs, {
+              className: 'feature-label',
+              permanent: false,
+              direction: 'center'
+            });
+          layer.on({
+            mouseover: highlightFeature,
+            click: highlightFeature,
+            mouseout: function(e) {
+              districtsLayer.resetStyle(e.target);
+            }
+          });
+        }
+      }).addTo(districts_group);
+
+      var overlays = {
+        "<span>Zaatari Districts</span>": districtsLayer,
+        "<span>Camp Facilties</span>": faciltiesLayer,
+        '<span>Mosques</span> <i class="fas fa-mosque fa-lg control"></i> ': mosquesLayer,
+        '<span>Garbage Bins</span><i class="fas fa-trash-alt fa-lg trash"></i>': trashLayer,
+        "<span >Roads<hr></span>": roadsLayer,
+        "<span >Septic Tanks</span>": sepTanksLayer,
+        "<span >Septic Pipes</span>": sepPipesLayer,
+        "<span >Steel Tanks</span>": steelTanksLayer,
+        "<span >Solid Free Pipes</span>": steelPipesLayer,
+      }
+      L.control.layers(baseLayers, overlays, {
+        collapsed: false
+      }).addTo(mymap);
+
+      function highlightFeature(e) {
+        // e indicates the current event
+        var layer = e.target; //the target capture the object which the event associates with
+        layer.setStyle({
+          weight: 1,
+          opacity: 1,
+          color: 'white',
+          fillColor: 'mediumslateblue',
+          fillOpacity: 0.8
+        });
+
+      }
+
+      $('#sidebar').addClass('active');
+      $('#info').css('left', '420px');
+      // $('.overlay').addClass('active');
+      $('.collapse.in').toggleClass('in');
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+
+
+      // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
+      function zoomToFeature(e) {
+        mymap.fitBounds(e.target.getBounds());
+      }
+      //  var labels = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}@2x.png').addTo(mymap);
+    });
+
+    function road_style(feature) {
+      var c = null;
+      var w = 1;
+      if (feature.properties.LINETYPE == "paved") {
+        c = "grey";
+        w = 1;
+      } else {
+        c = "brown";
+        w = .75;
+      }
+      return {
+        opacity: 0.7,
+        color: c,
+        weight: w
+      };
+    };
+    colors = chroma.scale('YlOrRd').colors(9); //colors = chroma.scale('OrRd').colors(5);
+    function setColor(density) {
+      var id = 0;
+      if (density > 8500) {
+        id = 8;
+      } else if (density > 8000 && density <= 8500) {
+        id = 7;
+      } else if (density > 7500 && density <= 8000) {
+        id = 6;
+      } else if (density > 7000 && density <= 7500) {
+        id = 5;
+      } else if (density > 6500 && density <= 7000) {
+        id = 4;
+      } else if (density > 6000 && density <= 6500) {
+        id = 3;
+      } else if (density > 5500 && density <= 6000) {
+        id = 2;
+      } else if (density > 5000 && density <= 5500) {
+        id = 1;
+      } else {
+        id = 0;
+      }
+      return colors[id];
+    }
+    // 7. Set style function that sets fill color.md property equal to cell tower density
+    function style(feature) {
+      return {
+        fillColor: setColor(feature.properties.totpop),
+        fillOpacity: 0.4,
+        weight: 2,
+        opacity: 1,
+        color: '#b4b4b4',
+        dashArray: '4'
+      };
+    }
+    // facilityColors = chroma.scale('YlOrRd').colors(17);
+
+    function setColorFacility(type) {
+      var id = 0;
+      if (type == "Child Friendly Space") {
+        id = 10;
+      } else if (type == "Community Center") {
+        id = 16;
+      } else if (type == "Community Office") {
+        id = 15;
+      } else if (type == "Distribution Point") {
+        id = 14;
+      } else if (type == "Health") {
+        id = 13;
+      } else if (type == "Kindergarten") {
+        id = 12;
+      } else if (type == "Mosque") {
+        id = 11;
+      } else if (type == "Office") {
+        id = 17;
+      } else if (type == "Playground") {
+        id = 9;
+      } else if (type == "Recreation") {
+        id = 8;
+      } else if (type == "Recycling Facilities") {
+        id = 7;
+      } else if (type == "Registration") {
+        id = 6;
+      } else if (type == "School") {
+        id = 5;
+      } else if (type == "Security") {
+        id = 4;
+      } else if (type == "Vacant") {
+        id = 3;
+      } else if (type == "Warehouse") {
+        id = 2;
+      } else if (type == "Water Facilities") {
+        id = 1;
+      } else {
+        id = 0;
+      }
+      return facilityColors[id];
+    }
+
+    function styleFacility(feature) {
+      return {
+        fillColor: setColorFacility(feature.properties.TYPE),
+        fillOpacity: 0.4,
+        weight: 0,
+        opacity: 1,
+        color: '#b4b4b4',
+        dashArray: '4'
+      };
+    }
+
+    $(".leaflet-control-attribution")
+      .css("bottom", "60px")
+      .css("background-color", "transparent")
+      .html("Supported by <a href='http://geoviz.ceoas.oregonstate.edu'> GeoViz Lab @ Oregon State University </a>");
+
+    $(document).on("click", '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+    });
+
+
+
+    d3.csv('assets/time.csv').then(function(dataset) {
+      var t = ["t"];
+      var totpop = ["Incoming Syrian Refugees"];
+      dataset.forEach(function(d) {
+        t.push(new Date(d["t"]))
+        totpop.push((+d["total"]))
+      });
+      var chart = c3.generate({
+        data: {
+          x: "t",
+          columns: [t, totpop],
+          type: 'area-spline',
+        },
+        subchart: {
+          show: true,
+          // type: 'bar',
+          size: {
+            height: 15
+          },
+        },
+        axis: {
+          x: {
+            type: "timeseries",
+            tick: {
+              format: "%b, %Y"
+            }
+          },
+          y: {
+            label: {
+              text: 'Incoming Syrian Refugees',
+              position: 'outer-middle'
+            }
+          },
+        },
+        point: {
+          r: 0,
+          focus: {
+            expand: {
+              r: 2
+            }
+          }
+        },
+        zoom: {
+          // rescale: true,+
+          enabled: true,
+          type: "scroll",
+        },
+        legend: {
+          show: false,
+        },
+        tooltip: {
+          linked: true
+        },
+        bindto: "#totpop"
+      });
+      $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
+    });
+
+
+    $("#popSwitcher input").on("click", function() {
+      if ($("#popSwitcher input:checked").val() === "on") {
+        districts_group.addTo(mymap);
+      } else {
+        districts_group.clearLayers();
+      }
+    })
+
+    $("#luSwitcher input").on("click", function() {
+      if ($("#luSwitcher input:checked").val() === "on") {
+        facilities_group.addTo(mymap);
+      } else {
+        facilities_group.clearLayers();
+      }
+    })
+
+    var donut = c3.generate({
+        data: {
+            columns: [
+              ["0-99m",1723],
+              ["100-199m",3612],
+              ["200-399m",10078],
+              ["400-799m",11278],
+              ["800+m",242]
+                      ],
+            type: 'donut',
+
+          },
+          tooltip: {
+            show: false
+          },
+            donut: {
+              title: "School-Age Child School Distances",
+              width: 50
+            },
+            bindto: '#donut'
+    });
+</script>
+</body>
+
+</html>
