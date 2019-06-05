@@ -834,7 +834,7 @@
       if ($("#popSwitcher input:checked").val() === "on") {
         districts_group.addTo(mymap);
       } else {
-        districts_group.clearLayers();
+        mymap.removeLayer(districts_group);
       }
     })
 
@@ -842,7 +842,7 @@
       if ($("#luSwitcher input:checked").val() === "on") {
         facilities_group.addTo(mymap);
       } else {
-        facilities_group.clearLayers();
+        mymap.removeLayer(facilities_group);
       }
     })
   </script>
