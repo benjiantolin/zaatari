@@ -4,8 +4,8 @@
 ----------------------------------------------------- */
 #sidebar {
     position:absolute;
-    left: -400px;
-    width: 400px;
+    /* left: -400px; */
+    width: 414px;
     top: 0;
     bottom: 0;
     height: 100vh;
@@ -94,51 +94,9 @@ ul ul a {
 }
 
 
-#class-chart, #date-chart, #date-chart2 {
-  margin-top: 10px;
-  margin-left:20px
-}
-
-#stock-chart {
-    margin-top: 10px;
-  margin-left:20px
-}
-
-#species-chart {
-  margin-top: 10px;
-  margin-left:20px
-}
 
 
 
 .proj-img img {
   margin-bottom: 10px;
-}
-
-#projDesc {
-  margin: 15px;
-}
-
-.textLabelclass a {
-  white-space: nowrap;
-  font-size: 15px;
-  /* font-weight: 400; */
-  /* text-shadow: 0 0 0.1em gray, 0 0 0.1em gray,
-    0 0 0.1em gray, 0 0 0.1em gray, 0 0 0.1em; */
-  color: brown !important;
-}
-
-.textLabelclass2 {
-  white-space: nowrap;
-  font-size: 15px;
-  font-weight: bold;
-  text-shadow: 0 0 0.1em black, 0 0 0.1em black,
-    0 0 0.1em black, 0 0 0.1em black, 0 0 0.1em;
-  color: white;
-}
-
-.station {
-  color: brown;
-  opacity: 1;
-  /* text-shadow: 1px 1px 1px black; */
 }
