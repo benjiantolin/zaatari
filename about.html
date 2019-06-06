@@ -102,6 +102,8 @@
         <p>
           <a class="btn btn-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">The camp</a>
           <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">The project</button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Methods & Data</button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Credits</button>
         </p>
         <div class="row">
           <div class="col">
@@ -120,19 +122,27 @@
               </div>
             </div>
           </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample3">
+              <div class="card card-body text-left">
+                For this coordinated view of Za’atari demographics and trends, data and shapefiles were obtained from the <a href="Raw Data/reach_jor_report_zaatari_camp_population_count_february2015_1.pdf">REACH Initiative</a>. We reviewed and cleaned the data in Excel and used pivot tables to extract the necessary data we needed to create our charts. In addition to data cleaning, in the early stages of creating our geovisualization, we drew sketches of how we envisioned the coordinated view. A draft sketch can be seen below:<br><br>
+                <img class="about-image" src="img/interface_sketch.png"><br><br>
+                After generating our vision for the coordinated view, we then began the coding process in Atom 1.37. We first made the underlying base map of the Za’atari camp split into its 12 districts. A chloropleth was then overlaid on the map representing the population density by district. The miniaturized Syria map was then added on top of the base camp map and a chloropleth of camp district population density was overlaid. We then utilized D3 to set and call in our data, then C3 to create the various charts.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample4">
+              <div class="card card-body text-left">
+                The major JavaScript libraries we used for this project include Leaflet, jQuery, D3, C3, Bootstrap, FontAwesome, and Chroma. Leaflet was utilized as the base web mapping and info/legend generating library, jQuery and Bootstrap were used for increased coding efficiency and design, D3 was utilized for setting and initializing the data, C3 was used for creating the charts,  FontAwesome was used for page fonts, and Chroma was used for chloropleth and legend colors. Tile layers were obtained from Carto DB, OpenStreetMap, and the ArcGIS Online map server.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-      <div class="about-methods">
-        <h3>Methods & Data</h3>
-        <p>For this coordinated view of Za’atari demographics and trends, data and shapefiles were obtained from the <a href="/Raw Data/reach_jor_report_zaatari_camp_population_count_february2015_1.pdf">REACH Initiative</a>. We reviewed and cleaned the data in Excel and used pivot tables to extract the necessary data we needed to create our charts. In addition to data cleaning, in the early stages of creating our geovisualization, we drew sketches of how we envisioned the coordinated view. A draft sketch can be seen below:<br><br>
-        <img class="about-image" src="img/interface_sketch.png"><br><br>
-        After generating our vision for the coordinated view, we then began the coding process in Atom 1.37. We first made the underlying base map of the Za’atari camp split into its 12 districts. A chloropleth was then overlaid on the map representing the population density by district. The miniaturized Syria map was then added on top of the base camp map and a chloropleth of camp district population density was overlaid. We then utilized D3 to set and call in our data, then C3 to create the various charts.<br><br>
-        Credits<br><br>
-        The major JavaScript libraries we used for this project include Leaflet, jQuery, D3, C3, Bootstrap, FontAwesome, and Chroma. Leaflet was utilized as the base web mapping and info/legend generating library, jQuery and Bootstrap were used for increased coding efficiency and design, D3 was utilized for setting and initializing the data, C3 was used for creating the charts,  FontAwesome was used for page fonts, and Chroma was used for chloropleth and legend colors. Tile layers were obtained from Carto DB, OpenStreetMap, and the ArcGIS Online map server.
-        </p>
-      </div>
+
 
 
     <div class="album py-5 bg-light">
