@@ -199,6 +199,24 @@
       fill: white;
     }
 
+    .shelter {
+      width: 375px;
+      height: 375px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+    }
+
+    .agehealth {
+      width: 375px;
+      height: 375px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+    }
+
     .totpop {
       width: 375px;
       height: 250px;
@@ -358,6 +376,8 @@
       <div id="projImages" class="row col-md-12"></div>
       <div id="totpop" class="totpop"></div>
       <div id="donut" class="donut"></div>
+      <div id="shelter_bar" class="shelter"></div>
+      <div id="agehealth_bar" class="agehealth"></div>
     </div>
 
 
@@ -846,6 +866,85 @@
       bindto: '#donut'
     });
 
+    Promise.all([
+      d3.csv('assets/SurveyData_Shelter.csv'),
+    ]).then(function(datasets) {
+      var dist = ["dist"];
+      var caravan = ["Caravan"];
+      var tent = ["Tent"];
+      var tandc = ["Tent and Caravan"];
+     //************** Use name of attributes in csv file in the quotes for this section
+      datasets[0].forEach(function(d) {
+        dist.push(+d["dist"])         //X axis
+        caravan.push(+d["caravan"])
+        tent.push(+d["tent"])
+        tandc.push(+d["tent_and_caravan"])
+      });
+      var shelter_bar = c3.generate({
+           title: {
+             text: 'Shelter Count by District'
+           },
+           data: {
+             columns: [caravan, tent, tandc],
+             type: 'bar',
+           },
+           axis: {
+             x: {
+               type: 'category',
+               categories: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12']
+             }
+           },
+           bar: {
+             width: {
+               ratio: 0.5
+             },
+           },
+           bindto: '#shelter_bar',
+       });
+    });
+
+    Promise.all([
+      d3.csv('assets/SurveyData_HealthDist.csv')
+    ]).then(function(datasets) {
+      var age_brackets = ["age_brackets"];
+      var length1 = ["0-99m"];
+      var length2 = ["100-199m"];
+      var length3 = ["200-399m"];
+      var length4 = ["400-799m"];
+      var length5 = ["800+m"];
+     //************** Use name of attributes in csv file in the quotes for this section
+      datasets[0].forEach(function(d) {
+        age_brackets.push(+d["age_brackets"])   //X axis
+        length1.push(+d["0_99m"])
+        length2.push(+d["100_199m"])
+        length3.push(+d["200_399m"])
+        length4.push(+d["400_799m"])
+        length5.push(+d["800plusm"])
+      });
+
+      var agehealth_bar = c3.generate({
+              title: {
+                text: 'Distance to Health Center by Age Group'
+              },
+              data: {
+                columns: [length1, length2, length3, length4, length5],
+                type: 'bar'
+              },
+              axis: {
+                x: {
+                  type: 'category',
+                  categories: ['0-19 years', '20-34 years', '35-49 years', '50-64 years', '65+ years']
+                }
+              },
+              bar: {
+                width: {
+                  ratio: 0.5
+                }
+              },
+              bindto: '#agehealth_bar'
+          });
+
+    });
 
     $("#popSwitcher input").on("click", function() {
       if ($("#popSwitcher input:checked").val() === "on") {
