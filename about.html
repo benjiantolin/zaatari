@@ -97,17 +97,17 @@
 
   <main role="main">
 
-    <section class="jumbotron text-center about-background" style="background-image:url('img/An_Aerial_View_of_the_Za%27atri_Refugee_Camp.jpg')">
+    <section class="jumbotron text-center about-background" style="background-image:url('img/An_Aerial_View_of_the_Za%27atri_Refugee_Camp.jpg')" style="height:100%">
       <div class="container">
         <p>
-          <a class="btn btn-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">The camp</a>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">The project</button>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Methods & Data</button>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Credits</button>
+          <a class="btn btn-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="width:300px" >The camp</a>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2" style="width:300px">The project</button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3" style="width:300px">Methods & Data</button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4" style="width:300px">Credits</button>
         </p>
         <div class="row">
           <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="collapse multi-collapse" id="multiCollapseExample1" style="width:300px">
               <div class="card card-body text-left">
                 The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old. The camp is split into 12 districts and has a variety of important refugee resources including basic needs (blankets, utensils, mattresses, etc.), schools, health clinics, food, water sanitation, and more.
                 <br><br>Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
@@ -116,14 +116,14 @@
             </div>
           </div>
           <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
+            <div class="collapse multi-collapse" id="multiCollapseExample2" style="width:300px">
               <div class="card card-body text-left">
                 The major aim of our geovisualization is to present camp population time trends and locational differences in demographics. Specifically, our coordinated view of the Za’atari camp displays a map of the camp itself, a miniaturized map of Syria, and variety of district-based demographic charts. We hope our project provides users with an interactive, engaging, and detailed view of Za’atari camp trends and demographics in order to increase awareness of the reality of life in the camp.
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample3">
+            <div class="collapse multi-collapse" id="multiCollapseExample3" style="width:300px">
               <div class="card card-body text-left">
                 For this coordinated view of Za’atari demographics and trends, data and shapefiles were obtained from the <a href="Raw Data/reach_jor_report_zaatari_camp_population_count_february2015_1.pdf">REACH Initiative</a>. We reviewed and cleaned the data in Excel and used pivot tables to extract the necessary data we needed to create our charts. In addition to data cleaning, in the early stages of creating our geovisualization, we drew sketches of how we envisioned the coordinated view. A draft sketch can be seen below:<br><br>
                 <img class="about-image" src="img/interface_sketch.png"><br><br>
@@ -132,7 +132,7 @@
             </div>
           </div>
           <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample4">
+            <div class="collapse multi-collapse" id="multiCollapseExample4" style="width:300px">
               <div class="card card-body text-left">
                 The major JavaScript libraries we used for this project include Leaflet, jQuery, D3, C3, Bootstrap, FontAwesome, and Chroma. Leaflet was utilized as the base web mapping and info/legend generating library, jQuery and Bootstrap were used for increased coding efficiency and design, D3 was utilized for setting and initializing the data, C3 was used for creating the charts,  FontAwesome was used for page fonts, and Chroma was used for chloropleth and legend colors. Tile layers were obtained from Carto DB, OpenStreetMap, and the ArcGIS Online map server.
               </div>

@@ -72,6 +72,11 @@ background-repeat: no-repeat;
 
 }
 
+.jumbotron {
+    ...
+    min-height: 800px;
+}
+
 .about-image{
 position:relative;
 max-width: 250%;
