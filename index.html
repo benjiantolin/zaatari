@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Bo Zhao, Benji">
+  <title>Wiki Gallery</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+  <style>
+    body {
+      font-family: 'Titillium Web', sans-serif;
+    }
+
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .jumbotron {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      margin-bottom: 0;
+      background-color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .jumbotron {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+    }
+
+    .jumbotron p:last-child {
+      margin-bottom: 0;
+    }
+
+    .jumbotron-heading {
+      font-weight: 300;
+    }
+
+    .jumbotron .container {
+      max-width: 40rem;
+    }
+
+    footer {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    footer p {
+      margin-bottom: .25rem;
+    }
+  </style>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" media="all" href="css/landing_page.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"> </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> </script>
+</head>
+
+<body class="background" style="background-image:url('https://www.aljazeera.com/mritems/Images/2018/3/26/82b86784163244518aa6af9a410a53db_8.jpg')">
+  <span class="background" style="background-image:url('https://www.aljazeera.com/mritems/Images/2018/3/26/82b86784163244518aa6af9a410a53db_8.jpg')"></span>
+
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-11 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">The Za’atari Coordinated View Map, created by students at Oregon State University, is a geovisualization of the Za’atari refugee camp in Jordan. <br>
+              The project focuses on demographics and time trends in the camp from its opening in 2012 to December 2014.</p>
+          </div>
+          <div class="col-sm-1 offset-md-1 py-4">
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white"><i class="fab fa-facebook"></i></a></li>
+              <li><a href="#" class="text-white"><i class="fab fa-github-square"></i></a></li>
+              <li><a href="#" class="text-white"><i class="fas fa-info-circle"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-expand-md navbar-dark bg-dark shadow-sm">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="map.html">Map</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container-fluid d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
+          <strong>Zaatari Refugee Camp</strong>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+
+          <div class="landingtext">
+            <h1>Za'Atari</h1>
+            <h4>Life in a refugee camp</h4>
+          </div>
+
+
+
+          <!-- Slideshow container -->
+          <div class="slideshow-container">
+
+            <!-- Full-width slides/quotes -->
+            <div class="mySlides">
+              <q>When we arrived, we weren’t used to this kind of life. We were living in tents – our old home in Syria had four rooms, a large living room and a balcony. We were happy in our home. But here, we adapted. Now in our caravan, we have two rooms.</q>
+            </div>
+
+            <div class="mySlides">
+              <q>When my parents told me that we were going to Jordan, I thought we were just moving from building to building. But when we arrived, our home was a big tent with lots of people.</q>
+            </div>
+
+            <div class="mySlides">
+              <q>My father said we lived a normal life in Syria. I wish I could remember it.</q>
+            </div>
+
+            <div class="mySlides">
+              <q>We thought we would only be here for a short while, until the situation improved, but we are still here, staying here.</q>
+            </div>
+
+          </div>
+
+
+
+
+
+      <script>
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function autoPlaySlideShow() {
+        slideIndex = slideIndex+1;
+        showSlides(slideIndex);
+        //showSlides(2); old code
+    }
+
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+            }
+          slides[slideIndex-1].style.display = "block";
+        }
+    setInterval(autoPlaySlideShow,7500);
+
+
+
+      </script>
+
+
+      <footer>
+        <div class="footer-container">
+          <p>Photo credit: JOI LEE/CONTRAST VR</p>
+        </div>
+      </footer>
+
+</body>
+
+</html>
