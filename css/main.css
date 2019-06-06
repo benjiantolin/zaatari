@@ -28,10 +28,10 @@ html, body,main
 
 
 .leaflet-control-layers, .leaflet-control-zoom {
-  color: #333333 !important;
+  color: white !important;
   padding: 6px 8px;
   border: none !important;
-  background: rgba(225, 225, 225, 0.5) !important;
+  background: #343a40 !important;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
   border-radius: 5px  !important;
   /* position: fixed;
@@ -45,12 +45,12 @@ html, body,main
 #info {
   position: fixed;
   z-index: 1000;
-  bottom: 20px;
-  width: 450px;
-  color: #333333;
   left: 20px;
+  top: 270px;
+  width: 200px;
+  color: white;
   padding: 6px 8px;
-  background: rgba(225, 225, 225, 0.5);
+  background: #343a40;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
@@ -104,8 +104,8 @@ footer p {
 }
 
 .fa-github-square {
-  color: white;
-  font-size: 20px;
+  color: #343a40;
+  font-size: 40px;
 }
 
 .fa-facebook:hover {
@@ -122,6 +122,24 @@ footer p {
 }
 
 .fa-info-circle {
+  color: white;
+  font-size: 20px;
+}
+
+.fa-home:hover {
+  opacity: 0.3;
+}
+
+.fa-home {
+  color: white;
+  font-size: 20px;
+}
+
+.fa-map-marked-alt:hover {
+  opacity: 0.3;
+}
+
+.fa-map-marked-alt {
   color: white;
   font-size: 20px;
 }

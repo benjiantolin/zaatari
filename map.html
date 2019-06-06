@@ -17,163 +17,163 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/zaatari.css">
   <style>
-  .legend {
-    line-height: 16px;
-    width: 140px;
-    color: white;
-    font-family: 'Open Sans', sans-serif;
-    padding: 6px 8px;
-    border-radius: 5px;
-  }
+    .legend {
+      line-height: 16px;
+      width: 140px;
+      color: white;
+      font-family: 'Open Sans', sans-serif;
+      padding: 6px 8px;
+      border-radius: 5px;
+    }
 
-  .legend i {
-    width: 16px;
-    height: 16px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.9;
-  }
+    .legend i {
+      width: 16px;
+      height: 16px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.9;
+    }
 
-  .legend img {
-    width: 16px;
-    height: 16px;
-    margin-right: 3px;
-    float: left;
-  }
+    .legend img {
+      width: 16px;
+      height: 16px;
+      margin-right: 3px;
+      float: left;
+    }
 
-  .legend p {
-    font-size: 12px;
-    line-height: 16px;
-    margin: 0;
-  }
+    .legend p {
+      font-size: 12px;
+      line-height: 16px;
+      margin: 0;
+    }
 
-  #mapFunc {
-    font-size: small
-  }
+    #mapFunc {
+      font-size: small
+    }
 
-  .fa-mosque:hover {
-    opacity: 0.3;
-  }
+    .fa-mosque:hover {
+      opacity: 0.3;
+    }
 
-  .fa-mosque {
-    color: #8c510a;
-    font-size: .5rem;
-    position: absolute;
-    border: 5px;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    opacity: 0.8;
-    text-shadow: 1px 1px 1px black;
-  }
+    .fa-mosque {
+      color: #8c510a;
+      font-size: .5rem;
+      position: absolute;
+      border: 5px;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
 
-  .fa-thumbtack {
-    color: red;
-    font-size: 1rem;
-    position: absolute;
-    border: 5px;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    opacity: 0.8;
-    text-shadow: 1px 1px 1px black;
-  }
+    .fa-thumbtack {
+      color: red;
+      font-size: 1rem;
+      position: absolute;
+      border: 5px;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
 
-  .control {
-    color: #8c510a;
-    font-size: 10px;
-    position: relative;
-    border: 5px;
-    top: 35%;
-    left: 5%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    opacity: 0.8;
-    text-shadow: 1px 1px 1px black;
-  }
+    .control {
+      color: #8c510a;
+      font-size: 10px;
+      position: relative;
+      border: 5px;
+      top: 35%;
+      left: 5%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
 
-  .trash {
-    color: #878787;
-    font-size: 10px;
-    position: relative;
-    border: 5px;
-    top: 35%;
-    left: 5%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    opacity: 0.8;
-    text-shadow: 1px 1px 1px black;
-  }
+    .trash {
+      color: #878787;
+      font-size: 10px;
+      position: relative;
+      border: 5px;
+      top: 35%;
+      left: 5%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      opacity: 0.8;
+      text-shadow: 1px 1px 1px black;
+    }
 
-  .fa-trash-alt:hover {
-    opacity: 0.3;
-  }
+    .fa-trash-alt:hover {
+      opacity: 0.3;
+    }
 
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 46px;
-    height: 24px;
-  }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 24px;
+    }
 
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+    /* Hide default HTML checkbox */
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
 
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
+    /* The slider */
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
 
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
 
-  input:checked+.slider {
-    background-color: #2196F3;
-  }
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
 
-  input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
 
-  input:checked+.slider:before {
-    -webkit-transform: translateX(22px);
-    -ms-transform: translateX(22px);
-    transform: translateX(22px);
-  }
+    input:checked+.slider:before {
+      -webkit-transform: translateX(22px);
+      -ms-transform: translateX(22px);
+      transform: translateX(22px);
+    }
 
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 16px;
-  }
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 16px;
+    }
 
-  .slider.round:before {
-    border-radius: 50%;
-  }
+    .slider.round:before {
+      border-radius: 50%;
+    }
 
-  /* .fa-trash-alt {
+    /* .fa-trash-alt {
     color: #878787;
     font-size: 10px;
     position: absolute;
@@ -185,90 +185,95 @@
     opacity: 0.8;
     text-shadow: 10px 10px 10px white;
   } */
-  /* .mosques {
+    /* .mosques {
 color: red;
 opacity: 0.8;
 text-shadow: 1px 1px 1px grey;
 } */
-  .leaflet-control-layers {
-    width: 116px;
-    bottom: -480px;
-  }
+    .leaflet-control-layers {
+      width: 116px;
+      bottom: -550px;
+    }
 
-  .c3-chart-arcs-title {
-    fill: white;
-    font-size: 12px;
-  }
+    .c3-chart-arcs-title {
+      fill: white;
+      font-size: 12px;
+    }
 
-  .c3-legend-item {
-    fill: white;
-  }
+    .c3-legend-item {
+      fill: white;
+    }
 
-  .donut {
-    width: 375px;
-    height: 375px;
-    margin: 5px;
-    padding: 2px;
-    border: 2px;
-    fill: white;
-  }
+    .donut {
+      width: 375px;
+      height: 375px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+    }
 
-  .shelter {
-    width: 395px;
-    height: 375px;
-    margin: 5px;
-    padding: 2px;
-    border: 2px;
-    fill: white;
-  }
+    .shelter {
+      width: 395px;
+      height: 375px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+    }
 
-  .agehealth {
-    width: 395px;
-    height: 375px;
-    margin: 5px;
-    padding: 2px;
-    border: 2px;
-    fill: white;
-    bottom: 20px;
-  }
+    .agehealth {
+      width: 395px;
+      height: 375px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+      bottom: 20px;
+    }
 
-  .totpop {
-    width: 375px;
-    height: 250px;
-    margin: 5px;
-    padding: 2px;
-    border: 2px;
-    fill: white;
-  }
+    .totpop {
+      width: 375px;
+      height: 250px;
+      margin: 5px;
+      padding: 2px;
+      border: 2px;
+      fill: white;
+    }
 
-  .data {
-    z-index: 1000;
-    position: absolute;
-    right: 5px;
-    bottom: 90px;
-    padding: 6px 8px;
-    font: 14px Arial, Helvetica, sans-serif;
-    text-align: right;
-    background: white;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-  }
+    .data {
+      z-index: 1000;
+      position: absolute;
+      right: 5px;
+      bottom: 90px;
+      padding: 6px 8px;
+      font: 14px Arial, Helvetica, sans-serif;
+      text-align: right;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
 
-  #origin {
-    position: fixed;
-    z-index: 1000;
-    top: 60px;
-    left: 420px;
-    width: 200px;
-    height: 200px;
-    color: #333333;
-    padding: 6px 8px;
-    background: rgba(225, 225, 225, 0.5);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-  }
+    #origin {
+      position: fixed;
+      z-index: 1000;
+      top: 60px;
+      left: 420px;
+      width: 200px;
+      height: 200px;
+      color: #333333;
+      padding: 6px 8px;
+      background: rgba(225, 225, 225, 0.5);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
 
+    hr {
+      border-top: 1px solid white;
+      margin-right: 200px;
+      width: 130%;
+    }
   </style>
   <!-- <link rel="icon" href="img/favicon.ico" type="image/x-icon" /> -->
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
@@ -288,66 +293,52 @@ text-shadow: 1px 1px 1px grey;
 
 <body>
   <header>
-    <div class="collapse bg-dark" id="navbarHeader">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-11 col-md-7 py-4">
-            <h4 class="text-white">About</h4>
-            <p class="text-muted">The Za’atari Coordinated View Map, created by students at Oregon State University, is a geovisualization of the Za’atari refugee camp in Jordan. <br>
-              The project focuses on demographics and time trends in the camp from its opening in 2012 to December 2014.</p>
-          </div>
-          <div class="col-sm-1 offset-md-1 py-4">
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white"><i class="fab fa-facebook"></i></a></li>
-              <li><a href="#" class="text-white"><i class="fab fa-github-square"></i></a></li>
-              <li><a href="#" class="text-white"><i class="fas fa-info-circle"></i></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="navbar-expand-md navbar-dark bg-dark shadow-sm">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="map.html">Map</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container-fluid d-flex justify-content-between">
         <a href="#" class="navbar-brand d-flex align-items-center">
           <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
           <strong>Zaatari Refugee Camp</strong>
+
         </a>
+        <a class="nav-link" href="index.html"><i class="fas fa-home"></i></a>
+        <a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a>
+        <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a>
       </div>
+
     </div>
+
   </header>
 
   <main>
-    <!-- <div id="info" class="d-flex flex-column">
 
-        <h2>Zaatari Refugee Camp</h2>
-        <div class='update'>Hover over a feature</div>
+    <div id="syria">
+      <div id="origin"></div>
+    </div>
+    <div id="info">
+      <h5>Feature Information</h5>
+      <div class='update'>
+        <h1>Hover over a feature</h1>
+      </div>
+    </div>
+    <div id="sidebar">
+      <!-- <div class="sidebar-header">
 
-      <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
-        beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
-      </p>
+      </div> -->
+      <h3>Introduction</h3>
+      <div id="projDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near
+        the
+        beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.</div>
+      <span><br></span>
+      <hr>
       <div class="row col-md-12">
-        <div class="col-md-7 align-items-center">
+        <div class="col-md-6 align-items-center">
           <span>Facility Type</span>
           <label id="luSwitcher" class="switch">
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="col-md-5 align-items-center">
+        <div class="col-md-6 align-items-center">
           <span>Population</span>
           <label id="popSwitcher" class="switch">
             <input type="checkbox">
@@ -357,100 +348,36 @@ text-shadow: 1px 1px 1px grey;
       </div>
       <div class="row col-md-12">
         <div class="col-md-7 legend">
-          <i style="background: #66c2a5; opacity: 0.5"></i>
+          <i style="background: #66c2a5; opacity: 0.8"></i>
           <p>Community Space</p>
-          <i style="background: #b398cf; opacity: 0.5"></i>
+          <i style="background: #b398cf; opacity: 0.8"></i>
           <p>Infrastructure</p>
-          <i style="background: #ff9c67; opacity: 0.5"></i>
+          <i style="background: #ff9c67; opacity: 0.8"></i>
           <p>Health</p>
-          <i style="background: #fdd250; opacity: 0.5"></i>
+          <i style="background: #fdd250; opacity: 0.8"></i>
           <p>Education</p>
-          <i style="background: #b3b3b3; opacity: 0.5"></i>
+          <i style="background: #b3b3b3; opacity: 0.8"></i>
           <p>Vacant</p>
         </div>
 
-
+        <!-- <div style="border-left:1px solid #C5C5C5;height:190px"></div> -->
         <div class="col-md-5 legend">
-          <i style="background:#ffffcc; opacity: 0.5"></i>
+          <i style="background:#ffffcc; opacity: 0.8"></i>
           <p>
-            <5000</p> <i style="background: #fed976; opacity: 0.5"></i>
+            <5000</p> <i style="background: #fed976; opacity: 0.8"></i>
               <p>5001-6000</p>
-              <i style="background:#fd8d3c; opacity: 0.5"></i>
+              <i style="background:#fd8d3c; opacity: 0.8"></i>
               <p>6001-7000</p>
-              <i style="background:#e31a1c; opacity: 0.5"></i>
+              <i style="background:#e31a1c; opacity: 0.8"></i>
               <p>7001-8000</p>
-              <i style="background: #800026; opacity: 0.5"></i>
+              <i style="background: #800026; opacity: 0.8"></i>
               <p>>8000</p>
         </div>
 
       </div>
-    </div> -->
-    <div id="syria">
-      <div id="origin"></div>
-    </div>
-    <div id="sidebar">
-      <div class="sidebar-header">
-
-            <div class='update'><h1>Hover over a feature</h1></div>
-
-          <!-- <p id="caseDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
-            beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
-          </p> -->
-          <!-- <p id="mapFunc">Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many
-            other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
-          </p> -->
-
-
-      </div>
-      <div id="projDesc">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the
-        beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.</div>
-        <div class="row col-md-12">
-          <div class="col-md-6 align-items-center">
-            <span>Facility Type</span>
-            <label id="luSwitcher" class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="col-md-6 align-items-center">
-            <span>Population</span>
-            <label id="popSwitcher" class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </div>
-        </div>
-        <div class="row col-md-12">
-          <div class="col-md-7 legend">
-            <i style="background: #66c2a5; opacity: 0.8"></i>
-            <p>Community Space</p>
-            <i style="background: #b398cf; opacity: 0.8"></i>
-            <p>Infrastructure</p>
-            <i style="background: #ff9c67; opacity: 0.8"></i>
-            <p>Health</p>
-            <i style="background: #fdd250; opacity: 0.8"></i>
-            <p>Education</p>
-            <i style="background: #b3b3b3; opacity: 0.8"></i>
-            <p>Vacant</p>
-          </div>
-
-          <!-- <div style="border-left:1px solid #C5C5C5;height:190px"></div> -->
-          <div class="col-md-5 legend">
-            <i style="background:#ffffcc; opacity: 0.8"></i>
-            <p>
-              <5000</p> <i style="background: #fed976; opacity: 0.8"></i>
-                <p>5001-6000</p>
-                <i style="background:#fd8d3c; opacity: 0.8"></i>
-                <p>6001-7000</p>
-                <i style="background:#e31a1c; opacity: 0.8"></i>
-                <p>7001-8000</p>
-                <i style="background: #800026; opacity: 0.8"></i>
-                <p>>8000</p>
-          </div>
-
-        </div>
-      <div id="projImages" class="row col-md-12"></div>
+      <hr>
       <div id="totpop" class="totpop"></div>
+      <hr>
       <div id="donut" class="donut"></div>
       <hr>
       <div id="shelter_bar" class="shelter"></div>
@@ -497,7 +424,7 @@ text-shadow: 1px 1px 1px grey;
       dragging: false,
     });
 
-  $(".leaflet-control-zoom").hide();
+    $(".leaflet-control-zoom").hide();
 
     L.control.scale({
       // bottom: 50  ;
@@ -505,14 +432,18 @@ text-shadow: 1px 1px 1px grey;
     }).addTo(mymap);
 
     var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
-    	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    	subdomains: 'abcd',
-    	minZoom: 0,
-    	maxZoom: 18,
-    	ext: 'png'
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 18,
+      ext: 'png'
     }).addTo(syriamap);
-    var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png').addTo(mymap);
-    var streets = L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}@2x.png');
+
+
+    var gray = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}@2x.png');
+    var streets = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(mymap);
     var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
     var baseLayers = {
       'Grayscale': gray,
@@ -520,7 +451,7 @@ text-shadow: 1px 1px 1px grey;
       'Satellite': satellite
     }
     var districts_group = L.layerGroup().addTo(mymap);
-    var facilities_group = L.layerGroup();
+    var facilities_group = L.layerGroup().addTo(mymap);
     var facilityColors = chroma.scale('Set2').mode('lch').colors(5);
 
     $.when($.getJSON("assets/mosques.geojson"),
@@ -669,11 +600,11 @@ text-shadow: 1px 1px 1px grey;
       var faciltiesLayer = L.geoJSON(facilities, {
         style: styleFacility,
         onEachFeature: function(feature, layer) {
-          layer.bindTooltip('<b>Facility Type: </b>' + feature.properties.TYPE, {
-            className: 'feature-label',
-            permanent: false,
-            direction: 'center'
-          });
+          // layer.bindTooltip('<b>Facility Type: </b>' + feature.properties.TYPE, {
+          //   className: 'feature-label',
+          //   permanent: false,
+          //   direction: 'center'
+          // });
           layer.on({
             mouseover: highlightFeatureFac,
             click: highlightFeatureFac,
@@ -688,13 +619,6 @@ text-shadow: 1px 1px 1px grey;
       var districtsLayer = L.geoJSON(districts, {
         style: style,
         onEachFeature: function(feature, layer) {
-          // layer.bindTooltip('<b>Name: </b>' + feature.properties.NAME_EN +
-          //   '<br><b>Population: </b>' + feature.properties.totpop +
-          //   '<br><b>Housholds: </b>' + feature.properties.hhs, {
-          //     className: 'feature-label',
-          //     permanent: false,
-          //     direction: 'center'
-          //   });
           layer.on({
             mouseover: highlightFeatureDist,
             click: highlightFeatureDist,
@@ -736,10 +660,10 @@ text-shadow: 1px 1px 1px grey;
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
 
-        $(".update").html('<b>' + layer.feature.properties.NAME_EN + '</b> ' +
-                          '<br><b>Population: </b>' + layer.feature.properties.totpop +
-                          '<br><b>Households: </b>' + layer.feature.properties.hhs
-                        );
+        $(".update").html('<b>District: </b>' + layer.feature.properties.DISTRICT +
+          '<br><b>Population: </b>' + layer.feature.properties.totpop +
+          '<br><b>Households: </b>' + layer.feature.properties.hhs
+        );
       }
 
       function highlightFeatureFac(e) {
@@ -753,11 +677,11 @@ text-shadow: 1px 1px 1px grey;
           fillOpacity: 0.8
         });
 
-        $(".update").html( '<b>Name: </b>'+ layer.feature.properties.NAME_EN +
-                          '<br><b>Operator: </b>' + layer.feature.properties.OPERATOR +
-                          '<br><b>Type: </b>' + layer.feature.properties.TYPE +
-                          '<br><b>Health Type: </b>' + layer.feature.properties.HEALTH_TYP
-                        );
+        $(".update").html('<b>Name: </b>' + layer.feature.properties.NAME_EN +
+          '<br><b>Operator: </b>' + layer.feature.properties.OPERATOR +
+          '<br><b>Type: </b>' + layer.feature.properties.TYPE +
+          '<br><b>Health Type: </b>' + layer.feature.properties.HEALTH_TYP
+        );
       }
 
       // 3.2.2 zoom to the highlighted feature when the mouse is clicking onto it.
@@ -875,7 +799,7 @@ text-shadow: 1px 1px 1px grey;
       };
     }
 
-$(".leaflet-control-attribution").hide()
+    $(".leaflet-control-attribution").hide()
 
     $(".leaflet-control-attribution")
       .css("bottom", "60px")
@@ -908,12 +832,12 @@ $(".leaflet-control-attribution").hide()
             totpop: 'white',
           }
         },
-        subchart: {
-          show: true,
-          size: {
-            height: 15
-          },
-        },
+        // subchart: {
+        //   show: true,
+        //   size: {
+        //     height: 15
+        //   },
+        // },
         axis: {
           x: {
             type: "timeseries",
@@ -936,11 +860,10 @@ $(".leaflet-control-attribution").hide()
             }
           }
         },
-        zoom: {
-          // rescale: true,+
-          enabled: true,
-          type: "scroll",
-        },
+        // zoom: {
+        //   enabled: true,
+        //   type: "scroll",
+        // },
         legend: {
           show: false,
         },
@@ -949,7 +872,7 @@ $(".leaflet-control-attribution").hide()
         },
         bindto: "#totpop"
       });
-      $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
+      // $($($("#totpop svg").children()[2]).children()[2]).find("text").hide()
     });
 
     var donut = c3.generate({
@@ -983,9 +906,9 @@ $(".leaflet-control-attribution").hide()
       var length3 = ["200-399m"];
       var length4 = ["400-799m"];
       var length5 = ["800+m"];
-     //************** Use name of attributes in csv file in the quotes for this section
+      //************** Use name of attributes in csv file in the quotes for this section
       datasets[0].forEach(function(d) {
-        age_brackets.push(+d["age_brackets"])   //X axis
+        age_brackets.push(+d["age_brackets"]) //X axis
         length1.push(+d["0_99m"])
         length2.push(+d["100_199m"])
         length3.push(+d["200_399m"])
@@ -994,29 +917,29 @@ $(".leaflet-control-attribution").hide()
       });
 
       var agehealth_bar = c3.generate({
-              title: {
-                text: 'Distance to Health Center by Age Group'
-              },
-              data: {
-                columns: [length1, length2, length3, length4, length5],
-                type: 'bar'
-              },
-              axis: {
-                x: {
-                  type: 'category',
-                  categories: ['0-19 years', '20-34 years', '35-49 years', '50-64 years', '65+ years']
-                }
-              },
-              bar: {
-                width: {
-                  ratio: 0.5
-                }
-              },
-              tooltip:{
-                show: false
-              },
-              bindto: '#agehealth_bar'
-          });
+        title: {
+          text: 'Distance to Health Center by Age Group'
+        },
+        data: {
+          columns: [length1, length2, length3, length4, length5],
+          type: 'bar'
+        },
+        axis: {
+          x: {
+            type: 'category',
+            categories: ['0-19 years', '20-34 years', '35-49 years', '50-64 years', '65+ years']
+          }
+        },
+        bar: {
+          width: {
+            ratio: 0.5
+          }
+        },
+        tooltip: {
+          show: false
+        },
+        bindto: '#agehealth_bar'
+      });
 
     });
 
@@ -1027,37 +950,37 @@ $(".leaflet-control-attribution").hide()
       var caravan = ["Caravan"];
       var tent = ["Tent"];
       var tandc = ["Tent and Caravan"];
-     //************** Use name of attributes in csv file in the quotes for this section
+      //************** Use name of attributes in csv file in the quotes for this section
       datasets[0].forEach(function(d) {
-        dist.push(+d["dist"])         //X axis
+        dist.push(+d["dist"]) //X axis
         caravan.push(+d["caravan"])
         tent.push(+d["tent"])
         tandc.push(+d["tent_and_caravan"])
       });
       var shelter_bar = c3.generate({
-           title: {
-             text: 'Shelter Count by District'
-           },
-           data: {
-             columns: [caravan, tent, tandc],
-             type: 'bar',
-           },
-           axis: {
-             x: {
-               type: 'category',
-               categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
-             }
-           },
-           bar: {
-             width: {
-               ratio: 0.5
-             },
-           },
-           tooltip: {
-             show: false
-           },
-           bindto: '#shelter_bar',
-       });
+        title: {
+          text: 'Shelter Count by District'
+        },
+        data: {
+          columns: [caravan, tent, tandc],
+          type: 'bar',
+        },
+        axis: {
+          x: {
+            type: 'category',
+            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+          }
+        },
+        bar: {
+          width: {
+            ratio: 0.5
+          },
+        },
+        tooltip: {
+          show: false
+        },
+        bindto: '#shelter_bar',
+      });
     });
 
     $("#popSwitcher input").on("click", function() {
@@ -1077,6 +1000,7 @@ $(".leaflet-control-attribution").hide()
     })
 
     $("#popSwitcher").click();
+    $("#luSwitcher").click();
   </script>
 </body>
 
