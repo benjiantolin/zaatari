@@ -52,13 +52,15 @@ color: white;
 
 
 .background{
-position:fixed;
-background-position:center;
-background-size: cover;
-background-repeat: no-repeat;
-min-height: 115%;
-min-width: 100%;
-
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 0;
+  min-height: 115%;
+  min-width: 120%;
+  /*pointer-events: none;*/
+  display: block;
 }
 
 .about-background{
