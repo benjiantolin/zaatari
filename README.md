@@ -1,4 +1,4 @@
-# [Zaatari Refugee Camp](benjiantolin.github.io/zaatari/index.html)
+# [Zaatari Refugee Camp](benjiantolin.github.io/zaatari)
 
 **Group members**
 - Benjamin Antolin
