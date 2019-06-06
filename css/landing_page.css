@@ -1,4 +1,4 @@
-html, body { width: 100%; height: 100%; margin: 0; background: #fff}
+html, body { width: 100%; height: 100%; margin: 0; background: #fff;overflow: scroll;}
 
 #mymap {
     position: fixed;
@@ -68,7 +68,7 @@ max-width: 40%;
 }
 
 .picture-correct{
-  transform: rotate(90deg); 
+  transform: rotate(90deg);
 }
 
 .about-methods{
