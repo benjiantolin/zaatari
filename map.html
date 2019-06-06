@@ -214,7 +214,7 @@ text-shadow: 1px 1px 1px grey;
   }
 
   .shelter {
-    width: 375px;
+    width: 395px;
     height: 375px;
     margin: 5px;
     padding: 2px;
@@ -223,12 +223,13 @@ text-shadow: 1px 1px 1px grey;
   }
 
   .agehealth {
-    width: 375px;
+    width: 395px;
     height: 375px;
     margin: 5px;
     padding: 2px;
     border: 2px;
     fill: white;
+    bottom: 20px;
   }
 
   .totpop {
@@ -451,8 +452,11 @@ text-shadow: 1px 1px 1px grey;
       <div id="projImages" class="row col-md-12"></div>
       <div id="totpop" class="totpop"></div>
       <div id="donut" class="donut"></div>
+      <hr>
       <div id="shelter_bar" class="shelter"></div>
+      <hr>
       <div id="agehealth_bar" class="agehealth"></div>
+      <hr>
     </div>
 
 
@@ -971,46 +975,6 @@ $(".leaflet-control-attribution").hide()
     });
 
     Promise.all([
-      d3.csv('assets/SurveyData_Shelter.csv'),
-    ]).then(function(datasets) {
-      var dist = ["dist"];
-      var caravan = ["Caravan"];
-      var tent = ["Tent"];
-      var tandc = ["Tent and Caravan"];
-     //************** Use name of attributes in csv file in the quotes for this section
-      datasets[0].forEach(function(d) {
-        dist.push(+d["dist"])         //X axis
-        caravan.push(+d["caravan"])
-        tent.push(+d["tent"])
-        tandc.push(+d["tent_and_caravan"])
-      });
-      var shelter_bar = c3.generate({
-           title: {
-             text: 'Shelter Count by District'
-           },
-           data: {
-             columns: [caravan, tent, tandc],
-             type: 'bar',
-           },
-           axis: {
-             x: {
-               type: 'category',
-               categories: ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12']
-             }
-           },
-           bar: {
-             width: {
-               ratio: 0.5
-             },
-           },
-           tooltip: {
-             show: false
-           },
-           bindto: '#shelter_bar',
-       });
-    });
-
-    Promise.all([
       d3.csv('assets/SurveyData_HealthDist.csv')
     ]).then(function(datasets) {
       var age_brackets = ["age_brackets"];
@@ -1054,6 +1018,46 @@ $(".leaflet-control-attribution").hide()
               bindto: '#agehealth_bar'
           });
 
+    });
+
+    Promise.all([
+      d3.csv('assets/SurveyData_Shelter.csv'),
+    ]).then(function(datasets) {
+      var dist = ["dist"];
+      var caravan = ["Caravan"];
+      var tent = ["Tent"];
+      var tandc = ["Tent and Caravan"];
+     //************** Use name of attributes in csv file in the quotes for this section
+      datasets[0].forEach(function(d) {
+        dist.push(+d["dist"])         //X axis
+        caravan.push(+d["caravan"])
+        tent.push(+d["tent"])
+        tandc.push(+d["tent_and_caravan"])
+      });
+      var shelter_bar = c3.generate({
+           title: {
+             text: 'Shelter Count by District'
+           },
+           data: {
+             columns: [caravan, tent, tandc],
+             type: 'bar',
+           },
+           axis: {
+             x: {
+               type: 'category',
+               categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+             }
+           },
+           bar: {
+             width: {
+               ratio: 0.5
+             },
+           },
+           tooltip: {
+             show: false
+           },
+           bindto: '#shelter_bar',
+       });
     });
 
     $("#popSwitcher input").on("click", function() {
