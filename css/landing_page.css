@@ -44,6 +44,7 @@ top:140px;
 left:20px;
 font-family: 'Maitree', times, serif;
 color: white;
+font-size: 80px;
 /* background-color: rgba(0,0,0,.3); */
 /* border-radius: 2px; */
 /* padding:20px; */
@@ -89,9 +90,9 @@ max-width: 40%;
 /* Slideshow container */
 .slideshow-container {
   position: fixed;
-  bottom:20px;
-  right:10px;
-  width:325px;
+  bottom:60px;
+  right:40px;
+  width:600px;
   background-color: rgba(0,0,0,.3);
   border-radius: 2px;
   font-size: 30px;
