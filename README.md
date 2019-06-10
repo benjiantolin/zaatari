@@ -27,10 +27,15 @@ We are also interested in incorporating timeseries data if we are able to find t
 | Syria Shapefiles                  | Syria districts shapefiles                                   | <https://data.humdata.org/dataset/syrian-arab-republic-administrative-boundaries-populated-places> |
 | Syria Conflicts Dataset           | This data set contains event-based data to analyze conflict and crisis | <https://www.acleddata.com/data/>                            |
 
-**Interface Design**
-
-- [Population Pyramid](https://bl.ocks.org/mbostock/4062085) D3
-- [Chloropleth Map](https://observablehq.com/@d3/choropleth) D3
+**Libraries Used**
+- [Leaflet](https://leafletjs.com/)
+- [Chroma.js](https://github.com/gka/chroma.js/)
+- [D3.js](https://d3js.org/)
+- [C3.js](https://c3js.org/)
+- [jQuery](https://jquery.com/)
+- [Font Awesome](https://fontawesome.com/?from=io)
+- [Boostrap](https://getbootstrap.com/)
+- [Google Fonts](https://fonts.google.com/)
 
 **QGIS GUI Screenshot**
 ![](img/GUI.png)
