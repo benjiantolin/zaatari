@@ -34,7 +34,7 @@ html, body,main
   background: #343a40 !important;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
   border-radius: 5px  !important;
-  position: relative;
+  position: static;
   z-index: 1000;
   top: 575px;
   width: 55%;

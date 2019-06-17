@@ -275,7 +275,7 @@ text-shadow: 1px 1px 1px grey;
       width: 130%;
     }
   </style>
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <script src="https://unpkg.com/d3@5/dist/d3.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.14/c3.min.js"></script>
   <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
@@ -299,9 +299,9 @@ text-shadow: 1px 1px 1px grey;
           <strong>Zaatari Refugee Camp</strong>
         </a>
         <ul>
-        <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i></a></li>
-        <li><a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a></li>
-        <li><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a></li>
+          <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i></a></li>
+          <li><a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a></li>
+          <li><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a></li>
         </ul>
       </div>
 
@@ -324,7 +324,9 @@ text-shadow: 1px 1px 1px grey;
       <!-- <div class="sidebar-header">
 
       </div> -->
-      <div id="projDesc" style="padding: 5px;">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old. The camp is split into 12 districts and has a variety of important refugee resources including basic needs (blankets, utensils, mattresses, etc.), schools, health clinics, food, water sanitation, and more.</div>
+      <div id="projDesc" style="padding: 5px;">The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on
+        July 28th, 2012, near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old. The
+        camp is split into 12 districts and has a variety of important refugee resources including basic needs (blankets, utensils, mattresses, etc.), schools, health clinics, food, water sanitation, and more.</div>
       <span><br></span>
       <hr>
       <div class="row col-md-12">
@@ -356,8 +358,6 @@ text-shadow: 1px 1px 1px grey;
           <i style="background: #b3b3b3; opacity: 0.8"></i>
           <p>Vacant</p>
         </div>
-
-        <!-- <div style="border-left:1px solid #C5C5C5;height:190px"></div> -->
         <div class="col-md-5 legend">
           <i style="background:#ffffcc; opacity: 0.8"></i>
           <p>
@@ -370,7 +370,55 @@ text-shadow: 1px 1px 1px grey;
               <i style="background: #800026; opacity: 0.8"></i>
               <p>>8000</p>
         </div>
-
+      </div>
+      <hr>
+      <div class="row col-md-12">
+        <div class="col-md-6 align-items-center">
+          <span>Garbage Bins</span>
+          <label id="gbSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="col-md-6 align-items-center">
+          <span>Population</span>
+          <label id="popSwitcher" class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="row col-md-12">
+        <div class="col-md-7 legend">
+          <span style="font-size: 10pt; color: #006837; stroke: white">
+          <i class="fas fa-trash-alt"></i>
+          </span>
+          <p>Good Condition</p>
+          <span style="font-size: 10pt; color: #ffffbf;">
+          <i class="fas fa-trash-alt"></i>
+          </span>
+          <p>Maintain Condition</p>
+          <span style="font-size: 10pt; color: #a50026;">
+          <i class="fas fa-trash-alt"></i>
+          </span>
+          <p>Replace Condition</p>
+          <span style="font-size: 10pt; color: black;">
+          <i class="fas fa-trash-alt"></i>
+          </span>
+          <p>Unknown Condition</p>
+        </div>
+        <div class="col-md-5 legend">
+          <i style="background:#ffffcc; opacity: 0.8"></i>
+          <p>
+            <5000</p> <i style="background: #fed976; opacity: 0.8"></i>
+              <p>5001-6000</p>
+              <i style="background:#fd8d3c; opacity: 0.8"></i>
+              <p>6001-7000</p>
+              <i style="background:#e31a1c; opacity: 0.8"></i>
+              <p>7001-8000</p>
+              <i style="background: #800026; opacity: 0.8"></i>
+              <p>>8000</p>
+        </div>
       </div>
       <hr>
       <div id="totpop" class="totpop"></div>
@@ -421,6 +469,8 @@ text-shadow: 1px 1px 1px grey;
       zoomcontrol: false,
       detectRetina: true,
       dragging: false,
+      doubleClickZoom: false,
+      boxZoom: false,
     });
 
     $(".leaflet-control-zoom").hide();
@@ -451,6 +501,7 @@ text-shadow: 1px 1px 1px grey;
     }
     var districts_group = L.layerGroup().addTo(mymap);
     var facilities_group = L.layerGroup().addTo(mymap);
+    var trash_group = L.layerGroup();
     var facilityColors = chroma.scale('Set2').mode('lch').colors(5);
 
     $.when($.getJSON("assets/mosques.geojson"),
@@ -493,13 +544,6 @@ text-shadow: 1px 1px 1px grey;
         $('head').append($("<style> .trash-color-" + (i + 1).toString() + " { color: " + trashColors[i] + "; font-size: 10px; opacity: 0.8; text-shadow: 0 0 3px #636363;} </style>"));
       }
       var trashLayer = L.geoJSON(trash, {
-        onEachFeature: function(feature, layer) {
-          layer.bindTooltip('<b>CONDITION: </b>' + feature.properties.CONDITION, {
-            className: 'feature-label',
-            permanent: false,
-            direction: 'center'
-          });
-        },
         pointToLayer: function(feature, latlng) {
           var id = 0;
           if (feature.properties.CONDITION == "replace") {
@@ -516,8 +560,18 @@ text-shadow: 1px 1px 1px grey;
               className: 'fas fa-trash-alt trash-color-' + (id + 1).toString(),
             })
           });
+        },
+        onEachFeature: function(feature, layer) {
+          layer.on({
+            mouseover: highlightFeatureTrash,
+            click: highlightFeatureTrash,
+            mouseout: function(e) {
+              trashColorsLayer.resetStyle(e.target);
+              $(".update").html("Hover over a feature");
+            }
+          });
         }
-      });
+      }).addTo(trash_group);
 
       var sepTanksColors = chroma.scale('blues').colors(4);
       for (i = 0; i < 3; i++) {
@@ -653,7 +707,7 @@ text-shadow: 1px 1px 1px grey;
           fillOpacity: 0.8
         });
 
-        $('#sidebar').addClass('active');
+        // $('#sidebar').addClass('active');
         $('#info').css('left', '420px');
         // $('.overlay').addClass('active');
         $('.collapse.in').toggleClass('in');
@@ -680,6 +734,21 @@ text-shadow: 1px 1px 1px grey;
           '<br><b>Operator: </b>' + layer.feature.properties.OPERATOR +
           '<br><b>Type: </b>' + layer.feature.properties.TYPE +
           '<br><b>Health Type: </b>' + layer.feature.properties.HEALTH_TYP
+        );
+      }
+
+      function highlightFeatureTrash(e) {
+        // e indicates the current event
+        var layer = e.target; //the target capture the object which the event associates with
+        layer.setStyle({
+          weight: 1,
+          opacity: 1,
+          color: 'white',
+          fillColor: 'mediumslateblue',
+          fillOpacity: 0.8
+        });
+
+        $(".update").html('<b>Condition: </b>' + layer.feature.properties.CONDITION
         );
       }
 
@@ -998,11 +1067,22 @@ text-shadow: 1px 1px 1px grey;
       }
     })
 
+    $("#gbSwitcher input").on("click", function() {
+      if ($("#gbSwitcher input:checked").val() === "on") {
+        trash_group.addTo(mymap);
+      } else {
+        mymap.removeLayer(trash_group);
+      }
+    })
+
     $("#popSwitcher").click();
     $("#luSwitcher").click();
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-140689399-3');
