@@ -381,8 +381,8 @@ text-shadow: 1px 1px 1px grey;
           </label>
         </div>
         <div class="col-md-6 align-items-center">
-          <span>Population</span>
-          <label id="popSwitcher" class="switch">
+          <span>Roads</span>
+          <label id="roadSwitcher" class="switch">
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
@@ -408,16 +408,10 @@ text-shadow: 1px 1px 1px grey;
           <p>Unknown Condition</p>
         </div>
         <div class="col-md-5 legend">
-          <i style="background:#ffffcc; opacity: 0.8"></i>
-          <p>
-            <5000</p> <i style="background: #fed976; opacity: 0.8"></i>
-              <p>5001-6000</p>
-              <i style="background:#fd8d3c; opacity: 0.8"></i>
-              <p>6001-7000</p>
-              <i style="background:#e31a1c; opacity: 0.8"></i>
-              <p>7001-8000</p>
-              <i style="background: #800026; opacity: 0.8"></i>
-              <p>>8000</p>
+          <i style="background:grey"></i>
+          <p>Paved</p>
+          <i style="background: brown"></i>
+          <p>Unpaved</p>
         </div>
       </div>
       <hr>
@@ -499,9 +493,12 @@ text-shadow: 1px 1px 1px grey;
       'Streets': streets,
       'Satellite': satellite
     }
+
+
     var districts_group = L.layerGroup().addTo(mymap);
-    var facilities_group = L.layerGroup().addTo(mymap);
+    var roads_group = L.layerGroup();
     var trash_group = L.layerGroup();
+    var facilities_group = L.layerGroup().addTo(mymap);
     var facilityColors = chroma.scale('Set2').mode('lch').colors(5);
 
     $.when($.getJSON("assets/mosques.geojson"),
@@ -649,7 +646,7 @@ text-shadow: 1px 1px 1px grey;
       });
       var roadsLayer = L.geoJSON(roads, {
         style: road_style
-      });
+      }).addTo(roads_group);
       var faciltiesLayer = L.geoJSON(facilities, {
         style: styleFacility,
         onEachFeature: function(feature, layer) {
@@ -684,9 +681,7 @@ text-shadow: 1px 1px 1px grey;
       }).addTo(districts_group);
 
       var overlays = {
-        '<span>Mosques</span> <i class="fas fa-mosque fa-lg control"></i> ': mosquesLayer,
-        '<span>Garbage Bins</span><i class="fas fa-trash-alt fa-lg trash"></i>': trashLayer,
-        "<span >Roads<hr></span>": roadsLayer,
+        "<span>Mosques</span> <i class='fas fa-mosque fa-lg control'></i> ": mosquesLayer,
         "<span >Septic Tanks</span>": sepTanksLayer,
         "<span >Septic Pipes</span>": sepPipesLayer,
         "<span >Steel Tanks</span>": steelTanksLayer,
@@ -710,8 +705,8 @@ text-shadow: 1px 1px 1px grey;
         // $('#sidebar').addClass('active');
         $('#info').css('left', '420px');
         // $('.overlay').addClass('active');
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        // $('.collapse.in').toggleClass('in');
+        // $('a[aria-expanded=true]').attr('aria-expanded', 'false');
 
         $(".update").html('<b>District: </b>' + layer.feature.properties.DISTRICT +
           '<br><b>Population: </b>' + layer.feature.properties.totpop +
@@ -863,7 +858,7 @@ text-shadow: 1px 1px 1px grey;
         weight: 0,
         opacity: 1,
         color: '#b4b4b4',
-        dashArray: '4'
+        dashArray: '4',
       };
     }
 
@@ -1051,19 +1046,19 @@ text-shadow: 1px 1px 1px grey;
       });
     });
 
-    $("#popSwitcher input").on("click", function() {
-      if ($("#popSwitcher input:checked").val() === "on") {
-        districts_group.addTo(mymap);
-      } else {
-        mymap.removeLayer(districts_group);
-      }
-    })
-
     $("#luSwitcher input").on("click", function() {
       if ($("#luSwitcher input:checked").val() === "on") {
         facilities_group.addTo(mymap);
       } else {
         mymap.removeLayer(facilities_group);
+      }
+    })
+
+    $("#popSwitcher input").on("click", function() {
+      if ($("#popSwitcher input:checked").val() === "on") {
+        districts_group.addTo(mymap);
+      } else {
+        mymap.removeLayer(districts_group);
       }
     })
 
@@ -1075,8 +1070,17 @@ text-shadow: 1px 1px 1px grey;
       }
     })
 
-    $("#popSwitcher").click();
+    $("#roadSwitcher input").on("click", function() {
+      if ($("#roadSwitcher input:checked").val() === "on") {
+        roads_group.addTo(mymap);
+      } else {
+        mymap.removeLayer(roads_group);
+      }
+    })
+
     $("#luSwitcher").click();
+    $("#popSwitcher").click();
+
 
     window.dataLayer = window.dataLayer || [];
 

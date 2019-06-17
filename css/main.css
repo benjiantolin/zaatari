@@ -36,8 +36,7 @@ html, body,main
   border-radius: 5px  !important;
   position: static;
   z-index: 1000;
-  top: 575px;
-  width: 55%;
+  /* width: 100%; */
 }
 
 
