@@ -4,7 +4,7 @@ html, body,main
   width: 100%;
   height: 100vh;
   margin: 0;
-  background: #fff;
+  background-color:#343a40;
   font-family: 'Titillium Web', sans-serif;
   overflow: auto;
 }
@@ -27,18 +27,16 @@ html, body,main
 
 
 
-.leaflet-control-layers, .leaflet-control-zoom {
+.leaflet-control-layers{
   color: white !important;
   padding: 6px 8px;
   border: none !important;
   background: #343a40 !important;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2) !important;
   border-radius: 5px  !important;
-  /* position: fixed;
+  position: static;
   z-index: 1000;
-  top: 200px;
-  width: 768px;
-  left: 40px; */
+  /* width: 100%; */
 }
 
 
@@ -60,6 +58,7 @@ html, body,main
     outline: none;
     border: none;
 }
+
 
 .line {
     width: 100%;
@@ -104,17 +103,17 @@ footer p {
 }
 
 .fa-github-square {
-  color: #343a40;
+  color: #fff;
   font-size: 40px;
 }
 
-.fa-facebook:hover {
+.fa-linkedin:hover {
   opacity: 0.3;
 }
 
-.fa-facebook {
-  color: white;
-  font-size: 20px;
+.fa-linkedin {
+  color: #fff;
+  font-size: 40px;
 }
 
 .fa-info-circle:hover {

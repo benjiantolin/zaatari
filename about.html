@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="Benji Antolin, Michael Brawner, Blake Buchalter, Kristoffer Stuvstad, and Bo Zhao">
+  <meta name="author" content="Benji Antolin, Michael Brawner, Blake Buchalter, Kristoffer Stuvstad, with Bo Zhao">
   <title>Zaatari Refugee Camp (2015)</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -36,8 +36,8 @@
       padding-top: 3rem;
       padding-bottom: 3rem;
       margin-bottom: 0;
-      background-color: #fff;
-      min-height: 52%;
+      background-color: #343a40;
+      /* min-height: 30%; */
     }
 
     @media (min-width: 768px) {
@@ -56,7 +56,7 @@
     }
 
     .jumbotron .container {
-      max-width: 40rem;
+      max-width: 80rem;
     }
 
     footer {
@@ -68,6 +68,57 @@
       margin-bottom: .25rem;
     }
 
+  .btn-light {
+  background-color: #343a40;
+  font-family: 'Titillium Web', sans-serif;
+  border: none;
+  color: white;
+  width: 300px;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.album{
+    background-color: #343a40;
+}
+
+.leaflet-control-layers {
+  width: 220px;
+  top:auto;
+}
+.card{
+  color: white;
+  background-color: #343a40;
+}
+
+#multiCollapseExample1{
+  width: 150%;
+}
+
+#multiCollapseExample2{
+  width: 150%;
+}
+
+#multiCollapseExample3{
+  width: 300%;
+}
+
+#multiCollapseExample4{
+  width: 150%;
+}
+
+.divider{
+    width:10px;
+    /* height:auto; */
+    /* display:inline-block; */
+}
+
+hr{
+  background-color: white;
+}
+
   </style>
 
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -77,6 +128,9 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"> </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> </script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-140689399-4"></script>
+
 </head>
 
 <body>
@@ -84,13 +138,13 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container-fluid d-flex justify-content-between">
         <a href="index.html" class="navbar-brand d-flex align-items-center">
-          <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
           <strong>Zaatari Refugee Camp</strong>
-
         </a>
-        <a class="nav-link" href="index.html"><i class="fas fa-home"></i></a>
-        <a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a>
-        <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a>
+        <ul>
+        <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i></a></li>
+        <li><a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a></li>
+        <li><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a></li>
+        </ul>
       </div>
 
     </div>
@@ -99,44 +153,81 @@
 
   <main role="main">
 
-    <section class="jumbotron text-center about-background" style="background-image:url('img/An_Aerial_View_of_the_Za%27atri_Refugee_Camp.jpg')" style="height:100%">
+    <section class="jumbotron text-center about-background" style="background-image:url('img/An_Aerial_View_of_the_Za%27atri_Refugee_Camp.jpg')">
       <div class="container">
         <p>
-          <a class="btn btn-light" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="width:300px" >The camp</a>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2" style="width:300px">The project</button>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3" style="width:300px">Methods & Data</button>
-          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4" style="width:300px">Credits</button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1"><b>The Camp</b></button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2"><b>The Project</b></button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3"><b>Methods & Data</b></button>
+          <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4"><b>Credits</b></button>
         </p>
         <div class="row">
           <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1" style="width:600px">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
               <div class="card card-body text-left">
-                The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012, near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians. As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old. The camp is split into 12 districts and has a variety of important refugee resources including basic needs (blankets, utensils, mattresses, etc.), schools, health clinics, food, water sanitation, and more.
-                <br><br>Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF, MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
+                The Za’atari refugee camp is located near Mafraq governorate, Jordan and is the largest refugee camp for
+                Syrian refugees, with a peak population of 83,000 individuals in March 2015. The camp opened on July 28th, 2012,
+                near the beginning of the Syrian Civil War, which is estimated to have displaced over 10 million Syrians.
+                As of October 2018, the Za’atari camp population is still nearly 80,000 and 20% are children under 5 years old.
+                The camp is split into 12 districts and has a variety of important refugee resources including basic needs
+                (blankets, utensils, mattresses, etc.), schools, health clinics, food, water sanitation, and more.<br><br>
+                Overall camp administration is coordinated by the Syrian Refugee Affairs Directorate and the United Nations High
+                Commissioner for Refugees (UNHCR) and large funding sums are donated to the camp by the Jordanian government. Many
+                other stakeholders exist for camp administration and services including the following (not exhaustive): UNICEF,
+                MercyCorps, Oxfam, World Food Programme, UNESCO, ACTED, and more.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+              <div class="card card-body text-left">
+                The major aim of our geovisualization is to present camp population time trends and locational differences
+                in demographics. Specifically, our coordinated view of the Za’atari camp displays a map of the camp itself,
+                a miniaturized map of Syria, and variety of district-based demographic charts. We hope our project provides
+                users with an interactive, engaging, and detailed view of Za’atari camp trends and demographics in order to
+                increase awareness of the reality of life in the camp.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample3">
+              <div class="card card-body text-left">
+                For this coordinated view of Za’atari demographics data were collected from <a href="https://data.humdata.org/organization/reach-initiative?groups=jor&q=&ext_page_size=25" style="color: lightblue">REACH Initiative</a> and the general infrastructure and waste water network shapefiles were obtained from the
+                <a href="https://github.com/impact-initiatives/reach-jor-zaatari-data" style="color: lightblue">Za'atari Joint Data Portal.</a>
+                We reviewed and cleaned the data in Excel and used pivot tables to extract the necessary data we needed to
+                create our charts. In addition to data cleaning, in the early stages of creating our geovisualization, we
+                drew sketches of how we envisioned the coordinated view. A draft sketch can be seen below:
+                <img class="about-image" src="img/interface_sketch.png" >
+                After generating our vision for the coordinated view, we then began the coding process in Atom 1.37.
+                We first made the underlying base map of the Za’atari camp split into its 12 districts. A chloropleth was
+                then overlaid on the map representing the population density by district. The miniaturized Syria map was
+                then added on top of the base camp map and a chloropleth of camp district population density was overlaid.
+                We then utilized D3 to set and call in our data, then C3 to create the various charts.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample4">
+              <div class="card card-body text-left">
+                The major JavaScript libraries we used for this project include:
+                <ul>
+                  <li><a href="https://leafletjs.com/" style="color: lightblue">Leaflet</a></li>
+                  <li><a href="https://github.com/gka/chroma.js/" style="color: lightblue">Chroma.js</a></li>
+                  <li><a href="https://d3js.org/" style="color: lightblue">D3.js</a></li>
+                  <li><a href="https://c3js.org/" style="color: lightblue">C3.js</a></li>
+                  <li><a href="https://jquery.com/" style="color: lightblue">jQuery</a></li>
+                  <li><a href="https://fontawesome.com/?from=io" style="color: lightblue">Font Awesome</a></li>
+                  <li><a href="https://getbootstrap.com/" style="color: lightblue">Boostrap</a></li>
+                  <li><a href="https://fonts.google.com/" style="color: lightblue">Google Fonts</a></li>
+                </ul>
+                Leaflet was utilized as the base web mapping and info/legend generating library, jQuery and Bootstrap were used for increased
+                coding efficiency and design, D3 was utilized for setting and initializing the data, C3 was used for creating the charts,
+                FontAwesome was used for page fonts, and Chroma was used for chloropleth and legend colors. Tile layers were obtained from Carto DB,
+                OpenStreetMap, and the ArcGIS Online map server. <br>
+<hr>
+                <b>Video on landing page: </b><a href="https://www.youtube.com/watch?v=UMDObKVf2VE" style="color: lightblue"> BBC News. "Syria Conflict : Aerial view of Zaatari refugee camp" YouTube, 03 Feb. 2016</a>
+                <b>Photo on about page: </b><a href="https://commons.wikimedia.org/wiki/File:An_Aerial_View_of_the_Za%27atri_Refugee_Camp.jpg" style="color: lightblue"> U.S. Department of State. "Aerial view of Zaatari refugee camp" YouTube, 18 Jul. 2013</a>
 
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample2" style="width:600px">
-              <div class="card card-body text-left">
-                The major aim of our geovisualization is to present camp population time trends and locational differences in demographics. Specifically, our coordinated view of the Za’atari camp displays a map of the camp itself, a miniaturized map of Syria, and variety of district-based demographic charts. We hope our project provides users with an interactive, engaging, and detailed view of Za’atari camp trends and demographics in order to increase awareness of the reality of life in the camp.
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample3" style="width:1000px">
-              <div class="card card-body text-left">
-                For this coordinated view of Za’atari demographics and trends, data and shapefiles were obtained from the <a href="Raw Data/reach_jor_report_zaatari_camp_population_count_february2015_1.pdf">REACH Initiative</a>. We reviewed and cleaned the data in Excel and used pivot tables to extract the necessary data we needed to create our charts. In addition to data cleaning, in the early stages of creating our geovisualization, we drew sketches of how we envisioned the coordinated view. A draft sketch can be seen below:<br><br>
-                <img class="about-image" src="img/interface_sketch.png"><br><br>
-                After generating our vision for the coordinated view, we then began the coding process in Atom 1.37. We first made the underlying base map of the Za’atari camp split into its 12 districts. A chloropleth was then overlaid on the map representing the population density by district. The miniaturized Syria map was then added on top of the base camp map and a chloropleth of camp district population density was overlaid. We then utilized D3 to set and call in our data, then C3 to create the various charts.
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample4" style="width:600px">
-              <div class="card card-body text-left">
-                The major JavaScript libraries we used for this project include Leaflet, jQuery, D3, C3, Bootstrap, FontAwesome, and Chroma. Leaflet was utilized as the base web mapping and info/legend generating library, jQuery and Bootstrap were used for increased coding efficiency and design, D3 was utilized for setting and initializing the data, C3 was used for creating the charts,  FontAwesome was used for page fonts, and Chroma was used for chloropleth and legend colors. Tile layers were obtained from Carto DB, OpenStreetMap, and the ArcGIS Online map server.
               </div>
             </div>
           </div>
@@ -150,19 +241,21 @@
     <div class="album py-5 bg-light">
       <div class="container">
 
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card mb-3 shadow-sm">
+        <div class="row" >
+          <div class="col-md-3" >
+            <div class="card mb-3 shadow-sm" >
               <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="assets/Bio/Benji/benji.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
               <div class="card-body">
-                <p class="card-text">﻿Benji Antolin<br><br>
-                M.S. Student, Applied Economics<br>
+                <p class="card-text"><h4>﻿Benji Antolin</h4>
+                <i>Web Cartographer <br>
+                OSU GeoViz Lab <br>
                 Oregon State University<br>
-                College of Agricultural Sciences</p>
+                College of Earth, Ocean, and Atmospheric Sciences</i></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                  <a href="https://github.com/benjiantolin" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
-                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary" href="https://github.com/benjiantolin" target="_self"><i class="fab fa-github-square"></i></a> -->
+                  <a href="https://www.linkedin.com/in/benjaminantolin/" target="_blank" class="text-white">  <center><i class="fab fa-linkedin"></i></center></a>
+                  <div class="divider"></div>
+                  <a href="https://github.com/benjiantolin" target="_blank" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
                   </div>
                 </div>
               </div>
@@ -172,15 +265,17 @@
             <div class="card mb-3 shadow-sm">
               <img class="bd-placeholder-img card-img-top" width="100%" height="225" src=assets/Bio/Blake/blake-buchalter-440px.jpg preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
               <div class="card-body">
-                <p class="card-text">Blake Buchalter<br><br>
-                Ph.D. Student, Epidemiology<br>
+                <p class="card-text"><h4>Blake Buchalter</h4>
+                <i>Ph.D. Student, Epidemiology<br>
                 Oregon State University<br>
-                College of Public Health</p>
+                College of Public Health</i></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="https://github.com/blakebucky" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
-                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary" href="https://github.com/blakebucky" target="_self">github page</a> -->
+                    <a href="https://www.linkedin.com/in/blake-buchalter-175971121/" target="_blank" class="text-white">  <center><i class="fab fa-linkedin"></i></center></a>
+                    <div class="divider"></div>
+                    <a href="https://github.com/blakebucky" target="_blank" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -189,14 +284,15 @@
             <div class="card mb-3 shadow-sm">
               <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="assets/Bio/Kris/20190115_191959.jpg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
               <div class="card-body">
-                <p class="card-text">Kristoffer Stuvstad<br><br>
-                Undergraduate Senior, GIS and Geospatial Sciences<br>
+                <p class="card-text"><h4>Kristoffer Stuvstad</h4>
+                <i>Undergraduate Senior, GIS and Geospatial Sciences<br>
                 Oregon State University<br>
-                College of Earth, Ocean, and Atmospheric Sciences</p>
+                College of Earth, Ocean, and Atmospheric Sciences</i></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="https://github.com/kkstuvstad" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
-                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary" href="https://github.com/kkstuvstad" target="_self">github page</a> -->
+                    <a href="https://www.linkedin.com/in/kristoffer-stuvstad/" target="_blank" class="text-white">  <center><i class="fab fa-linkedin"></i></center></a>
+                    <div class="divider"></div>
+                    <a href="https://github.com/kkstuvstad" target="_blank" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
                   </div>
                 </div>
               </div>
@@ -206,15 +302,16 @@
             <div class="card mb-3 shadow-sm">
               <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="assets/Bio/Mike/IMG_2270.JPG" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
               <div class="card-body">
-                <p class="card-text">Michael Brawner<br><br>
-                Ph.D. Candidate, Integrative Biology<br>
+                <p class="card-text"><h4>Michael Brawner</h4>
+                <i>Ph.D. Candidate, Integrative Biology<br>
                 NSF Graduate Research Fellow<br>
                 Oregon State University<br>
-                College of Science</p>
+                College of Science</i></p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <a href="https://github.com/mdbrawner" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
-                    <!-- <a type="button" class="btn btn-sm btn-outline-secondary" href="https://github.com/mdbrawner" target="_self">github page</a> -->
+                    <a href="#" target="_blank" class="text-white">  <center><i class="fab fa-linkedin"></i></center></a>
+                    <div class="divider"></div>
+                    <a href="https://github.com/mdbrawner" target="_blank" class="text-white">  <center><i class="fab fa-github-square"></i></center></a>
                   </div>
                 </div>
               </div>
@@ -227,15 +324,12 @@
 
   </main>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Wiki Gallery is made by the Carotgrpahy and Geovisaulziation Lab at Oregon State University.</p>
-      <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="/docs/4.3/getting-started/introduction/">getting started guide</a>.</p>
-    </div>
-  </footer>
-</body>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
+gtag('config', 'UA-140689399-4');
+</script>
+</body>
 </html>

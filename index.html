@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="Benji Antolin, Michael Brawner, Blake Buchalter, Kristoffer Stuvstad, and Bo Zhao">
+  <meta name="author" content="Benji Antolin, Michael Brawner, Blake Buchalter, Kristoffer Stuvstad, with Bo Zhao">
   <title>Zaatari Refugee Camp (2015)</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
@@ -58,6 +58,7 @@
     }
 
     footer {
+      z-index: 1000;
       padding-top: 3rem;
       padding-bottom: 3rem;
     }
@@ -65,17 +66,25 @@
     footer p {
       margin-bottom: .25rem;
     }
+
+    .leaflet-control-layers {
+      z-index: 1000;
+      position: fixed;
+      width: 220px;
+    }
   </style>
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" media="all" href="css/landing_page.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"> </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140689399-2"></script>
+
 </head>
 
-<body >
+<body>
   <video class="background" autoplay muted loop>
-          <source src="img/zaatari.mp4" type="video/mp4">
+    <source src="img/zaatari.mp4" type="video/mp4">
   </video>
 
 
@@ -83,95 +92,88 @@
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container-fluid d-flex justify-content-between">
         <a href="#" class="navbar-brand d-flex align-items-center">
-          <!-- <img src="img/navbar.png" class="img-responsive" height="30"></img> -->
           <strong>Zaatari Refugee Camp</strong>
-
         </a>
-        <a class="nav-link" href="index.html"><i class="fas fa-home"></i></a>
-        <a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a>
-        <a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a>
+        <ul>
+          <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i></a></li>
+          <li><a class="nav-link" href="map.html"><i class="fas fa-map-marked-alt"></i></a></li>
+          <li><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i></a></li>
+        </ul>
       </div>
-
     </div>
-
   </header>
 
+  <div class="landingtext">
+    <p>Life in a refugee camp</p>
+  </div>
+  <!-- Slideshow container -->
+  <div class="slideshow-container">
+    <!-- Full-width slides/quotes -->
+    <div class="mySlides">
+      <q>When we arrived, we weren’t used to this kind of life. We were living in tents – our old home in Syria had four rooms, a large living room and a balcony. We were happy in our home. But here, we adapted. Now in our caravan, we have two
+        rooms.</q>
+    </div>
 
+    <div class="mySlides">
+      <q>When my parents told me that we were going to Jordan, I thought we were just moving from building to building. But when we arrived, our home was a big tent with lots of people.</q>
+    </div>
 
-            <div class="landingtext">
-              <p>Life in a refugee camp</p>
-            </div>
+    <div class="mySlides">
+      <q>My father said we lived a normal life in Syria. I wish I could remember it.</q>
+    </div>
 
+    <div class="mySlides">
+      <q>We thought we would only be here for a short while, until the situation improved, but we are still here, staying here.</q>
+    </div>
+  </div>
 
+  <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
 
-            <!-- Slideshow container -->
-            <div class="slideshow-container">
-
-              <!-- Full-width slides/quotes -->
-              <div class="mySlides">
-                <q>When we arrived, we weren’t used to this kind of life. We were living in tents – our old home in Syria had four rooms, a large living room and a balcony. We were happy in our home. But here, we adapted. Now in our caravan, we have two rooms.</q>
-              </div>
-
-              <div class="mySlides">
-                <q>When my parents told me that we were going to Jordan, I thought we were just moving from building to building. But when we arrived, our home was a big tent with lots of people.</q>
-              </div>
-
-              <div class="mySlides">
-                <q>My father said we lived a normal life in Syria. I wish I could remember it.</q>
-              </div>
-
-              <div class="mySlides">
-                <q>We thought we would only be here for a short while, until the situation improved, but we are still here, staying here.</q>
-              </div>
-
-            </div>
-
-
-
-
-
-
-      <script>
-
-        var slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function autoPlaySlideShow() {
-        slideIndex = slideIndex+1;
-        showSlides(slideIndex);
-        //showSlides(2); old code
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
     }
 
-        function showSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("mySlides");
-          if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";
-            }
-          slides[slideIndex-1].style.display = "block";
-        }
-    setInterval(autoPlaySlideShow,7500);
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function autoPlaySlideShow() {
+      slideIndex = slideIndex + 1;
+      showSlides(slideIndex);
+      //showSlides(2); old code
+    }
+    $(".leaflet-control-attribution")
+      .css("bottom", "50px")
+      .css("background-color", "transparent")
+      .html("Supported by <a href='http://geoviz.ceoas.oregonstate.edu' target='_blank'> GeoViz Lab @ Oregon State University </a>");
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      if (n > slides.length) {
+        slideIndex = 1
+      }
+      if (n < 1) {
+        slideIndex = slides.length
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex - 1].style.display = "block";
+    }
+    setInterval(autoPlaySlideShow, 7500);
 
 
 
-      </script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-140689399-2');
 
-      <footer>
-        <div class="footer-container">
-          <p>Photo credit: JOI LEE/CONTRAST VR</p>
-        </div>
-      </footer>
+  </script>
 
 </body>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html, body { width: 100%; height: 100%; margin: 0; background: #fff;}
 
 #mymap {
@@ -12,10 +13,29 @@ html, body { width: 100%; height: 100%; margin: 0; background: #fff;}
     overflow-x: hidden;
     overflow-y: hidden; */
     background-color: rgb(213,218,220);
+=======
+/* html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background-color: #343a40;
+} */
+
+#mymap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  background-color: #343a40;
+>>>>>>> 24a5e7984bde548105873243b6f5eea095ef2273
 }
 
-
 #mymap2 {
+<<<<<<< HEAD
     position: fixed;
     top: 0;
     bottom: 0;
@@ -25,10 +45,17 @@ html, body { width: 100%; height: 100%; margin: 0; background: #fff;}
     display: block;
     /* overflow-x: hidden;
     overflow-y: hidden; */
+=======
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  display: block;
+  background-color: #343a40;
+>>>>>>> 24a5e7984bde548105873243b6f5eea095ef2273
 }
-
-
-
 
 /*
 .mind-process{
@@ -38,69 +65,64 @@ html, body { width: 100%; height: 100%; margin: 0; background: #fff;}
     border-collapse: separate;
     border-spacing: 10px;
 } */
-
-.landingtext{
-position: relative;
-top:140px;
-left:20px;
-font-family: 'Maitree', times, serif;
-color: white;
-font-size: 80px;
-/* background-color: rgba(0,0,0,.3); */
-/* border-radius: 2px; */
-/* padding:20px; */
-/* width: 400px; */
+.landingtext {
+  position: relative;
+  top: 140px;
+  left: 20px;
+  font-family: 'Maitree', times, serif;
+  color: white;
+  font-size: 80px;
 }
 
-
-.background{
+.background {
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   border-radius: 0;
-  min-height: 115%;
-  min-width: 120%;
+  min-height: 114%;
+  min-width: 114%;
   /*pointer-events: none;*/
   display: block;
+  color: #343a40;
 }
 
-.about-background{
-position:relative;
-background-position:center;
-background-size: cover;
-background-repeat: no-repeat;
-
+.about-background {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #343a40;
+  background-color: #343a40;
 }
 
 .jumbotron {
-    ...
-    min-height: 800px;
+  min-height: 40%;
+  background-color: #343a40;
 }
 
-.about-image{
-position:relative;
-max-width: 50%;
+.about-image {
+  position: relative;
+  max-width: 50%;
 }
 
-.picture-correct{
+.picture-correct {
   transform: rotate(90deg);
 }
 
-.about-methods{
+.about-methods {
   position: relative;
-  padding:10px;
+  padding: 10px;
   font-size: 30px;
 }
-
 
 /* Slideshow container */
 .slideshow-container {
   position: fixed;
-  bottom:60px;
-  right:40px;
-  width:600px;
-  background-color: rgba(0,0,0,.3);
+  bottom: 60px;
+  right: 40px;
+  width: 600px;
+  background-color: rgba(0, 0, 0, .3);
   border-radius: 2px;
   font-size: 30px;
 }
@@ -113,25 +135,26 @@ max-width: 50%;
   color: black;
 }
 
-
-
 /* Slides */
 .mySlides {
-  position:relative;
-  display:block;
+  position: relative;
+  display: block;
   padding: 30px;
   color: white;
   vertical-align: middle;
   text-align: center;
-
   font-family: 'Maitree', times, serif;
 }
 
 /* Add an italic font style to all quotes */
-q {font-style: italic;}
+q {
+  font-style: italic;
+}
 
 /* Add a blue color to the author */
-.author {color: cornflowerblue;}
+.author {
+  color: cornflowerblue;
+}
 
 /* Fading animation */
 .fade {
@@ -142,11 +165,30 @@ q {font-style: italic;}
 }
 
 @-webkit-keyframes fade {
-  from {opacity: .9}
-  to {opacity: 1}
+  from {
+    opacity: .9
+  }
+
+  to {
+    opacity: 1
+  }
 }
 
 @keyframes fade {
-  from {opacity: .9}
-  to {opacity: 1}
+  from {
+    opacity: .9
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.navbar ul {
+    list-style-type: none;
+    height: 25px;
+}
+
+.navbar li {
+  float: left;
 }
