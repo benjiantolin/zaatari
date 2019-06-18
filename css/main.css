@@ -6,7 +6,7 @@ html, body,main
   margin: 0;
   background: #fff;
   font-family: 'Titillium Web', sans-serif;
-  overflow:scroll;
+  overflow: auto;
 }
 
 
@@ -22,7 +22,7 @@ html, body,main
   margin: 0;
   background: #fff;
   font-family: 'Titillium Web', sans-serif;
-  overflow: hidden
+  overflow: hidden;
 }
 
 
@@ -142,4 +142,42 @@ footer p {
 .fa-map-marked-alt {
   color: white;
   font-size: 20px;
+}
+
+#blues_legend {
+  position: absolute;
+  line-height: 12px;
+  padding: 3px;
+  /* text-align: center; */
+}
+
+#blues_legend i {
+  width: 0.5px;
+  height: 12px;
+  float: left;
+}
+
+#greens_legend {
+  position: absolute;
+  line-height: 12px;
+  padding: 3px;
+  /* text-align: center; */
+}
+
+#greens_legend i {
+  width: 0.5px;
+  height: 12px;
+  float: left;
+}
+#rdylgn_legend {
+  position: absolute;
+  line-height: 12px;
+  padding: 3px;
+  /* text-align: center; */
+}
+
+#rdylgn_legend i {
+  width: 0.5px;
+  height: 12px;
+  float: left;
 }
